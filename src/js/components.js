@@ -179,6 +179,127 @@ export function initInteractiveComponents() {
   // 8. Simulated Live Chat Message Generator
   // ---------------------------------------------------------------------------
   startChatSimulation();
+
+  // ---------------------------------------------------------------------------
+  // 9. Auth Forms & Password Visibility Toggles
+  // ---------------------------------------------------------------------------
+  initAuthForms();
+}
+
+// -----------------------------------------------------------------------------
+// Auth & Security Forms Controller
+// -----------------------------------------------------------------------------
+function initAuthForms() {
+  // Password Visibility Toggle
+  document.addEventListener('click', (e) => {
+    const toggleBtn = e.target.closest('[data-password-toggle]');
+    if (toggleBtn) {
+      e.preventDefault();
+      const targetInputId = toggleBtn.getAttribute('data-password-toggle');
+      const input = document.getElementById(targetInputId);
+      if (input) {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        toggleBtn.textContent = isPassword ? 'HIDE' : 'SHOW';
+      }
+    }
+  });
+
+  // Login Form Submission
+  const loginForm = document.getElementById('form-login');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const usernameInput = document.getElementById('login-username');
+      const passwordInput = document.getElementById('login-password');
+      const username = usernameInput ? usernameInput.value.trim() : '';
+      const password = passwordInput ? passwordInput.value.trim() : '';
+
+      if (!username || !password) {
+        showToast('ERROR: ALL AUTHENTICATION FIELDS ARE REQUIRED', 'danger');
+        return;
+      }
+
+      showToast(`ACCESS GRANTED // OPERATOR: ${username.toUpperCase()}`, 'success');
+
+      // Update Profile dropdown header callsign
+      const profileHeader = document.querySelector('.cyber-dropdown__header span:first-child');
+      if (profileHeader) {
+        profileHeader.textContent = `// PROFILE: ${username.toUpperCase()}`;
+      }
+
+      // Close modal
+      const modal = loginForm.closest('.cyber-modal-backdrop');
+      if (modal) {
+        setTimeout(() => modal.classList.remove('is-open'), 350);
+      }
+    });
+  }
+
+  // Register Form Submission
+  const registerForm = document.getElementById('form-register');
+  if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const usernameInput = document.getElementById('register-username');
+      const passwordInput = document.getElementById('register-password');
+      const confirmInput = document.getElementById('register-confirm');
+
+      const username = usernameInput ? usernameInput.value.trim() : '';
+      const password = passwordInput ? passwordInput.value : '';
+      const confirm = confirmInput ? confirmInput.value : '';
+
+      if (!username || !password || !confirm) {
+        showToast('ERROR: ALL REGISTRATION FIELDS ARE REQUIRED', 'danger');
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast('ERROR: SECRET KEY MUST BE AT LEAST 6 CHARACTERS', 'warning');
+        if (passwordInput) passwordInput.classList.add('cyber-input--error');
+        return;
+      }
+
+      if (password !== confirm) {
+        showToast('ERROR: PASSWORDS DO NOT MATCH', 'danger');
+        if (confirmInput) {
+          confirmInput.classList.add('cyber-input--error');
+          confirmInput.focus();
+        }
+        return;
+      }
+
+      // Clear any errors
+      if (confirmInput) confirmInput.classList.remove('cyber-input--error');
+      if (passwordInput) passwordInput.classList.remove('cyber-input--error');
+
+      showToast(`ACCOUNT [${username.toUpperCase()}] PROVISIONED SUCCESSFULLY`, 'success');
+
+      // Close register modal, open login modal and prefill callsign
+      const registerModal = registerForm.closest('.cyber-modal-backdrop');
+      if (registerModal) registerModal.classList.remove('is-open');
+
+      const loginModal = document.getElementById('login-modal');
+      const loginUsernameInput = document.getElementById('login-username');
+      if (loginUsernameInput) loginUsernameInput.value = username;
+
+      setTimeout(() => {
+        if (loginModal) {
+          loginModal.classList.add('is-open');
+          showToast('ENTER SECRET KEY TO LOG IN', 'info');
+          const loginPass = document.getElementById('login-password');
+          if (loginPass) loginPass.focus();
+        }
+      }, 350);
+    });
+  }
+
+  // Clear validation error on typing
+  document.querySelectorAll('#form-register input, #form-login input').forEach(input => {
+    input.addEventListener('input', () => {
+      input.classList.remove('cyber-input--error');
+    });
+  });
 }
 
 // -----------------------------------------------------------------------------
