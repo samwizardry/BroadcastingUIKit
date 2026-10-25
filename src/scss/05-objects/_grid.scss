@@ -1,61 +1,288 @@
 // =============================================================================
-// LAYER 05: OBJECTS // GRID & LAYOUT STRUCTURES
-// BroadcastingUIKit
+// LAYER 05: OBJECTS // GRID & APPLICATION SHELL LAYOUTS
+// BroadcastingUIKit - Twitch-Style Cyberpunk Application Shell
 // =============================================================================
 
+// Application Master Shell (Persistent Left Sidebar + Main View Area)
+.app-shell {
+  display: flex;
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  position: relative;
+}
+
+.app-main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+// -----------------------------------------------------------------------------
+// 1. Browse Layout (Twitch Home / Feed Mode)
+// -----------------------------------------------------------------------------
+.browse-layout {
+  padding: 24px 28px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+
+  // Featured Hero Showcase Banner
+  .featured-hero {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-lg);
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(216, 255, 0, 0.1);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-hero__media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #050608;
+      overflow: hidden;
+      cursor: pointer;
+
+      .hero-preview-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, #1A2230 0%, #060709 100%);
+        font-family: var(--font-hud);
+        letter-spacing: 2.5px;
+        color: var(--accent-acid);
+      }
+
+      .badge-live {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        z-index: 5;
+      }
+
+      .badge-viewers {
+        position: absolute;
+        bottom: 14px;
+        left: 14px;
+        z-index: 5;
+      }
+    }
+
+    .featured-hero__info {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      background: linear-gradient(135deg, var(--bg-surface-elevated) 0%, var(--bg-surface) 100%);
+
+      .hero-meta-top {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero-streamer-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .hero-title {
+        font-family: var(--font-hud);
+        font-size: 22px;
+        letter-spacing: 1px;
+        line-height: 1.25;
+        color: var(--text-primary);
+      }
+
+      .hero-desc {
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  // Category Filter Pills
+  .browse-categories-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+
+    .category-pill {
+      font-family: var(--font-hud);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 7px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dim);
+      color: var(--text-secondary);
+      clip-path: var(--cut-corner-xs);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: var(--transition-fast);
+
+      &:hover {
+        color: var(--text-primary);
+        border-color: var(--accent-cyan);
+      }
+
+      &.is-active {
+        background: var(--accent-acid);
+        color: var(--text-inverse);
+        border-color: var(--accent-acid);
+        box-shadow: 0 0 10px rgba(216, 255, 0, 0.3);
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 2. Watch Layout (Active Stream Player + Chat)
+// -----------------------------------------------------------------------------
+.watch-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  transition: grid-template-columns var(--transition-fast);
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
+
+  &--chat-collapsed {
+    grid-template-columns: 1fr 44px;
+
+    .watch-layout__chat {
+      .cyber-chat {
+        display: none;
+      }
+
+      .btn-chat-expand {
+        display: flex;
+      }
+    }
+  }
+
+  &__main {
+    padding: 20px 24px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    min-width: 0;
+
+    .watch-back-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      .btn-back-to-browse {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-hud);
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 5px 10px;
+        background: transparent;
+        border: 1px solid var(--border-dim);
+        clip-path: var(--cut-corner-xs);
+        transition: var(--transition-fast);
+
+        &:hover {
+          color: var(--accent-acid);
+          border-color: var(--accent-acid);
+        }
+      }
+    }
+  }
+
+  &__chat {
+    border-left: 1px solid var(--border-dim);
+    background: var(--bg-surface);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    position: sticky;
+    top: 60px;
+
+    .cyber-chat {
+      height: 100%;
+      border: none;
+      clip-path: none;
+    }
+
+    .btn-chat-expand {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface);
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      writing-mode: vertical-rl;
+      font-family: var(--font-hud);
+      font-size: 11px;
+      letter-spacing: 2px;
+      gap: 10px;
+
+      &:hover {
+        color: var(--accent-acid);
+      }
+    }
+  }
+}
+
+// Responsive Grids
 .cyber-grid {
   display: grid;
   gap: 20px;
 
   &--2col {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+    @media (max-width: 768px) { grid-template-columns: 1fr; }
   }
 
   &--3col {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    @media (max-width: 640px) {
-      grid-template-columns: 1fr;
-    }
+    @media (max-width: 1200px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 640px) { grid-template-columns: 1fr; }
   }
 
   &--4col {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    @media (max-width: 1200px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    @media (max-width: 640px) {
-      grid-template-columns: 1fr;
-    }
-  }
-}
-
-// Broadcasting Studio Master Layout (Player + Chat + Telemetry)
-.broadcast-layout {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 24px;
-  align-items: start;
-
-  @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-  }
-
-  &__main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  &__sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    @media (max-width: 1400px) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 1024px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 640px) { grid-template-columns: 1fr; }
   }
 }
 
