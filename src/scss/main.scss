@@ -1,0 +1,42 @@
+// =============================================================================
+// BROADCASTING UI KIT // MASTER SCSS ENTRYPOINT (ITCSS)
+// Marathon "Graphic Realism" & Cyberpunk Design System
+// =============================================================================
+
+// 01. SETTINGS (Tokens, variables, theme switches)
+@use '01-settings/tokens' as *;
+
+// 02. TOOLS (Mixins, functions, chamfer cuts)
+@use '02-tools/mixins' as *;
+
+// 03. GENERIC (Resets, normalizations, ambient background grid)
+@use '03-generic/reset';
+@use '03-generic/cyber-bg';
+
+// 04. ELEMENTS (Unclassed HTML typography, scrollbars)
+@use '04-elements/typography';
+@use '04-elements/scrollbars';
+
+// 05. OBJECTS (Layout containers, grid systems, panels)
+@use '05-objects/containers';
+@use '05-objects/grid';
+
+// 06. COMPONENTS (Explicit, modular UI widgets)
+@use '06-components/buttons';
+@use '06-components/badges';
+@use '06-components/inputs';
+@use '06-components/switch-slider';
+@use '06-components/player';
+@use '06-components/vu-meter';
+@use '06-components/stream-health';
+@use '06-components/stream-card';
+@use '06-components/chat';
+@use '06-components/avatars';
+@use '06-components/modals';
+@use '06-components/dropdowns';
+@use '06-components/tabs';
+@use '06-components/alerts';
+@use '06-components/tooltips';
+
+// 07. TRUMPS (High-specificity utilities, hazard patterns, glitch effects)
+@use '07-trumps/utilities';

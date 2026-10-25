@@ -1,0 +1,152 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // BADGES & CHIPS
+// BroadcastingUIKit - Tactical Stream Status Badges & Telemetry Chips
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Live Broadcast Badge (Pulsing Red)
+// -----------------------------------------------------------------------------
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--accent-alert);
+  color: #FFFFFF;
+  font-family: var(--font-hud);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  clip-path: var(--cut-corner-badge);
+  box-shadow: 0 0 14px rgba(255, 51, 75, 0.45);
+  user-select: none;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    animation: live-pulse 1.4s ease-in-out infinite;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Viewers Counter Badge
+// -----------------------------------------------------------------------------
+.badge-viewers {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(8, 9, 11, 0.88);
+  border: 1px solid var(--border-bright);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  clip-path: var(--cut-corner-sm);
+  backdrop-filter: blur(4px);
+  user-select: none;
+
+  .viewer-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent-cyan);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Broadcast Specs & Protocol Tag
+// -----------------------------------------------------------------------------
+.cyber-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
+  clip-path: var(--cut-corner-xs);
+  transition: var(--transition-fast);
+
+  &:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+  }
+
+  &--acid {
+    color: var(--accent-acid);
+    border-color: rgba(216, 255, 0, 0.35);
+    background: var(--accent-acid-dim);
+  }
+
+  &--cyan {
+    color: var(--accent-cyan);
+    border-color: rgba(0, 245, 255, 0.35);
+    background: var(--accent-cyan-dim);
+  }
+
+  &--alert {
+    color: var(--accent-alert);
+    border-color: rgba(255, 51, 75, 0.35);
+    background: var(--accent-alert-dim);
+  }
+
+  &--warning {
+    color: var(--accent-warning);
+    border-color: rgba(255, 132, 0, 0.35);
+    background: var(--accent-warning-dim);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Telemetry Status Chip (Online / Standby / Encrypted)
+// -----------------------------------------------------------------------------
+.badge-telemetry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  padding: 3px 8px;
+  clip-path: var(--cut-corner-xs);
+
+  .telemetry-indicator {
+    width: 6px;
+    height: 6px;
+
+    &--green {
+      background: var(--accent-acid);
+      box-shadow: 0 0 6px var(--accent-acid);
+    }
+    &--cyan {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 6px var(--accent-cyan);
+    }
+    &--red {
+      background: var(--accent-alert);
+      box-shadow: 0 0 6px var(--accent-alert);
+    }
+  }
+}
+
+@keyframes live-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}

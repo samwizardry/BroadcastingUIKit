@@ -1,0 +1,110 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // MODALS & DIALOGS
+// BroadcastingUIKit - Tactical Sci-Fi Overlay Window
+// =============================================================================
+
+.cyber-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 7, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.cyber-modal {
+  width: 100%;
+  max-width: 540px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-bright);
+  clip-path: var(--cut-corner-lg);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), var(--glow-acid);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform: scale(0.96);
+  transition: transform var(--transition-fast);
+
+  .is-open & {
+    transform: scale(1);
+  }
+
+  // Technical Corner Brackets
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    z-index: 5;
+    border-color: var(--accent-acid);
+  }
+  &::before {
+    top: 6px;
+    left: 6px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+  &::after {
+    bottom: 6px;
+    right: 6px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border-dim);
+    background: rgba(255, 255, 255, 0.02);
+
+    .modal-title {
+      font-family: var(--font-hud);
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::before {
+        content: '[SYS.MODAL]';
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--accent-acid);
+      }
+    }
+  }
+
+  &__body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 14px 22px;
+    border-top: 1px solid var(--border-dim);
+    background: rgba(0, 0, 0, 0.3);
+  }
+}

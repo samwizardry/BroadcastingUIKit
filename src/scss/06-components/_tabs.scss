@@ -1,0 +1,66 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // TABS & SEGMENTED SWITCHERS
+// BroadcastingUIKit - Tactical Chamfered Tabs
+// =============================================================================
+
+.cyber-tabs {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-dim);
+  clip-path: var(--cut-corner-sm);
+  padding: 4px;
+  gap: 4px;
+
+  &__item {
+    font-family: var(--font-hud);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    clip-path: var(--cut-corner-xs);
+    transition: var(--transition-fast);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+
+    &:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &.is-active {
+      color: var(--text-inverse);
+      background: var(--accent-acid);
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(216, 255, 0, 0.35);
+
+      .tab-counter {
+        background: var(--text-inverse);
+        color: var(--accent-acid);
+      }
+    }
+
+    .tab-counter {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+      padding: 1px 6px;
+      border-radius: 2px;
+    }
+  }
+
+  &--fill {
+    display: flex;
+    width: 100%;
+
+    .cyber-tabs__item {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // TOOLTIPS
+// BroadcastingUIKit - Telemetry Hover Tooltips
+// =============================================================================
+
+.cyber-tooltip {
+  position: absolute;
+  z-index: 200;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-bright);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 8px;
+  clip-path: var(--cut-corner-xs);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+
+  &.is-visible {
+    opacity: 1;
+  }
+}

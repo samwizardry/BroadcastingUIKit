@@ -1,0 +1,133 @@
+// =============================================================================
+// LAYER 02: TOOLS // MIXINS & FUNCTIONS
+// BroadcastingUIKit - Reusable Cyberpunk & Marathon HUD Mixins
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Chamfer Cut Corners (Polygon geometry)
+// -----------------------------------------------------------------------------
+@mixin cut-corner($size: 10px) {
+  clip-path: polygon(
+    0 0,
+    calc(100% - #{$size}) 0,
+    100% #{$size},
+    100% 100%,
+    #{$size} 100%,
+    0 calc(100% - #{$size})
+  );
+}
+
+@mixin cut-corner-badge($cut: 8px) {
+  clip-path: polygon(0 0, 100% 0, calc(100% - #{$cut}) 100%, 0 100%);
+}
+
+@mixin cut-corner-reverse($size: 12px) {
+  clip-path: polygon(
+    #{$size} 0,
+    100% 0,
+    100% calc(100% - #{$size}),
+    calc(100% - #{$size}) 100%,
+    0 100%,
+    0 #{$size}
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Tactical Glow & Shadows
+// -----------------------------------------------------------------------------
+@mixin glow($color, $spread: 16px, $opacity: 0.35) {
+  box-shadow: 0 0 $spread rgba($color, $opacity);
+}
+
+@mixin text-glow($color, $spread: 8px) {
+  text-shadow: 0 0 $spread $color;
+}
+
+// -----------------------------------------------------------------------------
+// Typography Helpers
+// -----------------------------------------------------------------------------
+@mixin text-hud($size: 12px, $tracking: 1.5px, $weight: 700) {
+  font-family: var(--font-hud);
+  font-size: $size;
+  font-weight: $weight;
+  text-transform: uppercase;
+  letter-spacing: $tracking;
+}
+
+@mixin text-mono($size: 11px, $weight: 500) {
+  font-family: var(--font-mono);
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// -----------------------------------------------------------------------------
+// CRT Scanlines & Screen Texture
+// -----------------------------------------------------------------------------
+@mixin scanlines($spacing: 4px, $opacity: 0.55) {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, $opacity) 50%,
+    rgba(0, 0, 0, $opacity)
+  );
+  background-size: 100% $spacing;
+}
+
+// -----------------------------------------------------------------------------
+// Industrial Hazard Stripes
+// -----------------------------------------------------------------------------
+@mixin hazard-stripes($color1: rgba(255, 132, 0, 0.2), $color2: transparent, $width: 8px) {
+  background: repeating-linear-gradient(
+    -45deg,
+    $color1,
+    $color1 $width,
+    $color2 $width,
+    $color2 ($width * 2)
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Technical HUD Corner Brackets ([ ])
+// -----------------------------------------------------------------------------
+@mixin hud-brackets($color: var(--accent-acid), $size: 10px, $thickness: 2px) {
+  position: relative;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: $size;
+    height: $size;
+    pointer-events: none;
+    z-index: 10;
+    border-color: $color;
+  }
+
+  &::before {
+    top: 6px;
+    left: 6px;
+    border-top: $thickness solid;
+    border-left: $thickness solid;
+  }
+
+  &::after {
+    bottom: 6px;
+    right: 6px;
+    border-bottom: $thickness solid;
+    border-right: $thickness solid;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Subtle Focus-Visible Outline (A11y)
+// -----------------------------------------------------------------------------
+@mixin focus-ring($color: var(--accent-cyan)) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}

@@ -1,0 +1,88 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // DROPDOWNS & MENUS
+// BroadcastingUIKit - Tactical Cyber Menus
+// =============================================================================
+
+.cyber-dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 240px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-md);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 16px rgba(0, 245, 255, 0.15);
+    padding: 6px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+
+    &.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+
+  &__header {
+    padding: 8px 12px;
+    font-family: var(--font-hud);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-size: 12px;
+    clip-path: var(--cut-corner-xs);
+    transition: var(--transition-fast);
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background: var(--bg-surface-hover);
+      color: var(--accent-acid);
+
+      .item-shortcut {
+        color: var(--accent-cyan);
+      }
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .item-shortcut {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: var(--border-dim);
+    margin: 4px 0;
+  }
+}

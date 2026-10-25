@@ -1,0 +1,153 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // STREAM CARD
+// BroadcastingUIKit - Interactive Streamer Channel Card
+// =============================================================================
+
+@use '../02-tools/mixins' as *;
+
+.stream-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  clip-path: var(--cut-corner-md);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-acid);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(216, 255, 0, 0.15);
+
+    .stream-thumbnail__scanlines {
+      opacity: 0.6;
+    }
+
+    .stream-thumbnail__img {
+      transform: scale(1.04);
+    }
+
+    .stream-title {
+      color: var(--accent-acid);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Thumbnail Section
+  // ---------------------------------------------------------------------------
+  .stream-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #060709;
+    overflow: hidden;
+
+    .stream-thumbnail-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #18202C 0%, #08090C 100%);
+      font-family: var(--font-hud);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
+
+    .stream-thumbnail__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-smooth);
+    }
+
+    .stream-thumbnail__scanlines {
+      position: absolute;
+      inset: 0;
+      @include scanlines(3px, 0.4);
+      pointer-events: none;
+      opacity: 0.25;
+      transition: opacity var(--transition-fast);
+    }
+
+    .badge-live {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+    }
+
+    .badge-viewers {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 2;
+    }
+
+    .badge-resolution {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Card Body
+  // ---------------------------------------------------------------------------
+  .stream-card-body {
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .stream-card-meta {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .stream-title {
+      font-family: var(--font-hud);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-primary);
+      @include truncate;
+      transition: color var(--transition-fast);
+    }
+
+    .stream-author-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+
+      .author-name {
+        font-family: var(--font-mono);
+        color: var(--text-secondary);
+      }
+
+      .verified-icon {
+        color: var(--accent-cyan);
+      }
+    }
+
+    .stream-category {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+  }
+}

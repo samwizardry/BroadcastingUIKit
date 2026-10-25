@@ -1,0 +1,247 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // BUTTONS
+// BroadcastingUIKit - Tactical Cyberpunk Buttons
+// =============================================================================
+
+.btn-cyber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-hud);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 10px 22px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  clip-path: var(--cut-corner-btn);
+  transition: var(--transition-fast);
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
+  user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &[disabled], &--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(0.8);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Variants
+  // ---------------------------------------------------------------------------
+
+  // Primary: High-Visibility Acid Chartreuse
+  &-primary, &--primary {
+    background: var(--accent-acid);
+    color: var(--text-inverse);
+    border-color: var(--accent-acid);
+
+    &:hover {
+      background: var(--accent-acid-hover);
+      box-shadow: var(--glow-acid);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  // Secondary: Matte Carbon Surface with Cyan Glow
+  &-secondary, &--secondary {
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-bright);
+
+    &:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  // Danger / Terminate: Alert Crimson
+  &-danger, &--danger {
+    background: var(--accent-alert);
+    color: #FFFFFF;
+    border-color: var(--accent-alert);
+
+    &:hover {
+      filter: brightness(1.15);
+      box-shadow: var(--glow-alert);
+      transform: translateY(-1px);
+    }
+  }
+
+  // Warning / Intercept: Hazard Amber
+  &-warning, &--warning {
+    background: var(--accent-warning);
+    color: var(--text-inverse);
+    border-color: var(--accent-warning);
+
+    &:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 0 16px rgba(255, 132, 0, 0.45);
+      transform: translateY(-1px);
+    }
+  }
+
+  // Ghost: Transparent with Tactical Border
+  &-ghost, &--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border-color: var(--border-dim);
+
+    &:hover {
+      color: var(--accent-acid);
+      border-color: var(--accent-acid);
+      background: var(--accent-acid-dim);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Sizes
+  // ---------------------------------------------------------------------------
+  &-sm, &--sm {
+    padding: 6px 14px;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    clip-path: var(--cut-corner-xs);
+  }
+
+  &-lg, &--lg {
+    padding: 14px 28px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    clip-path: var(--cut-corner-md);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Loading State
+  // ---------------------------------------------------------------------------
+  &--loading {
+    color: transparent !important;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin: -8px 0 0 -8px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: cyber-spin 0.6s linear infinite;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Tactical Icon HUD Button (40x40 Square with Counter Badge)
+// -----------------------------------------------------------------------------
+.btn-icon-hud {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  clip-path: var(--cut-corner-sm);
+  transition: var(--transition-fast);
+  position: relative;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--accent-acid);
+    border-color: var(--accent-acid);
+    background: var(--bg-surface-hover);
+    box-shadow: 0 0 12px rgba(216, 255, 0, 0.25);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &--active {
+    color: var(--accent-acid);
+    border-color: var(--accent-acid);
+    background: var(--accent-acid-dim);
+  }
+
+  &--sm {
+    width: 32px;
+    height: 32px;
+    clip-path: var(--cut-corner-xs);
+  }
+
+  .badge-counter {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--accent-alert);
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 2px;
+    border: 1px solid var(--bg-deep);
+  }
+}
+
+// Button Group
+.btn-group-cyber {
+  display: inline-flex;
+  align-items: center;
+
+  .btn-cyber {
+    clip-path: none;
+    border-radius: 0;
+
+    &:first-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    }
+
+    &:last-child {
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    }
+
+    + .btn-cyber {
+      margin-left: -1px;
+    }
+  }
+}
+
+@keyframes cyber-spin {
+  to { transform: rotate(360deg); }
+}

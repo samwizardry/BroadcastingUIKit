@@ -1,0 +1,104 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // STREAM HEALTH & TELEMETRY
+// BroadcastingUIKit - Ingestion Diagnostics & Real-time Network Telemetry
+// =============================================================================
+
+.stream-health-widget {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  clip-path: var(--cut-corner-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .health-title {
+      font-family: var(--font-hud);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+
+  // Real-time Bitrate Telemetry Graph
+  .bitrate-graph-container {
+    height: 60px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-dim);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 4px;
+
+    .graph-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 100% 20px;
+      pointer-events: none;
+    }
+
+    .bitrate-svg-sparkline {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+
+      polyline {
+        fill: none;
+        stroke: var(--accent-acid);
+        stroke-width: 2;
+        stroke-linecap: round;
+        filter: drop-shadow(0 0 4px rgba(216, 255, 0, 0.6));
+      }
+
+      polygon {
+        fill: rgba(216, 255, 0, 0.08);
+      }
+    }
+  }
+
+  // Diagnostic Stats Grid
+  .health-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    .metric-cell {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-dim);
+      padding: 8px 10px;
+      clip-path: var(--cut-corner-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .metric-name {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+
+      .metric-val {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-primary);
+
+        &--acid { color: var(--accent-acid); }
+        &--cyan { color: var(--accent-cyan); }
+        &--alert { color: var(--accent-alert); }
+      }
+    }
+  }
+}

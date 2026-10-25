@@ -1,0 +1,364 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // STREAM VIDEO PLAYER & INFO
+// BroadcastingUIKit - Full Cyberpunk Broadcast Video Shell
+// =============================================================================
+
+@use '../02-tools/mixins' as *;
+
+.cyber-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #050608;
+  border: 1px solid var(--border-bright);
+  clip-path: var(--cut-corner-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+
+  // Technical HUD Corner Brackets
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    z-index: 15;
+    border-color: var(--accent-acid);
+  }
+  &::before {
+    top: 10px;
+    left: 10px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+  &::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  // Active Video or Holographic Canvas
+  .player-screen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #141A24 0%, #060709 100%);
+    overflow: hidden;
+  }
+
+  // CRT Scanlines Overlay
+  .player-scanlines {
+    position: absolute;
+    inset: 0;
+    @include scanlines(4px, 0.45);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  // Subtle Crosshair & Grid Overlay in Video Background
+  .player-overlay-crosshair {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  // Top Telemetry HUD
+  .player-hud-top {
+    position: absolute;
+    top: 16px;
+    left: 28px;
+    right: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    pointer-events: none;
+
+    .hud-meta-left, .hud-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: auto;
+    }
+
+    .hud-pill {
+      background: rgba(8, 9, 11, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--border-bright);
+      padding: 3px 9px;
+      clip-path: var(--cut-corner-xs);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+
+  // Center Holographic Play / Buffer Action
+  .player-center-action {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform var(--transition-fast);
+
+    &:hover {
+      transform: scale(1.06);
+
+      .play-btn-large {
+        background: var(--accent-acid);
+        color: var(--text-inverse);
+        box-shadow: 0 0 24px var(--accent-acid);
+      }
+
+      .play-label {
+        color: var(--accent-acid);
+      }
+    }
+
+    .play-btn-large {
+      width: 64px;
+      height: 64px;
+      background: var(--accent-acid-dim);
+      border: 2px solid var(--accent-acid);
+      clip-path: var(--cut-corner-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-acid);
+      box-shadow: var(--glow-acid);
+      transition: var(--transition-fast);
+
+      svg {
+        margin-left: 3px;
+      }
+    }
+
+    .play-label {
+      font-family: var(--font-hud);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      transition: color var(--transition-fast);
+    }
+  }
+
+  // Bottom Playback HUD Bar
+  .player-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 24px;
+    background: linear-gradient(to top, rgba(6, 7, 9, 0.96) 0%, rgba(6, 7, 9, 0.7) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+
+    .controls-timeline {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      position: relative;
+      cursor: pointer;
+      transition: height var(--transition-fast);
+
+      &:hover {
+        height: 6px;
+      }
+
+      .timeline-buffered {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        width: 78%;
+      }
+
+      .timeline-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--accent-acid);
+        width: 62%;
+        box-shadow: 0 0 8px var(--accent-acid);
+
+        &::after {
+          content: '';
+          position: absolute;
+          right: -4px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 8px;
+          height: 12px;
+          background: var(--accent-acid);
+          clip-path: var(--cut-corner-xs);
+        }
+      }
+    }
+
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .controls-left, .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-player-control {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+      padding: 4px;
+
+      &:hover {
+        color: var(--accent-acid);
+        filter: drop-shadow(0 0 6px var(--accent-acid));
+      }
+    }
+
+    .live-status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-hud);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-alert);
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border: 1px solid rgba(255, 51, 75, 0.4);
+      clip-path: var(--cut-corner-xs);
+      background: var(--accent-alert-dim);
+
+      .live-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--accent-alert);
+        border-radius: 50%;
+        animation: live-pulse 1.4s infinite;
+      }
+    }
+
+    .time-readout {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Stream Info Container (Streamer, Title, Actions, Specs)
+// -----------------------------------------------------------------------------
+.stream-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  padding: 20px 24px;
+  clip-path: var(--cut-corner-md);
+
+  .stream-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .streamer-identity {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .stream-meta-title {
+      font-family: var(--font-hud);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .streamer-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+
+      .channel-author {
+        color: var(--accent-acid);
+        font-weight: 600;
+        font-family: var(--font-mono);
+      }
+    }
+  }
+
+  .stream-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stream-specs-bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid var(--border-dim);
+    padding-top: 14px;
+    flex-wrap: wrap;
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+
+      .spec-label {
+        color: var(--text-muted);
+      }
+      .spec-value {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+    }
+  }
+}

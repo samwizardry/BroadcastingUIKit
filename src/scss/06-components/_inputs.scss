@@ -1,0 +1,180 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // INPUTS & CONTROLS
+// BroadcastingUIKit - Tactical Streamer Form Inputs
+// =============================================================================
+
+.cyber-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+
+  &__label {
+    font-family: var(--font-hud);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .label-code {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-acid);
+    }
+  }
+
+  &__hint {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+}
+
+.cyber-input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 10px 14px;
+  clip-path: var(--cut-corner-sm);
+  transition: var(--transition-fast);
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:hover {
+    border-color: var(--border-bright);
+    background: var(--bg-surface-elevated);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.25);
+    background: var(--bg-surface-elevated);
+  }
+
+  &[readonly] {
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--accent-cyan);
+    cursor: default;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--error {
+    border-color: var(--accent-alert) !important;
+    box-shadow: 0 0 10px rgba(255, 51, 75, 0.25) !important;
+  }
+}
+
+.cyber-textarea {
+  @extend .cyber-input;
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+// -----------------------------------------------------------------------------
+// Cyber Input Group (with prefix icon / suffix button)
+// -----------------------------------------------------------------------------
+.cyber-input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  position: relative;
+
+  .input-prefix-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .cyber-input {
+    padding-left: 38px;
+  }
+
+  .input-suffix-action {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Stream Key Ingest Box (with Mask & Copy)
+// -----------------------------------------------------------------------------
+.cyber-stream-key {
+  display: flex;
+  align-items: center;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-bright);
+  clip-path: var(--cut-corner-sm);
+  padding: 4px;
+  width: 100%;
+
+  .key-value {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent-acid);
+    padding: 6px 12px;
+    letter-spacing: 2px;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .key-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Cyber Select Dropdown
+// -----------------------------------------------------------------------------
+.cyber-select-wrapper {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    content: '▼';
+    font-size: 9px;
+    color: var(--accent-acid);
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+.cyber-select {
+  @extend .cyber-input;
+  appearance: none;
+  padding-right: 32px;
+  cursor: pointer;
+
+  option {
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+  }
+}

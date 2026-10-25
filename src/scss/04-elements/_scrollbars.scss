@@ -1,0 +1,29 @@
+// =============================================================================
+// LAYER 04: ELEMENTS // SCROLLBARS
+// BroadcastingUIKit - Cyber Chamfered Scrollbars
+// =============================================================================
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+  border-left: 1px solid var(--border-dim);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  transition: var(--transition-fast);
+
+  &:hover {
+    background: var(--accent-acid);
+  }
+}
+
+// Firefox standard support
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bright) var(--bg-deep);
+}

@@ -1,0 +1,74 @@
+// =============================================================================
+// LAYER 07: TRUMPS // UTILITY CLASSES & GLITCH EFFECTS
+// BroadcastingUIKit
+// =============================================================================
+
+@use '../02-tools/mixins' as *;
+
+// Industrial Hazard Stripe Background
+.bg-hazard {
+  @include hazard-stripes(rgba(255, 132, 0, 0.25), transparent, 8px);
+}
+
+.bg-hazard-acid {
+  @include hazard-stripes(rgba(216, 255, 0, 0.2), transparent, 8px);
+}
+
+// Tactical Glows
+.glow-acid {
+  box-shadow: var(--glow-acid) !important;
+}
+
+.glow-cyan {
+  box-shadow: var(--glow-cyan) !important;
+}
+
+.glow-alert {
+  box-shadow: var(--glow-alert) !important;
+}
+
+// Glitch Text Animation Motif
+.glitch-text {
+  position: relative;
+  display: inline-block;
+
+  &::before, &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  &:hover::before {
+    left: -2px;
+    text-shadow: 2px 0 var(--accent-alert);
+    animation: glitch-anim-1 0.8s infinite linear alternate-reverse;
+  }
+
+  &:hover::after {
+    left: 2px;
+    text-shadow: -2px 0 var(--accent-cyan);
+    animation: glitch-anim-2 0.8s infinite linear alternate-reverse;
+  }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(10px, 9999px, 20px, 0); }
+  20% { clip: rect(40px, 9999px, 60px, 0); }
+  40% { clip: rect(15px, 9999px, 35px, 0); }
+  60% { clip: rect(50px, 9999px, 70px, 0); }
+  80% { clip: rect(25px, 9999px, 45px, 0); }
+  100% { clip: rect(5px, 9999px, 30px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(30px, 9999px, 50px, 0); }
+  20% { clip: rect(10px, 9999px, 25px, 0); }
+  40% { clip: rect(55px, 9999px, 75px, 0); }
+  60% { clip: rect(20px, 9999px, 40px, 0); }
+  80% { clip: rect(65px, 9999px, 85px, 0); }
+  100% { clip: rect(35px, 9999px, 55px, 0); }
+}

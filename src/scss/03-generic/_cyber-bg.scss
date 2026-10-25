@@ -1,0 +1,51 @@
+// =============================================================================
+// LAYER 03: GENERIC // CYBER AMBIENT BACKGROUND & GRID
+// BroadcastingUIKit
+// =============================================================================
+
+.cyber-grid-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+
+  // Primary technical coordinate grid
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(34, 41, 54, 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(34, 41, 54, 0.45) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 40%, transparent 95%);
+    opacity: 0.6;
+  }
+
+  // Ambient acid/cyan atmospheric glows
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 15% 15%, rgba(216, 255, 0, 0.04) 0%, transparent 45%),
+      radial-gradient(circle at 85% 35%, rgba(0, 245, 255, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 50% 85%, rgba(255, 51, 75, 0.02) 0%, transparent 40%);
+  }
+}
+
+// Background technical watermark coordinates
+.cyber-telemetry-watermark {
+  position: fixed;
+  bottom: 12px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+  text-transform: uppercase;
+}

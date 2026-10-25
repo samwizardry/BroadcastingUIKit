@@ -1,0 +1,128 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // SWITCHES & SLIDERS
+// BroadcastingUIKit - Hardware Toggles & Range Controls
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Cyber Hardware Switch
+// -----------------------------------------------------------------------------
+.cyber-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .switch-track {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-xs);
+    transition: var(--transition-fast);
+  }
+
+  .switch-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--text-muted);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  input:checked + .switch-track {
+    border-color: var(--accent-acid);
+    background: var(--accent-acid-dim);
+
+    .switch-thumb {
+      transform: translateX(22px);
+      background: var(--accent-acid);
+      box-shadow: 0 0 8px var(--accent-acid);
+    }
+  }
+
+  &:hover .switch-track {
+    border-color: var(--accent-cyan);
+  }
+
+  .switch-label {
+    font-family: var(--font-hud);
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Cyber Range Slider (Volume / Bitrate)
+// -----------------------------------------------------------------------------
+.cyber-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+
+  .slider-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    min-width: 40px;
+  }
+
+  .slider-value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-acid);
+    min-width: 45px;
+    text-align: right;
+  }
+}
+
+.cyber-slider {
+  flex: 1;
+  appearance: none;
+  height: 6px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-dim);
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 18px;
+    background: var(--accent-acid);
+    clip-path: var(--cut-corner-xs);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(216, 255, 0, 0.4);
+    transition: var(--transition-fast);
+
+    &:hover {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+      transform: scaleY(1.15);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 14px;
+    height: 18px;
+    background: var(--accent-acid);
+    clip-path: var(--cut-corner-xs);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 8px rgba(216, 255, 0, 0.4);
+  }
+}

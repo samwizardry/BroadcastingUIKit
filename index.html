@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BROADCASTING // UI KIT [CYBERPUNK GRAPHIC REALISM]</title>
+  <meta name="description" content="Professional Cyberpunk Graphic Realism UI Kit for Broadcasting & Live Streaming Services, inspired by Marathon.">
+  <link rel="stylesheet" href="./src/scss/main.scss">
+  <style>
+    /* Showcase-specific layout refinements */
+    .showcase-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 9, 11, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dim);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-mark-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crosshair {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--accent-acid);
+      clip-path: var(--cut-corner-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-acid);
+      font-weight: 900;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(216, 255, 0, 0.3);
+    }
+
+    .brand-name {
+      font-family: var(--font-hud);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--text-primary);
+    }
+
+    .brand-telemetry {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .showcase-workbench-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dim);
+      clip-path: var(--cut-corner-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+    }
+
+    .showcase-workbench-title {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--accent-acid);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-dim);
+      padding-bottom: 10px;
+    }
+
+    .code-preview-box {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-dim);
+      clip-path: var(--cut-corner-sm);
+      padding: 14px;
+      position: relative;
+    }
+
+    .code-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--border-dim);
+    }
+
+    .code-snippet {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    .palette-swatch {
+      width: 100%;
+      height: 70px;
+      clip-path: var(--cut-corner-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div class="cyber-grid-canvas"></div>
+  <div class="cyber-telemetry-watermark">[SYS.TELEMETRY: ACTIVE // PROTOCOL: WEBRTC]</div>
+
+  <!-- =========================================================================
+       TOP GLOBAL HUD BAR
+       ========================================================================= -->
+  <header class="showcase-header">
+    <div class="brand-mark-group">
+      <div class="brand-crosshair">+</div>
+      <div>
+        <div class="brand-name">BROADCASTING <span style="color: var(--accent-acid);">// UI KIT</span></div>
+        <div class="brand-telemetry">[GRAPHIC REALISM // MARATHON SPEC 1.0]</div>
+      </div>
+    </div>
+
+    <!-- View Switcher Tabs -->
+    <nav class="cyber-tabs" role="tablist">
+      <button class="cyber-tabs__item is-active" data-showcase-view="studio" role="tab">
+        <span>01 // LIVE STUDIO DEMO</span>
+      </button>
+      <button class="cyber-tabs__item" data-showcase-view="workbench" role="tab">
+        <span>02 // COMPONENT WORKBENCH</span>
+      </button>
+      <button class="cyber-tabs__item" data-showcase-view="tokens" role="tab">
+        <span>03 // DESIGN TOKENS</span>
+      </button>
+    </nav>
+
+    <!-- Header Actions -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <button id="audio-fx-toggle" class="btn-cyber btn-cyber-primary btn-cyber-sm" title="Toggle Tactile Web Audio FX">
+        AUDIO: ON
+      </button>
+
+      <div class="cyber-dropdown">
+        <button class="btn-icon-hud" data-dropdown-toggle title="Broadcaster Profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <div class="cyber-dropdown__menu">
+          <div class="cyber-dropdown__header">
+            <span>// PROFILE: SAMWIZARDRY</span>
+            <span>HOST.01</span>
+          </div>
+          <a href="#settings" class="cyber-dropdown__item" data-modal-open="stream-settings-modal">
+            <span class="item-left">
+              <span>⚙️</span>
+              <span>Stream Ingest Settings</span>
+            </span>
+            <span class="item-shortcut">CTRL+S</span>
+          </a>
+          <a href="#stats" class="cyber-dropdown__item">
+            <span class="item-left">
+              <span>📊</span>
+              <span>Channel Telemetry</span>
+            </span>
+          </a>
+          <div class="cyber-dropdown__divider"></div>
+          <a href="#logout" class="cyber-dropdown__item" style="color: var(--accent-alert);">
+            <span class="item-left">
+              <span>🛑</span>
+              <span>Disconnect Session</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="position: relative; z-index: 1; padding: 28px 24px 60px;">
+
+    <!-- =======================================================================
+         VIEW 1: LIVE BROADCAST STUDIO (Interactive End-to-End Streaming Simulation)
+         ======================================================================= -->
+    <section data-view-panel="studio" style="display: block;">
+      <div class="cyber-container">
+        
+        <div class="broadcast-layout">
+          
+          <!-- Main Player Column -->
+          <div class="broadcast-layout__main">
+            
+            <!-- Video Player Component -->
+            <article class="cyber-player" id="main-stream-player">
+              <div class="player-scanlines"></div>
+              <div class="player-overlay-crosshair"></div>
+
+              <!-- Top Telemetry HUD -->
+              <div class="player-hud-top">
+                <div class="hud-meta-left">
+                  <span class="badge-live">● LIVE BROADCAST</span>
+                  <span class="badge-viewers"><span class="viewer-dot"></span> 24,850 VIEWERS</span>
+                  <span class="hud-pill">CH_01 // SAM_BROADCAST</span>
+                </div>
+                <div class="hud-meta-right">
+                  <span class="hud-pill" style="color: var(--accent-acid);">1080P // 60FPS</span>
+                  <span class="hud-pill">DROP: 0.00%</span>
+                  <span class="hud-pill">EU-CENTRAL-01</span>
+                </div>
+              </div>
+
+              <!-- Center Interactive Play Action -->
+              <div class="player-center-action" id="player-center-play">
+                <div class="play-btn-large">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+                <span class="play-label">START BROADCAST FEED</span>
+              </div>
+
+              <div class="player-screen" id="player-active-screen">
+                <div style="font-family: var(--font-hud); font-size: 18px; letter-spacing: 3px; color: var(--accent-cyan); text-align: center;">
+                  BROADCASTING STREAM ONLINE
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 6px;">
+                    WEBRTC ULTRA LOW-LATENCY INGEST // AUDIO 48KHZ STEREO
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Playback Controls Bar -->
+              <div class="player-controls">
+                <div class="controls-timeline">
+                  <div class="timeline-buffered"></div>
+                  <div class="timeline-progress"></div>
+                </div>
+                <div class="controls-bar">
+                  <div class="controls-left">
+                    <button class="btn-player-control" id="player-bottom-play" title="Play / Pause">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                    </button>
+                    
+                    <span class="live-status-chip">
+                      <span class="live-dot"></span> LIVE
+                    </span>
+
+                    <button class="btn-player-control" title="Volume">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                      </svg>
+                    </button>
+
+                    <!-- Mini VU Meter embedded in controls -->
+                    <div class="vu-meter-mini" title="Audio Levels">
+                      <div class="mini-bar"></div>
+                      <div class="mini-bar"></div>
+                      <div class="mini-bar"></div>
+                      <div class="mini-bar"></div>
+                    </div>
+
+                    <span class="time-readout">01:42:18 // LIVE</span>
+                  </div>
+
+                  <div class="controls-right">
+                    <span class="cyber-tag cyber-tag--acid">AV1</span>
+                    <span class="cyber-tag cyber-tag--cyan">1080P60</span>
+
+                    <button class="btn-player-control" title="Settings" data-modal-open="stream-settings-modal">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                      </svg>
+                    </button>
+
+                    <button class="btn-player-control" title="Fullscreen">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Stream Metadata & Author Section -->
+            <div class="stream-info-container">
+              <div class="stream-header-row">
+                <div class="streamer-identity">
+                  <div class="avatar-hud avatar-hud--live avatar-hud--lg">SAM</div>
+                  <div>
+                    <h1 class="stream-meta-title">CYBERPUNK BROADCASTING SYSTEM ARCHITECTURE // MARATHON SPEC</h1>
+                    <div class="streamer-name-row">
+                      <span class="channel-author">SamWizardry</span>
+                      <svg class="verified-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      <span>•</span>
+                      <span>Cyberpunk Design Systems & Streaming Engines</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="stream-actions">
+                  <button class="btn-cyber btn-cyber-primary">FOLLOW CHANNEL</button>
+                  <button class="btn-cyber btn-cyber-secondary" data-modal-open="stream-settings-modal">INGEST KEYS</button>
+                  <button class="btn-icon-hud" title="Share Stream">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                      <polyline points="16 6 12 2 8 6"></polyline>
+                      <line x1="12" y1="2" x2="12" y2="15"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Stream Technical Specs Telemetry Bar -->
+              <div class="stream-specs-bar">
+                <div class="spec-item">
+                  <span class="spec-label">INGEST PROTOCOL:</span>
+                  <span class="spec-value text-acid">WebRTC (Ultra Low-Latency)</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">ENCODER CODEC:</span>
+                  <span class="spec-value text-cyan">AV1 / OPUS</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">BITRATE:</span>
+                  <span class="spec-value">8,450 KBPS</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">RTT LATENCY:</span>
+                  <span class="spec-value text-acid">0.84 SEC</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">SECURITY:</span>
+                  <span class="spec-value">E2E ENCRYPTED (AES-256)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-Time Telemetry Row: VU Meter & Stream Health -->
+            <div class="cyber-grid cyber-grid--2col">
+              
+              <!-- Real-Time Audio Telemetry VU Meter -->
+              <div class="vu-meter-panel">
+                <div class="vu-meter-header">
+                  <span>// AUDIO TELEMETRY [STEREO MASTER]</span>
+                  <span class="vu-meter-status">48.0 KHZ // 320 KBPS</span>
+                </div>
+                <div class="vu-meter-stereo">
+                  <div class="vu-channel">
+                    <span class="channel-id">L</span>
+                    <div class="vu-bar-track">
+                      <div class="vu-bar-fill" id="vu-fill-left" style="width: 68%;"></div>
+                      <div class="vu-peak-indicator" id="vu-peak-left" style="left: 72%;"></div>
+                    </div>
+                    <span class="vu-db-readout" id="vu-db-left">-8.4 dB</span>
+                  </div>
+                  <div class="vu-channel">
+                    <span class="channel-id">R</span>
+                    <div class="vu-bar-track">
+                      <div class="vu-bar-fill" id="vu-fill-right" style="width: 64%;"></div>
+                      <div class="vu-peak-indicator" id="vu-peak-right" style="left: 69%;"></div>
+                    </div>
+                    <span class="vu-db-readout" id="vu-db-right">-9.8 dB</span>
+                  </div>
+                </div>
+                <div class="vu-scale-legend">
+                  <span>-40</span>
+                  <span>-20</span>
+                  <span>-12</span>
+                  <span>-6</span>
+                  <span>-3</span>
+                  <span>0</span>
+                  <span>+3 dB</span>
+                </div>
+              </div>
+
+              <!-- Stream Health & Bitrate Widget -->
+              <div class="stream-health-widget">
+                <div class="stream-health-widget__header">
+                  <span class="health-title">// NETWORK & BITRATE TELEMETRY</span>
+                  <span class="cyber-tag cyber-tag--acid">STATUS: OPTIMAL</span>
+                </div>
+                <div class="bitrate-graph-container">
+                  <div class="graph-grid-lines"></div>
+                  <svg class="bitrate-svg-sparkline" viewBox="0 0 300 60" preserveAspectRatio="none">
+                    <polygon points="0,60 0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20 300,60" />
+                    <polyline points="0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20" />
+                  </svg>
+                </div>
+                <div class="health-metrics-grid">
+                  <div class="metric-cell">
+                    <span class="metric-name">FPS</span>
+                    <span class="metric-val metric-val--acid">60.0</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-name">BITRATE</span>
+                    <span class="metric-val metric-val--cyan">8,450 kbps</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-name">DROP RATE</span>
+                    <span class="metric-val">0.00%</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Recommended Streams Carousel / Grid -->
+            <div>
+              <h2 style="font-size: 14px; letter-spacing: 2px; color: var(--accent-acid); margin-bottom: 14px;">
+                02 // DISCOVER BROADCAST CHANNELS
+              </h2>
+              <div class="cyber-grid cyber-grid--3col">
+                
+                <!-- Card 1 -->
+                <article class="stream-card">
+                  <div class="stream-thumbnail-wrapper">
+                    <div class="stream-thumbnail-placeholder" style="background: radial-gradient(circle at center, #1E2838 0%, #0A0D12 100%);">
+                      <span style="font-family: var(--font-hud); letter-spacing: 2px; color: var(--accent-cyan);">MARATHON HUD // 01</span>
+                    </div>
+                    <span class="badge-live">● LIVE</span>
+                    <span class="badge-viewers">4,120 VIEWERS</span>
+                    <span class="badge-resolution cyber-tag cyber-tag--acid">1080P60</span>
+                    <div class="stream-thumbnail__scanlines"></div>
+                  </div>
+                  <div class="stream-card-body">
+                    <div class="avatar-hud avatar-hud--online">MK</div>
+                    <div class="stream-card-meta">
+                      <h3 class="stream-title">CYBERPUNK SHADER & POST-FX DEVELOPMENT</h3>
+                      <div class="stream-author-row">
+                        <span class="author-name">MarathonRunner</span>
+                        <svg class="verified-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                      </div>
+                      <div class="stream-category">Game Engine Architecture</div>
+                      <div class="tag-list">
+                        <span class="cyber-tag cyber-tag--acid">HLSL</span>
+                        <span class="cyber-tag">Vulkan</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="stream-card">
+                  <div class="stream-thumbnail-wrapper">
+                    <div class="stream-thumbnail-placeholder" style="background: radial-gradient(circle at center, #251B38 0%, #0A0D12 100%);">
+                      <span style="font-family: var(--font-hud); letter-spacing: 2px; color: var(--accent-alert);">STREAM LAB // 02</span>
+                    </div>
+                    <span class="badge-live">● LIVE</span>
+                    <span class="badge-viewers">8,890 VIEWERS</span>
+                    <span class="badge-resolution cyber-tag cyber-tag--cyan">4K HDR</span>
+                    <div class="stream-thumbnail__scanlines"></div>
+                  </div>
+                  <div class="stream-card-body">
+                    <div class="avatar-hud avatar-hud--live">AI</div>
+                    <div class="stream-card-meta">
+                      <h3 class="stream-title">REALTIME AUDIO DSP & SYNTHESIS WORKBENCH</h3>
+                      <div class="stream-author-row">
+                        <span class="author-name">Signal_09</span>
+                      </div>
+                      <div class="stream-category">Audio Engineering</div>
+                      <div class="tag-list">
+                        <span class="cyber-tag cyber-tag--cyan">DSP</span>
+                        <span class="cyber-tag">WebAudio</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="stream-card">
+                  <div class="stream-thumbnail-wrapper">
+                    <div class="stream-thumbnail-placeholder" style="background: radial-gradient(circle at center, #1B3828 0%, #0A0D12 100%);">
+                      <span style="font-family: var(--font-hud); letter-spacing: 2px; color: var(--accent-acid);">TACTICAL HUD // 03</span>
+                    </div>
+                    <span class="badge-live">● LIVE</span>
+                    <span class="badge-viewers">1,940 VIEWERS</span>
+                    <span class="badge-resolution cyber-tag">1080P60</span>
+                    <div class="stream-thumbnail__scanlines"></div>
+                  </div>
+                  <div class="stream-card-body">
+                    <div class="avatar-hud avatar-hud--online">BL</div>
+                    <div class="stream-card-meta">
+                      <h3 class="stream-title">BLAZOR & SCSS DESIGN SYSTEM SCALING</h3>
+                      <div class="stream-author-row">
+                        <span class="author-name">BlazorForge</span>
+                      </div>
+                      <div class="stream-category">Frontend Architecture</div>
+                      <div class="tag-list">
+                        <span class="cyber-tag cyber-tag--acid">Blazor</span>
+                        <span class="cyber-tag">SCSS</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sidebar Column: Real-Time Cyberpunk Chat -->
+          <aside class="broadcast-layout__sidebar">
+            <div class="cyber-chat">
+              
+              <!-- Chat Header -->
+              <div class="cyber-chat__header">
+                <div class="chat-title-group">
+                  <span class="chat-title">// BROADCAST CHAT</span>
+                  <span class="chat-status-pill">SLOW: 3S</span>
+                </div>
+                <div class="chat-header-actions">
+                  <button class="btn-player-control" title="Chat Settings">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Pinned Notice -->
+              <div class="cyber-chat__pinned">
+                <span class="pinned-icon">📌</span>
+                <span class="pinned-text">Welcome to BroadcastingUIKit showcase! Audio & WebRTC telemetry active.</span>
+              </div>
+
+              <!-- Live Message Stream -->
+              <div class="cyber-chat__messages" id="chat-messages-container">
+                
+                <div class="chat-msg chat-msg--system">
+                  [SYS.01: BROADCAST INGEST INITIALIZED // 1080P60 8450KBPS]
+                </div>
+
+                <div class="chat-msg chat-msg--donation">
+                  <div class="msg-header">
+                    <span class="msg-time">21:04</span>
+                    <span class="msg-badge msg-badge--vip">VIP</span>
+                    <span class="msg-username text-cyan">NEXUS_VIP</span>
+                    <span class="donation-amount">★ SUPERTIP $50.00</span>
+                  </div>
+                  <div class="msg-content">This Marathon aesthetic is unmatched. The chamfer cuts and VU meters look gorgeous!</div>
+                </div>
+
+                <div class="chat-msg">
+                  <div class="msg-header">
+                    <span class="msg-time">21:05</span>
+                    <span class="msg-badge msg-badge--mod">MOD</span>
+                    <span class="msg-username" style="color: var(--accent-cyan);">CYBER_GUARD</span>
+                  </div>
+                  <div class="msg-content">Remember to test tactile audio with the AUDIO: ON toggle in the top bar!</div>
+                </div>
+
+                <div class="chat-msg">
+                  <div class="msg-header">
+                    <span class="msg-time">21:06</span>
+                    <span class="msg-badge msg-badge--host">HOST</span>
+                    <span class="msg-username text-acid">SAMWIZARDRY</span>
+                  </div>
+                  <div class="msg-content">BroadcastingUIKit is fully modular and Blazor-ready. Inspect the workbench tab for code snippets!</div>
+                </div>
+
+              </div>
+
+              <!-- Quick Reaction Bar -->
+              <div class="cyber-chat__reactions">
+                <button class="btn-reaction" title="Fire">🔥</button>
+                <button class="btn-reaction" title="Acid Heart">💚</button>
+                <button class="btn-reaction" title="100">💯</button>
+                <button class="btn-reaction" title="Glitch">⚡</button>
+                <button class="btn-reaction" title="Rocket">🚀</button>
+              </div>
+
+              <!-- Chat Input Footer -->
+              <div class="cyber-chat__footer">
+                <div class="chat-input-row">
+                  <input type="text" id="chat-input-field" class="chat-text-input" placeholder="Transmit message to channel..." maxlength="250">
+                  <button id="chat-send-btn" class="btn-cyber btn-cyber-primary btn-cyber-sm">SEND</button>
+                </div>
+                <div class="chat-input-meta">
+                  <span>PRESS ENTER TO TRANSMIT</span>
+                  <span>0 / 250</span>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 2: COMPONENT WORKBENCH (Living Styleguide & Copyable Snippets)
+         ======================================================================= -->
+    <section data-view-panel="workbench" style="display: none;">
+      <div class="cyber-container" style="display: flex; flex-direction: column; gap: 32px;">
+        
+        <div>
+          <h1 style="font-size: 26px; color: var(--accent-acid); letter-spacing: 2px;">COMPONENT WORKBENCH</h1>
+          <p style="margin-top: 4px;">Explore, interact with, and copy production-ready code snippets (HTML & Blazor Razor) for every component.</p>
+        </div>
+
+        <!-- 01 // Buttons -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>01 // TACTICAL BUTTONS & SIZES</span>
+            <span class="cyber-tag cyber-tag--acid">ATOMS // BUTTON</span>
+          </div>
+          
+          <div class="row">
+            <button class="btn-cyber btn-cyber-primary">Primary Acid</button>
+            <button class="btn-cyber btn-cyber-secondary">Secondary Carbon</button>
+            <button class="btn-cyber btn-cyber-danger">Danger Alert</button>
+            <button class="btn-cyber btn-cyber-warning">Hazard Amber</button>
+            <button class="btn-cyber btn-cyber-ghost">Ghost Outline</button>
+            <button class="btn-cyber btn-cyber-primary btn-cyber-sm">Small</button>
+            <button class="btn-cyber btn-cyber-secondary btn-cyber-lg">Large Action</button>
+            <button class="btn-cyber btn-cyber-primary" disabled>Disabled</button>
+            
+            <button class="btn-icon-hud" title="Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="badge-counter">4</span>
+            </button>
+          </div>
+
+          <!-- Code Snippet Tabs -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-buttons">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-buttons">
+&lt;!-- HTML5 --&gt;
+&lt;button class="btn-cyber btn-cyber-primary"&gt;Primary Action&lt;/button&gt;
+&lt;button class="btn-cyber btn-cyber-secondary"&gt;Secondary Action&lt;/button&gt;
+&lt;button class="btn-cyber btn-cyber-danger"&gt;Terminate Broadcast&lt;/button&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;button class="btn-cyber btn-cyber-@Variant.ToString().ToLower() @(IsSmall ? "btn-cyber-sm" : "")" @onclick="OnClick"&gt;
+    @ChildContent
+&lt;/button&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 02 // Badges & Telemetry Chips -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>02 // STATUS BADGES & TELEMETRY CHIPS</span>
+            <span class="cyber-tag cyber-tag--cyan">ATOMS // BADGES</span>
+          </div>
+          
+          <div class="row">
+            <span class="badge-live">● LIVE BROADCAST</span>
+            <span class="badge-viewers"><span class="viewer-dot"></span> 18,400 VIEWERS</span>
+            <span class="cyber-tag cyber-tag--acid">WEBRTC LOW-LATENCY</span>
+            <span class="cyber-tag cyber-tag--cyan">1080P // 60FPS</span>
+            <span class="cyber-tag cyber-tag--alert">DROPPED FRAMES: 0</span>
+            <span class="cyber-tag cyber-tag--warning">WARN: BUFFER 85%</span>
+            <span class="badge-telemetry">
+              <span class="telemetry-indicator telemetry-indicator--green"></span>
+              INGEST: OPTIMAL
+            </span>
+          </div>
+
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-badges">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-badges">
+&lt;!-- HTML5 --&gt;
+&lt;span class="badge-live"&gt;● LIVE BROADCAST&lt;/span&gt;
+&lt;span class="badge-viewers"&gt;&lt;span class="viewer-dot"&gt;&lt;/span&gt; 18,400 VIEWERS&lt;/span&gt;
+&lt;span class="cyber-tag cyber-tag--acid"&gt;WEBRTC LOW-LATENCY&lt;/span&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;span class="badge-live"&gt;● @(IsLive ? "LIVE BROADCAST" : "OFFLINE")&lt;/span&gt;
+&lt;span class="badge-viewers"&gt;&lt;span class="viewer-dot"&gt;&lt;/span&gt; @ViewerCount.ToString("N0") VIEWERS&lt;/span&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 03 // Inputs & Stream Keys -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>03 // FORM INPUTS & INGEST STREAM KEY</span>
+            <span class="cyber-tag cyber-tag--acid">MOLECULES // INPUTS</span>
+          </div>
+          
+          <div class="cyber-grid cyber-grid--2col">
+            <div class="cyber-field">
+              <label class="cyber-field__label">
+                <span>STREAM TITLE</span>
+                <span class="label-code">[FIELD.01]</span>
+              </label>
+              <input type="text" class="cyber-input" value="Marathon Graphic Realism Streaming Architecture">
+            </div>
+
+            <div class="cyber-field">
+              <label class="cyber-field__label">
+                <span>RTMP SERVER INGEST URL</span>
+                <span class="label-code">[RTMP.NODE]</span>
+              </label>
+              <input type="text" class="cyber-input" value="rtmp://live.samwizardry.broadcasting/live" readonly>
+            </div>
+          </div>
+
+          <div class="cyber-field">
+            <label class="cyber-field__label">
+              <span>PROTECTED STREAM KEY (SECRET)</span>
+              <span class="label-code">[KEY.INGEST]</span>
+            </label>
+            <div class="cyber-stream-key" data-stream-key-wrapper>
+              <input type="password" class="key-value" value="live_sec_89201948293481029384729103" readonly>
+              <div class="key-actions">
+                <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-key-toggle>SHOW</button>
+                <button class="btn-cyber btn-cyber-primary btn-cyber-sm" data-key-copy>COPY KEY</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-inputs">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-inputs">
+&lt;!-- Stream Key Ingest Box --&gt;
+&lt;div class="cyber-stream-key"&gt;
+  &lt;input type="password" class="key-value" value="live_sec_xxx" readonly&gt;
+  &lt;button class="btn-cyber btn-cyber-secondary btn-cyber-sm"&gt;SHOW&lt;/button&gt;
+  &lt;button class="btn-cyber btn-cyber-primary btn-cyber-sm"&gt;COPY KEY&lt;/button&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 04 // Hardware Switches & Sliders -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>04 // HARDWARE SWITCHES & TACTICAL SLIDERS</span>
+            <span class="cyber-tag cyber-tag--cyan">CONTROLS</span>
+          </div>
+
+          <div class="row" style="gap: 32px;">
+            <label class="cyber-switch">
+              <input type="checkbox" checked>
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+              <span class="switch-label">DVR RECORDING</span>
+            </label>
+
+            <label class="cyber-switch">
+              <input type="checkbox" checked>
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+              <span class="switch-label">LOW-LATENCY WEBRTC</span>
+            </label>
+
+            <label class="cyber-switch">
+              <input type="checkbox">
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+              <span class="switch-label">SUBSCRIBER-ONLY CHAT</span>
+            </label>
+          </div>
+
+          <div class="cyber-grid cyber-grid--2col" style="margin-top: 10px;">
+            <div class="cyber-slider-group">
+              <span class="slider-label">AUDIO GAIN</span>
+              <input type="range" class="cyber-slider" min="0" max="100" value="85" data-unit="%">
+              <span class="slider-value">85%</span>
+            </div>
+
+            <div class="cyber-slider-group">
+              <span class="slider-label">BITRATE TARGET</span>
+              <input type="range" class="cyber-slider" min="2000" max="12000" step="500" value="8500" data-unit=" kbps">
+              <span class="slider-value">8500 kbps</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 // Avatars & Status Rings -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>05 // STREAMER AVATARS & STATUS RINGS</span>
+            <span class="cyber-tag cyber-tag--acid">AVATARS</span>
+          </div>
+
+          <div class="row">
+            <div class="avatar-hud avatar-hud--sm">SM</div>
+            <div class="avatar-hud avatar-hud--online">ON</div>
+            <div class="avatar-hud avatar-hud--live">LIVE</div>
+            <div class="avatar-hud avatar-hud--lg avatar-hud--live">SAM</div>
+            <div class="avatar-hud avatar-hud--xl avatar-hud--live">HQ</div>
+          </div>
+        </div>
+
+        <!-- 06 // Alerts & Notification Banners -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>06 // CYBER HUD ALERTS & SYSTEM WARNINGS</span>
+            <span class="cyber-tag cyber-tag--alert">MESSAGING</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="cyber-alert cyber-alert--info">
+              <div class="cyber-alert__icon">ℹ️</div>
+              <div class="cyber-alert__content">
+                <span class="alert-title">// PROTOCOL NOTICE</span>
+                <span class="alert-desc">WebRTC ultra low-latency streaming pipeline is functioning under optimal threshold.</span>
+              </div>
+            </div>
+
+            <div class="cyber-alert cyber-alert--success">
+              <div class="cyber-alert__icon">✓</div>
+              <div class="cyber-alert__content">
+                <span class="alert-title">// INGEST VERIFIED</span>
+                <span class="alert-desc">Ingest key successfully validated by Frankfurt Edge Cluster. Broadcast is Live.</span>
+              </div>
+            </div>
+
+            <div class="cyber-alert cyber-alert--warning">
+              <div class="cyber-alert__icon">⚠</div>
+              <div class="cyber-alert__content">
+                <span class="alert-title">// BUFFER WARNING</span>
+                <span class="alert-desc">Client bandwidth fluctuation detected. Video bitrate throttled to 6,200 kbps.</span>
+              </div>
+            </div>
+
+            <div class="cyber-alert cyber-alert--danger">
+              <div class="cyber-alert__icon">🛑</div>
+              <div class="cyber-alert__content">
+                <span class="alert-title">// CRITICAL DROP</span>
+                <span class="alert-desc">Network dropped 18 frames in slot #4. Immediate relay failover recommended.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 3: DESIGN TOKENS & THEME LAB
+         ======================================================================= -->
+    <section data-view-panel="tokens" style="display: none;">
+      <div class="cyber-container" style="display: flex; flex-direction: column; gap: 32px;">
+        
+        <div>
+          <h1 style="font-size: 26px; color: var(--accent-acid); letter-spacing: 2px;">DESIGN TOKENS & THEME SPECIFICATION</h1>
+          <p style="margin-top: 4px;">Single source of truth for Marathon Graphic Realism tokens, color spaces, typography, and geometry.</p>
+        </div>
+
+        <!-- Palette Swatches -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>// COLOR SYSTEM MATRIX</span>
+            <span class="cyber-tag cyber-tag--acid">PALETTE</span>
+          </div>
+
+          <div class="cyber-grid cyber-grid--4col">
+            <div>
+              <div class="palette-swatch" style="background: var(--accent-acid); color: var(--text-inverse);">
+                <span>#D8FF00</span>
+                <span>ACID CHARTREUSE</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--accent-cyan); color: var(--text-inverse);">
+                <span>#00F5FF</span>
+                <span>GLITCH CYAN</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--accent-alert); color: #fff;">
+                <span>#FF334B</span>
+                <span>ALERT CRIMSON</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--accent-warning); color: var(--text-inverse);">
+                <span>#FF8400</span>
+                <span>HAZARD AMBER</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--bg-deep); color: var(--text-primary); border: 1px solid var(--border-bright);">
+                <span>#08090B</span>
+                <span>MATTE ONYX CANVAS</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border-bright);">
+                <span>#0E1116</span>
+                <span>SURFACE CONTAINER</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--bg-surface-elevated); color: var(--text-primary); border: 1px solid var(--border-bright);">
+                <span>#151922</span>
+                <span>ELEVATED MODAL</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="palette-swatch" style="background: var(--accent-purple); color: #fff;">
+                <span>#9D4EDD</span>
+                <span>VIP SUB PURPLE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography Matrix -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>// TYPOGRAPHY SPECIMEN</span>
+            <span class="cyber-tag cyber-tag--cyan">FONT STACKS</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="border-bottom: 1px solid var(--border-dim); padding-bottom: 14px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-acid); margin-bottom: 6px;">
+                HUD & HEADINGS: 'Chakra Petch', sans-serif (ALL-CAPS, LETTER-SPACING: 1.5 - 3PX)
+              </div>
+              <div style="font-family: var(--font-hud); font-size: 28px; font-weight: 700; letter-spacing: 2px;">
+                BROADCASTING PLATFORM // GRAPHIC REALISM 2026
+              </div>
+            </div>
+
+            <div style="border-bottom: 1px solid var(--border-dim); padding-bottom: 14px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 6px;">
+                TELEMETRY & MONOSPACE: 'JetBrains Mono', monospace
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 15px; color: var(--text-primary);">
+                [SYS.01] REC // LIVE 1080P60 8450KBPS LATENCY: 0.84s RTT
+              </div>
+            </div>
+
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); margin-bottom: 6px;">
+                BODY & METADATA: 'Space Grotesk', sans-serif
+              </div>
+              <p style="font-family: var(--font-body); font-size: 14px;">
+                BroadcastingUIKit incorporates high-craft industrial brutalism and technical utility. Interfaces remain hyper-legible, high-contrast, and responsive across viewports.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL DIALOG (Interactive Overlay Demo)
+       ========================================================================= -->
+  <div class="cyber-modal-backdrop" id="stream-settings-modal">
+    <div class="cyber-modal" role="dialog" aria-modal="true" aria-labelledby="modal-stream-settings-title">
+      
+      <div class="cyber-modal__header">
+        <h2 class="modal-title" id="modal-stream-settings-title">STREAM INGESTION & HARDWARE ENCODING</h2>
+        <button class="btn-icon-hud btn-icon-hud--sm" data-modal-close title="Close Window">
+          ✕
+        </button>
+      </div>
+
+      <div class="cyber-modal__body">
+        <div class="cyber-field">
+          <label class="cyber-field__label">
+            <span>INGESTION NODE LOCATION</span>
+            <span class="label-code">[GEO.NODE]</span>
+          </label>
+          <div class="cyber-select-wrapper">
+            <select class="cyber-select">
+              <option>Frankfurt, Germany (EU-Central-01) — 14ms</option>
+              <option>Stockholm, Sweden (EU-North-01) — 22ms</option>
+              <option>Virginia, USA (US-East-01) — 84ms</option>
+              <option>Tokyo, Japan (AP-Northeast-01) — 142ms</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cyber-field">
+          <label class="cyber-field__label">
+            <span>BROADCAST RESOLUTION & FRAMERATE</span>
+            <span class="label-code">[RES.FPS]</span>
+          </label>
+          <div class="cyber-select-wrapper">
+            <select class="cyber-select">
+              <option>1920x1080 (1080p) @ 60 FPS [Recommended]</option>
+              <option>2560x1440 (1440p) @ 60 FPS</option>
+              <option>3840x2160 (4K UHD) @ 60 FPS</option>
+              <option>1280x720 (720p) @ 60 FPS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cyber-field">
+          <label class="cyber-field__label">
+            <span>PRIMARY STREAM SECRET KEY</span>
+            <span class="label-code">[SECRET]</span>
+          </label>
+          <div class="cyber-stream-key" data-stream-key-wrapper>
+            <input type="password" class="key-value" value="live_sec_frankfurt_991823719028" readonly>
+            <div class="key-actions">
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-key-toggle>SHOW</button>
+              <button class="btn-cyber btn-cyber-primary btn-cyber-sm" data-key-copy>COPY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 6px;">
+          <label class="cyber-switch">
+            <input type="checkbox" checked>
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+            <span class="switch-label">HARDWARE ACCELERATION (NVENC/AV1)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="cyber-modal__footer">
+        <button class="btn-cyber btn-cyber-ghost" data-modal-close>CANCEL</button>
+        <button class="btn-cyber btn-cyber-primary" data-modal-close>SAVE & APPLY CONFIG</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="./src/js/showcase.js"></script>
+</body>
+</html>

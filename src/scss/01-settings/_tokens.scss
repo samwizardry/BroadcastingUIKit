@@ -1,0 +1,116 @@
+// =============================================================================
+// LAYER 01: SETTINGS // TOKENS & VARIABLES
+// BroadcastingUIKit - Marathon "Graphic Realism" & Cyberpunk Design System
+// =============================================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+// -----------------------------------------------------------------------------
+// SCSS DESIGN TOKENS (Compile-time)
+// -----------------------------------------------------------------------------
+
+// Core Background Surfaces (Matte Carbon Spectrum)
+$color-bg-deep:             #08090B; // Deepest backdrop canvas
+$color-bg-surface:          #0E1116; // Standard card / container background
+$color-bg-elevated:         #151922; // Modals, popovers, dropdowns
+$color-bg-hover:            #1F2633; // Interactive element hover surface
+$color-bg-active:           #2A3344; // Pressed state surface
+
+// High-Visibility Accents (Marathon Graphic Realism)
+$color-accent-acid:         #D8FF00; // Acid Chartreuse / High-vis Lime
+$color-accent-acid-hover:   #EAFF4F; // Brightened Acid Lime
+$color-accent-acid-dim:     rgba(216, 255, 0, 0.14);
+
+$color-accent-cyan:         #00F5FF; // Tactical Glitch Cyan
+$color-accent-cyan-hover:   #5CFAFF;
+$color-accent-cyan-dim:     rgba(0, 245, 255, 0.14);
+
+$color-accent-alert:        #FF334B; // Broadcast Live / Critical Alert Crimson
+$color-accent-alert-dim:    rgba(255, 51, 75, 0.18);
+
+$color-accent-warning:      #FF8400; // Hazard Amber / Network Warning
+$color-accent-warning-dim:  rgba(255, 132, 0, 0.18);
+
+$color-accent-purple:       #9D4EDD; // Sub VIP Accent
+$color-accent-purple-dim:   rgba(157, 78, 221, 0.18);
+
+// Borders & Structural Grid Lines
+$color-border-dim:          #222936; // Subtle panel dividing lines
+$color-border-bright:       #384358; // Active/highlighted boundaries
+$color-border-focus:        #00F5FF; // Keyboard focus ring color
+
+// Typography Color Scales
+$color-text-primary:        #F0F4FC; // Crisp high-contrast readable text
+$color-text-secondary:      #8E99A8; // Secondary info, metadata
+$color-text-muted:          #545F71; // Telemetry labels, coordinates
+$color-text-inverse:        #08090B; // Dark text over bright acid/cyan badges
+
+// Font Stacks
+$font-hud:                  'Chakra Petch', sans-serif;
+$font-mono:                 'JetBrains Mono', monospace;
+$font-body:                 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// -----------------------------------------------------------------------------
+// CSS CUSTOM PROPERTIES (Runtime Theming & Micro-Animations)
+// -----------------------------------------------------------------------------
+:root {
+  // Surfaces
+  --bg-deep: #{$color-bg-deep};
+  --bg-surface: #{$color-bg-surface};
+  --bg-surface-elevated: #{$color-bg-elevated};
+  --bg-surface-hover: #{$color-bg-hover};
+  --bg-surface-active: #{$color-bg-active};
+
+  // Borders
+  --border-dim: #{$color-border-dim};
+  --border-bright: #{$color-border-bright};
+  --border-focus: #{$color-border-focus};
+
+  // Accents
+  --accent-acid: #{$color-accent-acid};
+  --accent-acid-hover: #{$color-accent-acid-hover};
+  --accent-acid-dim: #{$color-accent-acid-dim};
+
+  --accent-cyan: #{$color-accent-cyan};
+  --accent-cyan-hover: #{$color-accent-cyan-hover};
+  --accent-cyan-dim: #{$color-accent-cyan-dim};
+
+  --accent-alert: #{$color-accent-alert};
+  --accent-alert-dim: #{$color-accent-alert-dim};
+
+  --accent-warning: #{$color-accent-warning};
+  --accent-warning-dim: #{$color-accent-warning-dim};
+
+  --accent-purple: #{$color-accent-purple};
+  --accent-purple-dim: #{$color-accent-purple-dim};
+
+  // Text
+  --text-primary: #{$color-text-primary};
+  --text-secondary: #{$color-text-secondary};
+  --text-muted: #{$color-text-muted};
+  --text-inverse: #{$color-text-inverse};
+
+  // Fonts
+  --font-hud: #{$font-hud};
+  --font-mono: #{$font-mono};
+  --font-body: #{$font-body};
+
+  // Chamfer Cut Corner Polygons (Bungie Marathon 45-degree angled cuts)
+  --cut-corner-xs: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  --cut-corner-sm: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  --cut-corner-btn: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  --cut-corner-md: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  --cut-corner-lg: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  --cut-corner-badge: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  --cut-corner-reverse: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+
+  // Tactical Glows
+  --glow-acid: 0 0 18px rgba(216, 255, 0, 0.38);
+  --glow-cyan: 0 0 18px rgba(0, 245, 255, 0.38);
+  --glow-alert: 0 0 18px rgba(255, 51, 75, 0.42);
+  --glow-subtle: 0 4px 20px rgba(0, 0, 0, 0.65);
+
+  // Transitions & Timing
+  --transition-fast: 0.14s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
