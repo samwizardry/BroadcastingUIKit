@@ -4,55 +4,61 @@
 // =============================================================================
 
 // -----------------------------------------------------------------------------
-// Cyber Hardware Switch
+// Cyber Hardware Switch (Bungie Marathon Slanted Chamfer Toggle)
 // -----------------------------------------------------------------------------
 .cyber-switch {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   user-select: none;
+  flex-shrink: 0;
 
-  input[type="checkbox"] {
-    position: absolute;
+  input[type="checkbox"], input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-
-  .switch-track {
-    position: relative;
-    width: 44px;
-    height: 22px;
-    background: var(--bg-deep);
-    border: 1px solid var(--border-bright);
-    clip-path: var(--cut-corner-xs);
-    transition: var(--transition-fast);
-  }
-
-  .switch-thumb {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    background: var(--text-muted);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    transition: transform var(--transition-fast), background-color var(--transition-fast);
   }
 
-  input:checked + .switch-track {
-    border-color: var(--accent-acid);
-    background: var(--accent-acid-dim);
+  .switch-track, .slider {
+    position: relative;
+    width: 38px;
+    height: 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-sm);
+    transition: var(--transition-fast);
+    display: inline-block;
 
-    .switch-thumb {
-      transform: translateX(22px);
-      background: var(--accent-acid);
-      box-shadow: 0 0 8px var(--accent-acid);
+    &::before, .switch-thumb {
+      content: "";
+      position: absolute;
+      height: 12px;
+      width: 12px;
+      left: 3px;
+      bottom: 3px;
+      background: var(--text-muted);
+      clip-path: var(--cut-corner-sm);
+      transition: var(--transition-fast);
     }
   }
 
-  &:hover .switch-track {
+  input:checked + .switch-track,
+  input:checked + .slider {
+    border-color: var(--accent-acid);
+    background: var(--accent-acid-dim);
+
+    &::before, .switch-thumb {
+      transform: translateX(18px);
+      background: var(--accent-acid);
+      box-shadow: var(--glow-acid);
+    }
+  }
+
+  &:hover .switch-track,
+  &:hover .slider {
     border-color: var(--accent-cyan);
   }
 

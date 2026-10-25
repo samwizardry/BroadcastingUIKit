@@ -1041,22 +1041,40 @@
               <span class="cyber-tag cyber-tag--cyan">CONTROLS</span>
             </div>
 
-            <div class="row" style="gap: 32px;">
+            <!-- Standalone Switches exactly like screenshot -->
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 1px;">
+                СВИТЧЕРЫ (TOGGLES):
+              </div>
+              <div style="display: flex; gap: 18px; align-items: center;">
+                <label class="cyber-switch" title="Active State">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+                <label class="cyber-switch" title="Inactive State">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Labeled Stream Options -->
+            <div class="row" style="gap: 28px; margin-top: 6px;">
               <label class="cyber-switch">
                 <input type="checkbox" checked>
-                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="slider"></span>
                 <span class="switch-label">DVR RECORDING</span>
               </label>
 
               <label class="cyber-switch">
                 <input type="checkbox" checked>
-                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="slider"></span>
                 <span class="switch-label">LOW-LATENCY WEBRTC</span>
               </label>
 
               <label class="cyber-switch">
                 <input type="checkbox">
-                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="slider"></span>
                 <span class="switch-label">SUBSCRIBER-ONLY CHAT</span>
               </label>
             </div>
@@ -1073,6 +1091,30 @@
                 <input type="range" class="cyber-slider" min="2000" max="12000" step="500" value="8500" data-unit=" kbps">
                 <span class="slider-value">8500 kbps</span>
               </div>
+            </div>
+
+            <!-- Code Snippet Box for Switches -->
+            <div class="code-preview-box" style="margin-top: 10px;">
+              <div class="code-preview-header">
+                <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (SLANTED CHAMFER TOGGLE)</span>
+                <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-switches">COPY CODE</button>
+              </div>
+              <pre class="code-snippet" id="snippet-switches">
+&lt;!-- HTML5 Cyber Switch --&gt;
+&lt;label class="cyber-switch"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="slider"&gt;&lt;/span&gt;
+  &lt;span class="switch-label"&gt;LOW-LATENCY WEBRTC&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;label class="cyber-switch"&gt;
+  &lt;input type="checkbox" @bind="IsChecked" @bind:after="OnToggled"&gt;
+  &lt;span class="slider"&gt;&lt;/span&gt;
+  @if (!string.IsNullOrEmpty(Label)) {
+    &lt;span class="switch-label"&gt;@Label&lt;/span&gt;
+  }
+&lt;/label&gt;</pre>
             </div>
           </div>
 
@@ -1367,7 +1409,7 @@
         <div class="row" style="margin-top: 6px;">
           <label class="cyber-switch">
             <input type="checkbox" checked>
-            <span class="switch-track"><span class="switch-thumb"></span></span>
+            <span class="slider"></span>
             <span class="switch-label">HARDWARE ACCELERATION (NVENC/AV1)</span>
           </label>
         </div>
