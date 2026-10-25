@@ -1,0 +1,274 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // STREAM & CHANNEL SEARCH
+// BroadcastingUIKit - Tactical Cyber Search Bar & Autocomplete Results
+// =============================================================================
+
+@use '../01-settings/tokens' as *;
+@use '../02-tools/mixins' as *;
+
+.cyber-search {
+  position: relative;
+  width: 100%;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-dim);
+    clip-path: var(--cut-corner-sm);
+    padding: 2px 10px 2px 12px;
+    gap: 10px;
+    transition: var(--transition-fast);
+    position: relative;
+
+    &:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-surface-elevated);
+    }
+
+    &:focus-within {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(0, 245, 255, 0.25);
+      background: var(--bg-surface-elevated);
+
+      .cyber-search__prefix {
+        color: var(--accent-cyan);
+      }
+    }
+  }
+
+  &__prefix {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    pointer-events: none;
+    user-select: none;
+    transition: var(--transition-fast);
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 8px 0;
+    letter-spacing: 0.5px;
+    min-width: 0;
+
+    &::placeholder {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__clear {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 6px;
+    display: none;
+    border-radius: 2px;
+    transition: var(--transition-fast);
+
+    &:hover {
+      color: var(--accent-alert);
+      background: var(--accent-alert-dim);
+    }
+
+    &.is-visible {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__shortcut {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    background: var(--bg-deep);
+    border: 1px solid var(--border-dim);
+    padding: 2px 6px;
+    clip-path: var(--cut-corner-xs);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Search Autocomplete / Results Dropdown
+  // ---------------------------------------------------------------------------
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-md);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 245, 255, 0.15);
+    z-index: 150;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    animation: cyber-search-dropdown-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.is-open {
+      display: flex;
+    }
+  }
+
+  &__filters {
+    display: flex;
+    gap: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border-dim);
+    overflow-x: auto;
+
+    .search-filter-chip {
+      font-family: var(--font-hud);
+      font-size: 9px;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-dim);
+      color: var(--text-secondary);
+      clip-path: var(--cut-corner-xs);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      user-select: none;
+
+      &:hover {
+        color: var(--text-primary);
+        border-color: var(--accent-cyan);
+      }
+
+      &.is-active {
+        background: var(--accent-acid);
+        color: var(--text-inverse);
+        border-color: var(--accent-acid);
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__results-header {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--accent-cyan);
+    padding: 2px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    clip-path: var(--cut-corner-xs);
+    text-decoration: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover,
+    &.is-highlighted {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-bright);
+      color: var(--accent-acid);
+
+      .item-category {
+        color: var(--text-secondary);
+      }
+    }
+
+    .item-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .item-name {
+      font-family: var(--font-hud);
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .item-category {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .item-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &__empty {
+    padding: 16px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6px;
+    border-top: 1px dashed var(--border-dim);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+  }
+}
+
+@keyframes cyber-search-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

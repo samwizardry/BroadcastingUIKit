@@ -170,6 +170,11 @@ export function initInteractiveComponents() {
   // 8. Auth Forms & Password Visibility Toggles
   // ---------------------------------------------------------------------------
   initAuthForms();
+
+  // ---------------------------------------------------------------------------
+  // 9. Cyber Search Controllers
+  // ---------------------------------------------------------------------------
+  initSearchComponents();
 }
 
 // -----------------------------------------------------------------------------
@@ -431,3 +436,116 @@ function startChatSimulation() {
     });
   }
 }
+
+// -----------------------------------------------------------------------------
+// 9. Cyber Search Controller
+// -----------------------------------------------------------------------------
+function initSearchComponents() {
+  // Global Shortcut CTRL+K / CMD+K to focus search
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      const searchInput = document.querySelector('.cyber-search__input');
+      if (searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+    }
+  });
+
+  document.querySelectorAll('.cyber-search').forEach(searchContainer => {
+    const input = searchContainer.querySelector('.cyber-search__input');
+    const clearBtn = searchContainer.querySelector('.cyber-search__clear');
+    const dropdown = searchContainer.querySelector('.cyber-search__dropdown');
+    const items = searchContainer.querySelectorAll('.cyber-search__item');
+    const filterChips = searchContainer.querySelectorAll('.search-filter-chip');
+    const countDisplay = searchContainer.querySelector('.search-results-count');
+    const emptyDisplay = searchContainer.querySelector('.cyber-search__empty');
+
+    if (!input) return;
+
+    let activeFilter = 'all';
+
+    const filterResults = () => {
+      const query = input.value.trim().toLowerCase();
+      let matchCount = 0;
+
+      if (clearBtn) {
+        clearBtn.classList.toggle('is-visible', query.length > 0);
+      }
+
+      items.forEach(item => {
+        const itemType = item.getAttribute('data-search-type') || 'channel';
+        const nameText = item.querySelector('.item-name')?.textContent.toLowerCase() || '';
+        const catText = item.querySelector('.item-category')?.textContent.toLowerCase() || '';
+        const allText = `${nameText} ${catText}`;
+
+        const matchesQuery = query === '' || allText.includes(query);
+        const matchesFilter = activeFilter === 'all' || itemType === activeFilter;
+
+        if (matchesQuery && matchesFilter) {
+          item.style.display = 'flex';
+          matchCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (countDisplay) {
+        countDisplay.textContent = `${matchCount} MATCH${matchCount === 1 ? '' : 'ES'}`;
+      }
+
+      if (emptyDisplay) {
+        emptyDisplay.style.display = matchCount === 0 ? 'block' : 'none';
+      }
+
+      if (dropdown && (query.length > 0 || document.activeElement === input)) {
+        dropdown.classList.add('is-open');
+      }
+    };
+
+    input.addEventListener('input', filterResults);
+    input.addEventListener('focus', () => {
+      filterResults();
+      if (dropdown) dropdown.classList.add('is-open');
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        input.value = '';
+        input.focus();
+        filterResults();
+      });
+    }
+
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterChips.forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        activeFilter = chip.getAttribute('data-filter') || 'all';
+        filterResults();
+      });
+    });
+  });
+
+  // Close search dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.cyber-search')) {
+      document.querySelectorAll('.cyber-search__dropdown.is-open').forEach(d => {
+        d.classList.remove('is-open');
+      });
+    }
+  });
+
+  // Close search dropdown on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.cyber-search__dropdown.is-open').forEach(d => {
+        d.classList.remove('is-open');
+      });
+    }
+  });
+}
+

@@ -191,12 +191,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Real-time Stream Grid Search Filtering (Browse page)
+  const browseSearchInput = document.querySelector('#browse-stream-search .cyber-search__input');
+  if (browseSearchInput) {
+    browseSearchInput.addEventListener('input', () => {
+      const q = browseSearchInput.value.trim().toLowerCase();
+      document.querySelectorAll('.browse-layout .stream-card').forEach(card => {
+        const title = card.querySelector('.stream-title')?.textContent.toLowerCase() || '';
+        const author = card.querySelector('.author-name')?.textContent.toLowerCase() || '';
+        const category = card.querySelector('.stream-category')?.textContent.toLowerCase() || '';
+        const tags = Array.from(card.querySelectorAll('.cyber-tag')).map(t => t.textContent.toLowerCase()).join(' ');
+        const text = `${title} ${author} ${category} ${tags}`;
+        card.style.display = (q === '' || text.includes(q)) ? 'flex' : 'none';
+      });
+    });
+  }
+
   // Category filter pills (Browse page)
   document.querySelectorAll('.category-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('is-active'));
       pill.classList.add('is-active');
-      showToast(`FILTER APPLIED: ${pill.textContent.trim()}`, 'info');
+      const categoryText = pill.textContent.trim().toUpperCase();
+      showToast(`FILTER APPLIED: ${categoryText}`, 'info');
+
+      // Also filter stream cards based on category
+      const targetCategory = pill.textContent.trim().toLowerCase();
+      document.querySelectorAll('.browse-layout .stream-card').forEach(card => {
+        if (targetCategory === 'all streams') {
+          card.style.display = 'flex';
+          return;
+        }
+        const category = card.querySelector('.stream-category')?.textContent.toLowerCase() || '';
+        const tags = Array.from(card.querySelectorAll('.cyber-tag')).map(t => t.textContent.toLowerCase()).join(' ');
+        const matches = category.includes(targetCategory) || tags.includes(targetCategory) || 
+          (targetCategory.includes('cyberpunk') && (category.includes('cyberpunk') || tags.includes('marathon'))) ||
+          (targetCategory.includes('game') && category.includes('game')) ||
+          (targetCategory.includes('audio') && category.includes('audio')) ||
+          (targetCategory.includes('blazor') && (category.includes('blazor') || tags.includes('blazor'))) ||
+          (targetCategory.includes('webrtc') && (category.includes('webrtc') || tags.includes('webrtc')));
+        card.style.display = matches ? 'flex' : 'none';
+      });
     });
   });
 

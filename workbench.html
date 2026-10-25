@@ -613,6 +613,650 @@
           </div>
         </div>
 
+        <!-- 08 // Tactical Dropdown Menus -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>08 // TACTICAL DROPDOWN MENUS</span>
+            <span class="cyber-tag cyber-tag--acid">MOLECULES // DROPDOWNS</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Chamfered overlay menus with high-contrast borders, bracket telemetry tags, keyboard shortcut hints, and auto-dismiss on outside click or Escape.
+          </p>
+
+          <div class="row" style="gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+            <!-- Dropdown 1: Operator Profile Menu -->
+            <div class="cyber-dropdown">
+              <button class="btn-cyber btn-cyber-secondary" data-dropdown-toggle>
+                <span>OPERATOR PROFILE</span>
+                <span class="btn-tag">[▼]</span>
+              </button>
+              <div class="cyber-dropdown__menu">
+                <div class="cyber-dropdown__header">
+                  <span>// PROFILE: OPERATOR_01</span>
+                  <span>HOST.01</span>
+                </div>
+                <a class="cyber-dropdown__item" data-modal-open="login-modal">
+                  <span class="item-left">
+                    <span class="item-tag">[AUTH]</span>
+                    <span>Sign In Operator</span>
+                  </span>
+                </a>
+                <a class="cyber-dropdown__item" data-modal-open="register-modal">
+                  <span class="item-left">
+                    <span class="item-tag" style="color: var(--accent-acid); border-color: rgba(216, 255, 0, 0.3); background: var(--accent-acid-dim);">[REG]</span>
+                    <span>Register New Profile</span>
+                  </span>
+                </a>
+                <div class="cyber-dropdown__divider"></div>
+                <a class="cyber-dropdown__item" data-modal-open="stream-settings-modal">
+                  <span class="item-left">
+                    <span class="item-tag">[CFG]</span>
+                    <span>Stream Settings</span>
+                  </span>
+                  <span class="item-shortcut">CTRL+S</span>
+                </a>
+                <div class="cyber-dropdown__divider"></div>
+                <a class="cyber-dropdown__item" style="color: var(--accent-alert);">
+                  <span class="item-left">
+                    <span class="item-tag" style="color: var(--accent-alert); border-color: rgba(255, 51, 75, 0.3); background: var(--accent-alert-dim);">[OFF]</span>
+                    <span>Disconnect Session</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Dropdown 2: Broadcast Quality Selector -->
+            <div class="cyber-dropdown">
+              <button class="btn-cyber btn-cyber-primary" data-dropdown-toggle>
+                <span>STREAM QUALITY: 1080P60</span>
+                <span class="btn-tag">[RES]</span>
+              </button>
+              <div class="cyber-dropdown__menu">
+                <div class="cyber-dropdown__header">
+                  <span>// RESOLUTION & BITRATE</span>
+                  <span>AV1/HEVC</span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag" style="color: var(--accent-acid); border-color: rgba(216, 255, 0, 0.3); background: var(--accent-acid-dim);">[REC]</span>
+                    <span>1080p @ 60 FPS (8,500 kbps)</span>
+                  </span>
+                  <span class="item-shortcut">ACTIVE</span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag">[UHD]</span>
+                    <span>1440p @ 60 FPS (12,000 kbps)</span>
+                  </span>
+                  <span class="item-shortcut">2K</span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag">[4K]</span>
+                    <span>3840x2160 @ 60 FPS (18,000 kbps)</span>
+                  </span>
+                  <span class="item-shortcut">HDR</span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag">[ECO]</span>
+                    <span>720p @ 60 FPS (4,500 kbps)</span>
+                  </span>
+                  <span class="item-shortcut">LOW</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dropdown 3: Ingest Protocol Selector -->
+            <div class="cyber-dropdown">
+              <button class="btn-cyber btn-cyber-ghost" data-dropdown-toggle>
+                <span>PROTOCOL: WEBRTC</span>
+                <span class="btn-tag">[NET]</span>
+              </button>
+              <div class="cyber-dropdown__menu">
+                <div class="cyber-dropdown__header">
+                  <span>// INGESTION PIPELINE</span>
+                  <span>TLS 1.3</span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag">[RTC]</span>
+                    <span>WebRTC Ultra Low-Latency (&lt;1s)</span>
+                  </span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag">[SRT]</span>
+                    <span>SRT Secure Reliable Transport</span>
+                  </span>
+                </div>
+                <div class="cyber-dropdown__item">
+                  <span class="item-left">
+                    <span class="item-tag">[RTMP]</span>
+                    <span>RTMP Fallback Legacy Protocol</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Box for Dropdowns -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (TACTICAL DROPDOWN)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-dropdowns">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-dropdowns">
+&lt;!-- HTML5 Cyber Dropdown --&gt;
+&lt;div class="cyber-dropdown"&gt;
+  &lt;button class="btn-cyber btn-cyber-secondary" data-dropdown-toggle&gt;
+    &lt;span&gt;OPERATOR MENU&lt;/span&gt;
+    &lt;span class="btn-tag"&gt;[▼]&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="cyber-dropdown__menu"&gt;
+    &lt;div class="cyber-dropdown__header"&gt;
+      &lt;span&gt;// PROFILE: SAMWIZARDRY&lt;/span&gt;
+      &lt;span&gt;HOST.01&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;a class="cyber-dropdown__item"&gt;
+      &lt;span class="item-left"&gt;
+        &lt;span class="item-tag"&gt;[CFG]&lt;/span&gt;
+        &lt;span&gt;Stream Settings&lt;/span&gt;
+      &lt;/span&gt;
+      &lt;span class="item-shortcut"&gt;CTRL+S&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;div class="cyber-dropdown__divider"&gt;&lt;/div&gt;
+    &lt;a class="cyber-dropdown__item" style="color: var(--accent-alert);"&gt;
+      &lt;span class="item-left"&gt;
+        &lt;span class="item-tag"&gt;[OFF]&lt;/span&gt;
+        &lt;span&gt;Disconnect Session&lt;/span&gt;
+      &lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;CyberDropdown Label="OPERATOR MENU" Tag="[▼]" Variant="ButtonVariant.Secondary"&gt;
+  &lt;Header Left="// PROFILE: @User.Callsign" Right="HOST.01" /&gt;
+  &lt;DropdownItem Tag="[CFG]" Text="Stream Settings" Shortcut="CTRL+S" OnClick="OpenSettings" /&gt;
+  &lt;DropdownDivider /&gt;
+  &lt;DropdownItem Tag="[OFF]" Text="Disconnect Session" IsDestructive="true" OnClick="Logout" /&gt;
+&lt;/CyberDropdown&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 09 // Stream Search Component -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>09 // STREAM & BROADCASTER SEARCH</span>
+            <span class="cyber-tag cyber-tag--cyan">COMPLEX // SEARCH</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Tactical cyber search bar with chamfer geometry, real-time query filtering, category filters, keyboard shortcut (<kbd style="color: var(--accent-acid); font-family: var(--font-mono);">CTRL+K</kbd>), instant clear button, and live autocomplete results preview.
+          </p>
+
+          <div style="max-width: 580px; width: 100%;">
+            <!-- Interactive Live Search Bar Demo -->
+            <div class="cyber-search" id="workbench-search-demo">
+              <div class="cyber-search__wrapper">
+                <div class="cyber-search__prefix">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <span>[SEARCH]</span>
+                </div>
+                <input type="text" class="cyber-search__input" placeholder="Search live channels, streamers, categories, or tags..." autocomplete="off">
+                <div class="cyber-search__actions">
+                  <button type="button" class="cyber-search__clear" title="Clear Query">✕</button>
+                  <span class="cyber-search__shortcut">CTRL+K</span>
+                </div>
+              </div>
+
+              <!-- Autocomplete Results Dropdown Panel -->
+              <div class="cyber-search__dropdown">
+                <div class="cyber-search__filters">
+                  <button type="button" class="search-filter-chip is-active" data-filter="all">ALL</button>
+                  <button type="button" class="search-filter-chip" data-filter="channel">CHANNELS</button>
+                  <button type="button" class="search-filter-chip" data-filter="category">CATEGORIES</button>
+                  <button type="button" class="search-filter-chip" data-filter="tag">TAGS</button>
+                </div>
+
+                <div class="cyber-search__results-header">
+                  <span>// REALTIME SEARCH INDEX</span>
+                  <span class="search-results-count">5 MATCHES</span>
+                </div>
+
+                <div class="cyber-search__list">
+                  <!-- Match 1 -->
+                  <a class="cyber-search__item" href="watch.html?channel=samwizardry" data-search-type="channel">
+                    <div class="item-meta">
+                      <div class="avatar-hud avatar-hud--live avatar-hud--sm">SAM</div>
+                      <div>
+                        <div class="item-name">SamWizardry</div>
+                        <div class="item-category">Cyberpunk Design Systems & Streaming Architecture</div>
+                      </div>
+                    </div>
+                    <div class="item-right">
+                      <span class="badge-live">LIVE</span>
+                      <span class="cyber-tag cyber-tag--acid">1080P60</span>
+                    </div>
+                  </a>
+
+                  <!-- Match 2 -->
+                  <a class="cyber-search__item" href="watch.html?channel=marathon" data-search-type="channel">
+                    <div class="item-meta">
+                      <div class="avatar-hud avatar-hud--live avatar-hud--sm">MK</div>
+                      <div>
+                        <div class="item-name">MarathonRunner</div>
+                        <div class="item-category">Game Engine Architecture & Vulkan Shaders</div>
+                      </div>
+                    </div>
+                    <div class="item-right">
+                      <span class="badge-live">LIVE</span>
+                      <span class="cyber-tag cyber-tag--acid">1440P60</span>
+                    </div>
+                  </a>
+
+                  <!-- Match 3 -->
+                  <a class="cyber-search__item" href="watch.html?channel=signal" data-search-type="category">
+                    <div class="item-meta">
+                      <div class="avatar-hud avatar-hud--live avatar-hud--sm">AI</div>
+                      <div>
+                        <div class="item-name">Audio DSP Engineering</div>
+                        <div class="item-category">Signal_09 // Synthesizers & Sound Telemetry</div>
+                      </div>
+                    </div>
+                    <div class="item-right">
+                      <span class="badge-live">LIVE</span>
+                      <span class="cyber-tag cyber-tag--cyan">8.8K VIEWERS</span>
+                    </div>
+                  </a>
+
+                  <!-- Match 4 -->
+                  <a class="cyber-search__item" href="watch.html?channel=blazor" data-search-type="tag">
+                    <div class="item-meta">
+                      <div class="avatar-hud avatar-hud--live avatar-hud--sm">BL</div>
+                      <div>
+                        <div class="item-name">Blazor WebAssembly</div>
+                        <div class="item-category">BlazorForge // C# .NET 9 Frontend Architecture</div>
+                      </div>
+                    </div>
+                    <div class="item-right">
+                      <span class="badge-live">LIVE</span>
+                      <span class="cyber-tag">BLAZOR</span>
+                    </div>
+                  </a>
+
+                  <!-- Match 5 -->
+                  <a class="cyber-search__item" href="watch.html?channel=vortex" data-search-type="channel">
+                    <div class="item-meta">
+                      <div class="avatar-hud avatar-hud--live avatar-hud--sm">VX</div>
+                      <div>
+                        <div class="item-name">VortexNet</div>
+                        <div class="item-category">Distributed WebRTC Ingest & Mesh Testing</div>
+                      </div>
+                    </div>
+                    <div class="item-right">
+                      <span class="badge-live">LIVE</span>
+                      <span class="cyber-tag cyber-tag--cyan">WEBRTC</span>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="cyber-search__empty" style="display: none;">
+                  [SYS.ERR: NO ACTIVE STREAMS MATCH QUERY]
+                </div>
+
+                <div class="cyber-search__footer">
+                  <span>PRESS ENTER TO SELECT</span>
+                  <span>ESC TO DISMISS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Box for Search -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (CYBER SEARCH & AUTOCOMPLETE)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-search">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-search">
+&lt;!-- HTML5 Cyber Search --&gt;
+&lt;div class="cyber-search"&gt;
+  &lt;div class="cyber-search__wrapper"&gt;
+    &lt;div class="cyber-search__prefix"&gt;
+      &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+        &lt;circle cx="11" cy="11" r="8"&gt;&lt;/circle&gt;
+        &lt;line x1="21" y1="21" x2="16.65" y2="16.65"&gt;&lt;/line&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;[SEARCH]&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;input type="text" class="cyber-search__input" placeholder="Search streams... [CTRL+K]"&gt;
+    &lt;div class="cyber-search__actions"&gt;
+      &lt;button type="button" class="cyber-search__clear"&gt;✕&lt;/button&gt;
+      &lt;span class="cyber-search__shortcut"&gt;CTRL+K&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="cyber-search__dropdown"&gt;
+    &lt;!-- Live Filter Chips &amp; Autocomplete Stream Items --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;CyberSearch Placeholder="Search streams..." OnSearch="HandleSearch" OnSelect="HandleSelectStream"&gt;
+  &lt;ResultsTemplate Context="stream"&gt;
+    &lt;SearchStreamItem Stream="@stream" /&gt;
+  &lt;/ResultsTemplate&gt;
+&lt;/CyberSearch&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 10 // Segmented Tabs & Switchers -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>10 // SEGMENTED TABS & SWITCHERS</span>
+            <span class="cyber-tag cyber-tag--acid">MOLECULES // TABS</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Tactical chamfered tab strips for routing, subviews, and category filtering with numerical counters.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">STANDARD TAB STRIP:</div>
+              <nav class="cyber-tabs" role="tablist">
+                <button class="cyber-tabs__item is-active" role="tab">
+                  <span>ALL STREAMS</span>
+                  <span class="tab-counter">24</span>
+                </button>
+                <button class="cyber-tabs__item" role="tab">
+                  <span>CYBERPUNK UI</span>
+                  <span class="tab-counter">8</span>
+                </button>
+                <button class="cyber-tabs__item" role="tab">
+                  <span>DSP AUDIO</span>
+                  <span class="tab-counter">5</span>
+                </button>
+                <button class="cyber-tabs__item" role="tab">
+                  <span>BLAZOR</span>
+                  <span class="tab-counter">3</span>
+                </button>
+              </nav>
+            </div>
+
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">FULL-WIDTH SEGMENTED SWITCHER:</div>
+              <div class="cyber-tabs cyber-tabs--fill" role="tablist">
+                <button class="cyber-tabs__item is-active" role="tab" style="flex: 1; justify-content: center;">
+                  <span>FEED [LIVE]</span>
+                </button>
+                <button class="cyber-tabs__item" role="tab" style="flex: 1; justify-content: center;">
+                  <span>CLIPS [VOD]</span>
+                </button>
+                <button class="cyber-tabs__item" role="tab" style="flex: 1; justify-content: center;">
+                  <span>SCHEDULE [UPCOMING]</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Box for Tabs -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (CHAMFERED TABS)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-tabs">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-tabs">
+&lt;!-- HTML5 Cyber Tabs --&gt;
+&lt;nav class="cyber-tabs" role="tablist"&gt;
+  &lt;button class="cyber-tabs__item is-active" role="tab"&gt;
+    &lt;span&gt;ALL STREAMS&lt;/span&gt;
+    &lt;span class="tab-counter"&gt;24&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="cyber-tabs__item" role="tab"&gt;
+    &lt;span&gt;CYBERPUNK UI&lt;/span&gt;
+    &lt;span class="tab-counter"&gt;8&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/nav&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;CyberTabs ActiveKey="@activeTab" OnChange="HandleTabChange"&gt;
+  &lt;CyberTabItem Key="all" Text="ALL STREAMS" Count="24" /&gt;
+  &lt;CyberTabItem Key="cyber" Text="CYBERPUNK UI" Count="8" /&gt;
+&lt;/CyberTabs&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 11 // Stream Discovery Cards -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>11 // STREAM CARDS & BROADCAST PREVIEWS</span>
+            <span class="cyber-tag cyber-tag--acid">ORGANISMS // CARDS</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            High-density broadcast preview card featuring 45° chamfer cut geometry, scanlines texture overlay, live telemetry chips, streamer badge, and clickable channel routing.
+          </p>
+
+          <div style="max-width: 360px;">
+            <article class="stream-card" style="cursor: pointer;" onclick="window.location.href='watch.html?channel=samwizardry'">
+              <div class="stream-thumbnail-wrapper">
+                <div class="stream-thumbnail-placeholder">
+                  <span class="preview-callsign">SYS.HUD // 01</span>
+                </div>
+                <span class="badge-live">LIVE</span>
+                <span class="badge-viewers">24,850 VIEWERS</span>
+                <span class="badge-resolution cyber-tag cyber-tag--acid">1080P60</span>
+                <div class="stream-thumbnail__scanlines"></div>
+              </div>
+              <div class="stream-card-body">
+                <div class="avatar-hud avatar-hud--live">SAM</div>
+                <div class="stream-card-meta">
+                  <h3 class="stream-title">CYBERPUNK BROADCASTING ARCHITECTURE</h3>
+                  <div class="stream-author-row">
+                    <span class="author-name">SamWizardry</span>
+                    <span class="cyber-tag cyber-tag--cyan" style="font-size: 9px; padding: 0 4px;">HOST</span>
+                  </div>
+                  <div class="stream-category">Cyberpunk Design Systems</div>
+                  <div class="tag-list">
+                    <span class="cyber-tag cyber-tag--acid">AV1</span>
+                    <span class="cyber-tag">Marathon Spec</span>
+                    <span class="cyber-tag">SCSS</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Code Snippet Box for Stream Card -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (STREAM CARD)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-stream-card">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-stream-card">
+&lt;!-- HTML5 Stream Card --&gt;
+&lt;article class="stream-card" data-open-stream="samwizardry"&gt;
+  &lt;div class="stream-thumbnail-wrapper"&gt;
+    &lt;span class="badge-live"&gt;LIVE&lt;/span&gt;
+    &lt;span class="badge-viewers"&gt;24.8K VIEWERS&lt;/span&gt;
+    &lt;span class="badge-resolution cyber-tag cyber-tag--acid"&gt;1080P60&lt;/span&gt;
+    &lt;div class="stream-thumbnail__scanlines"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stream-card-body"&gt;
+    &lt;div class="avatar-hud avatar-hud--live"&gt;SAM&lt;/div&gt;
+    &lt;div class="stream-card-meta"&gt;
+      &lt;h3 class="stream-title"&gt;CYBERPUNK BROADCASTING ARCHITECTURE&lt;/h3&gt;
+      &lt;span class="author-name"&gt;SamWizardry&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;StreamCard Channel="@channel" OnClick="SelectChannel" /&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 12 // Chat Messages & Reaction Chips -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>12 // CHAT MESSAGES & REACTION CHIPS</span>
+            <span class="cyber-tag cyber-tag--cyan">ATOMS // CHAT</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Tactical chat message feed primitives (System ingest, VIP tip donations, Moderator flags, Host broadcasts) and industrial hype chips without generic Unicode emojis.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; max-width: 540px;">
+            <div class="chat-msg chat-msg--system">
+              [SYS.01: BROADCAST INGEST INITIALIZED // 1080P60 8450KBPS]
+            </div>
+
+            <div class="chat-msg chat-msg--donation">
+              <div class="msg-header">
+                <span class="msg-time">22:04</span>
+                <span class="msg-badge msg-badge--vip">VIP</span>
+                <span class="msg-username text-cyan">NEXUS_VIP</span>
+                <span class="donation-amount">★ SUPERTIP $50.00</span>
+              </div>
+              <div class="msg-content">This Marathon graphic realism aesthetic is unmatched!</div>
+            </div>
+
+            <div class="chat-msg">
+              <div class="msg-header">
+                <span class="msg-time">22:05</span>
+                <span class="msg-badge msg-badge--mod">MOD</span>
+                <span class="msg-username" style="color: var(--accent-cyan);">CYBER_GUARD</span>
+              </div>
+              <div class="msg-content">WebRTC stream latency is 0.84 seconds. Rock solid stability.</div>
+            </div>
+
+            <div class="chat-msg">
+              <div class="msg-header">
+                <span class="msg-time">22:06</span>
+                <span class="msg-badge msg-badge--host">HOST</span>
+                <span class="msg-username text-acid">SAMWIZARDRY</span>
+              </div>
+              <div class="msg-content">All components are fully decoupled into separate pages and Blazor-ready.</div>
+            </div>
+
+            <div style="margin-top: 8px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">TACTICAL REACTION CHIPS:</div>
+              <div class="cyber-chat__reactions" style="padding: 0; background: transparent; border: none;">
+                <button class="btn-reaction" title="Hype">[HYPE]</button>
+                <button class="btn-reaction" title="Good Game">[GG]</button>
+                <button class="btn-reaction" title="Win">[W]</button>
+                <button class="btn-reaction" title="Max Bitrate">[100%]</button>
+                <button class="btn-reaction" title="Glitch">[GLITCH]</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Box for Chat Messages -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (CHAT PRIMITIVES)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-chat">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-chat">
+&lt;!-- VIP Donation Message --&gt;
+&lt;div class="chat-msg chat-msg--donation"&gt;
+  &lt;div class="msg-header"&gt;
+    &lt;span class="msg-badge msg-badge--vip"&gt;VIP&lt;/span&gt;
+    &lt;span class="msg-username text-cyan"&gt;OPERATOR&lt;/span&gt;
+    &lt;span class="donation-amount"&gt;★ SUPERTIP $50.00&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="msg-content"&gt;Message body text&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;ChatMessage Message="@chatMsg" OnReaction="HandleReaction" /&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 13 // Broadcast Telemetry & Health Board -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>13 // BROADCAST TELEMETRY & HEALTH BOARD</span>
+            <span class="cyber-tag cyber-tag--acid">MOLECULES // TELEMETRY</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Live streaming metrics board with vector bitrate sparkline and modular telemetry metric cells.
+          </p>
+
+          <div class="stream-health-widget">
+            <div class="stream-health-widget__header">
+              <span class="health-title">// NETWORK & BITRATE TELEMETRY</span>
+              <span class="cyber-tag cyber-tag--acid">STATUS: OPTIMAL</span>
+            </div>
+            <div class="bitrate-graph-container">
+              <div class="graph-grid-lines"></div>
+              <svg class="bitrate-svg-sparkline" viewBox="0 0 300 60" preserveAspectRatio="none">
+                <polygon points="0,60 0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20 300,60" />
+                <polyline points="0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20" />
+              </svg>
+            </div>
+            <div class="health-metrics-grid" style="grid-template-columns: repeat(6, 1fr);">
+              <div class="metric-cell">
+                <span class="metric-name">FPS</span>
+                <span class="metric-val metric-val--acid">60.0</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-name">BITRATE</span>
+                <span class="metric-val metric-val--cyan">8,450 kbps</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-name">DROP RATE</span>
+                <span class="metric-val">0.00%</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-name">RTT LATENCY</span>
+                <span class="metric-val metric-val--acid">0.84 SEC</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-name">CODEC</span>
+                <span class="metric-val">AV1 / OPUS</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-name">SECURITY</span>
+                <span class="metric-val metric-val--cyan">TLS 1.3 / E2E</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Box for Telemetry -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (TELEMETRY HEALTH WIDGET)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-telemetry-health">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-telemetry-health">
+&lt;!-- HTML5 Health Widget --&gt;
+&lt;div class="stream-health-widget"&gt;
+  &lt;div class="stream-health-widget__header"&gt;
+    &lt;span class="health-title"&gt;// NETWORK &amp; BITRATE TELEMETRY&lt;/span&gt;
+    &lt;span class="cyber-tag cyber-tag--acid"&gt;STATUS: OPTIMAL&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="bitrate-graph-container"&gt;
+    &lt;!-- SVG Bitrate Sparkline --&gt;
+  &lt;/div&gt;
+  &lt;div class="health-metrics-grid"&gt;
+    &lt;!-- Metric Cells (FPS, Bitrate, Drop, Latency, Codec, Security) --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;StreamHealthWidget Metrics="@telemetryMetrics" SparklineData="@sparklinePoints" /&gt;</pre>
+          </div>
+        </div>
+
       </div>
     </main>
 
