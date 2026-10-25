@@ -71,11 +71,30 @@ src/scss/
 │   ├── _dropdowns.scss
 │   ├── _tabs.scss
 │   ├── _alerts.scss
-│   └── _tooltips.scss
+│   ├── _tooltips.scss
+│   └── _sidebar.scss
 ├── 07-trumps/          # Overrides, hazard patterns, glitch animations
 │   └── _utilities.scss
 └── main.scss           # Master orchestrator compiling the bundle
 ```
+
+---
+
+## 4. Twitch-Style Application Architecture
+
+BroadcastingUIKit features a modern Twitch-style layout with seamless view switching:
+* **Persistent Left Channels Sidebar (`.cyber-sidebar`):**
+  * Displays Followed Channels (live status, viewer counts, avatars) and Recommended Channels.
+  * Collapsible into a compact 60px icon rail.
+  * Seamless channel switching: clicking any channel instantly tunes the center player to that stream.
+* **Browse Channels Feed (`.browse-layout`):**
+  * Featured live stream hero banner with live 16:9 preview and instant tune-in CTA.
+  * Category filter pills (`CYBERPUNK UI/UX`, `GAME ENGINE DEV`, `AUDIO DSP`, etc.).
+  * Responsive 3-4 column grid of live stream cards with scanline previews.
+* **Watch Stream Mode (`.watch-layout`):**
+  * **Left:** Persistent channels navigation.
+  * **Center:** Full cyberpunk broadcast player with telemetry HUD, stereo VU meter, and network diagnostics.
+  * **Right:** Collapsible real-time chat with superchat donations, subscriber badges, and hype reaction chips.
 
 ---
 
