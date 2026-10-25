@@ -1,12 +1,12 @@
 // =============================================================================
 // BROADCASTING UI KIT // SHOWCASE STUDIO ORCHESTRATOR
-// Platform Navigation, Channel Switching, and Studio Controls
+// Platform Navigation, Multi-Page Channel Routing, and Studio Controls
 // =============================================================================
 
 import { initInteractiveComponents, showToast } from './components.js';
 
 // Channels Dataset for Dynamic Channel Switching
-const CHANNELS_DATA = {
+export const CHANNELS_DATA = {
   samwizardry: {
     id: 'samwizardry',
     name: 'SamWizardry',
@@ -36,7 +36,7 @@ const CHANNELS_DATA = {
     name: 'Signal_09',
     avatar: 'AI',
     title: 'DISTRIBUTED WEBRTC MESH & LOW-LATENCY INGEST TESTING',
-    category: 'Network Architecture',
+    category: 'Audio DSP Engineering',
     viewers: '8,890',
     codec: 'AV1 / OPUS',
     resolution: '4K HDR // 60FPS',
@@ -69,50 +69,18 @@ const CHANNELS_DATA = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize component behaviors
-  initInteractiveComponents();
+// Select & Apply Channel Data to Stream Player
+export function selectChannel(channelId, updateUrl = true, notify = true) {
+  const channel = CHANNELS_DATA[channelId] || CHANNELS_DATA.samwizardry;
 
-  // View Switching Controller
-  const navTabs = document.querySelectorAll('[data-showcase-view]');
-  const viewPanels = document.querySelectorAll('[data-view-panel]');
-
-  function activateView(targetView) {
-    navTabs.forEach(t => {
-      if (t.getAttribute('data-showcase-view') === targetView) {
-        t.classList.add('is-active');
-      } else {
-        t.classList.remove('is-active');
-      }
-    });
-
-    viewPanels.forEach(panel => {
-      if (panel.getAttribute('data-view-panel') === targetView) {
-        panel.style.display = 'block';
-      } else {
-        panel.style.display = 'none';
-      }
-    });
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  navTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetView = tab.getAttribute('data-showcase-view');
-      activateView(targetView);
-    });
+  // Update active state in sidebar
+  document.querySelectorAll('.channel-item').forEach(item => {
+    item.classList.toggle('is-active', item.getAttribute('data-channel-id') === channel.id);
   });
 
-  // Switch Stream Channel Functionality
-  function selectChannel(channelId) {
-    const channel = CHANNELS_DATA[channelId] || CHANNELS_DATA.samwizardry;
+  const isWatchPage = !!document.getElementById('main-stream-player');
 
-    // Update active state in sidebar
-    document.querySelectorAll('.channel-item').forEach(item => {
-      item.classList.toggle('is-active', item.getAttribute('data-channel-id') === channelId);
-    });
-
+  if (isWatchPage) {
     // Update player elements
     const titleEl = document.getElementById('stream-title-display');
     const authorEl = document.getElementById('stream-author-display');
@@ -134,35 +102,66 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bitrateEl) bitrateEl.textContent = channel.bitrate;
     if (latencyEl) latencyEl.textContent = channel.latency;
 
-    // Switch view to Watch Mode
-    activateView('watch');
-    showToast(`TUNED TO [${channel.name.toUpperCase()}] // ${channel.resolution}`, 'info');
+    if (updateUrl) {
+      const currentUrl = new URL(window.location);
+      if (currentUrl.searchParams.get('channel') !== channel.id) {
+        currentUrl.searchParams.set('channel', channel.id);
+        window.history.pushState({ channel: channel.id }, '', currentUrl);
+      }
+    }
+
+    if (notify) {
+      showToast(`TUNED TO [${channel.name.toUpperCase()}] // ${channel.resolution}`, 'info');
+    }
+  } else {
+    // Navigate from another page to Watch Stream
+    window.location.href = `watch.html?channel=${encodeURIComponent(channel.id)}`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize component behaviors (modals, dropdowns, code copy, etc.)
+  initInteractiveComponents();
+
+  const isWatchPage = !!document.getElementById('main-stream-player');
+
+  // Watch page channel initialization from URL parameter
+  if (isWatchPage) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialChannel = urlParams.get('channel') || 'samwizardry';
+    selectChannel(initialChannel, false, false);
+
+    // Browser back/forward navigation
+    window.addEventListener('popstate', () => {
+      const params = new URLSearchParams(window.location.search);
+      const channel = params.get('channel') || 'samwizardry';
+      selectChannel(channel, false, false);
+    });
   }
 
   // Sidebar Channel Item Click
   document.querySelectorAll('.channel-item[data-channel-id]').forEach(item => {
     item.addEventListener('click', (e) => {
-      e.preventDefault();
       const channelId = item.getAttribute('data-channel-id');
-      selectChannel(channelId);
+      if (!channelId) return;
+
+      if (isWatchPage) {
+        e.preventDefault();
+        selectChannel(channelId, true, true);
+      }
+      // Non-watch pages will follow the natural href="watch.html?channel=..."
     });
   });
 
-  // Stream Cards Click (From Browse Feed)
+  // Stream Cards & Hero Previews Click (Browse Feed)
   document.querySelectorAll('[data-open-stream]').forEach(card => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
       const channelId = card.getAttribute('data-open-stream');
-      selectChannel(channelId);
+      if (channelId) {
+        window.location.href = `watch.html?channel=${encodeURIComponent(channelId)}`;
+      }
     });
   });
-
-  // Back to Browse button
-  const backToBrowseBtn = document.getElementById('btn-back-to-browse');
-  if (backToBrowseBtn) {
-    backToBrowseBtn.addEventListener('click', () => {
-      activateView('browse');
-    });
-  }
 
   // Sidebar Collapse / Expand Toggle
   const sidebarCollapseBtn = document.getElementById('sidebar-collapse-toggle');
@@ -175,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Chat Collapse / Expand Toggle
+  // Chat Collapse / Expand Toggle (Watch page)
   const watchLayout = document.getElementById('watch-layout-main');
   const chatCollapseBtn = document.getElementById('btn-chat-collapse');
   const chatExpandBtn = document.getElementById('btn-chat-expand');
@@ -192,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Category filter pills in browse view
+  // Category filter pills (Browse page)
   document.querySelectorAll('.category-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('is-active'));

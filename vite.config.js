@@ -18,7 +18,10 @@ export default defineConfig({
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html')
+        main: resolve(__dirname, 'index.html'),
+        watch: resolve(__dirname, 'watch.html'),
+        workbench: resolve(__dirname, 'workbench.html'),
+        tokens: resolve(__dirname, 'tokens.html')
       }
     }
   }
