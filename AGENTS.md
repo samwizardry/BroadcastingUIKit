@@ -92,3 +92,11 @@ BroadcastingUIKit/
 * **`npm run dev`**: Launch Vite local development server with instant SCSS Hot Module Replacement.
 * **`npm run build`**: Build the interactive showcase web app and compile the standalone CSS bundles.
 * **`npm run build:css`**: Compile Dart Sass directly into `dist/broadcasting-uikit.css` and `.min.css`.
+
+---
+
+## 5. Strict Negative Constraints
+
+1. **NO Third-Party Platform / Product Mentions:** Never mention any external commercial streaming platforms or third-party products in conversations, code comments, documentation, or UI text. Always use proprietary terminology (`BroadcastingUIKit`, `Live Broadcast Studio`, `Channels Sidebar`, `Stream Discovery Feed`).
+2. **NO Generic AI/Emoji Icons:** Never use Unicode emojis (`ℹ️`, `✓`, `⚠️`, `🛑`, `⚙️`, `📊`) as icons. Use industrial telemetry badges (`[SYS.INFO]`, `[VERIFIED]`, `[WARN_08]`, `[CRIT_ERR]`, `[CFG]`, `[TEL]`, `[HYPE]`) and sharp vector glyphs.
+

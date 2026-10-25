@@ -1,12 +1,12 @@
 // =============================================================================
 // BROADCASTING UI KIT // SHOWCASE STUDIO ORCHESTRATOR
-// Twitch-Style Navigation, Channel Switching, and Studio Controls
+// Platform Navigation, Channel Switching, and Studio Controls
 // =============================================================================
 
 import { soundFx } from './audio-fx.js';
 import { initInteractiveComponents, showToast } from './components.js';
 
-// Channels Dataset for Twitch-Style Switching
+// Channels Dataset for Dynamic Channel Switching
 const CHANNELS_DATA = {
   samwizardry: {
     id: 'samwizardry',

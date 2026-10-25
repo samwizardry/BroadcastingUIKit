@@ -80,9 +80,9 @@ src/scss/
 
 ---
 
-## 4. Twitch-Style Application Architecture
+## 4. Broadcasting Platform Layout Architecture
 
-BroadcastingUIKit features a modern Twitch-style layout with seamless view switching:
+BroadcastingUIKit features a modern live streaming layout with seamless view switching:
 * **Persistent Left Channels Sidebar (`.cyber-sidebar`):**
   * Displays Followed Channels (live status, viewer counts, avatars) and Recommended Channels.
   * Collapsible into a compact 60px icon rail.
@@ -98,7 +98,7 @@ BroadcastingUIKit features a modern Twitch-style layout with seamless view switc
 
 ---
 
-## 4. Antigravity IDE Configuration & Agentic Roles
+## 5. Antigravity IDE Configuration & Agentic Roles
 
 Configured for collaborative AI development within Google Antigravity:
 * **[AGENTS.md](./AGENTS.md)**: Master guidelines, aesthetic laws, and architectural rules.
@@ -113,7 +113,7 @@ Configured for collaborative AI development within Google Antigravity:
 
 ---
 
-## 5. Quick Start & Commands
+## 6. Quick Start & Commands
 
 ```bash
 # Install dependencies
@@ -133,7 +133,7 @@ npm run build
 
 ---
 
-## 6. Blazor (.razor) Conversion Guide
+## 7. Blazor (.razor) Conversion Guide
 
 Every component markup block in BroadcastingUIKit is designed to cleanly convert into a Blazor component:
 

@@ -1,6 +1,6 @@
 // =============================================================================
 // LAYER 05: OBJECTS // GRID & APPLICATION SHELL LAYOUTS
-// BroadcastingUIKit - Twitch-Style Cyberpunk Application Shell
+// BroadcastingUIKit - Modular Cyberpunk Application Shell
 // =============================================================================
 
 // Application Master Shell (Persistent Left Sidebar + Main View Area)
@@ -19,7 +19,7 @@
 }
 
 // -----------------------------------------------------------------------------
-// 1. Browse Layout (Twitch Home / Feed Mode)
+// 1. Browse Layout (Discovery & Feed Mode)
 // -----------------------------------------------------------------------------
 .browse-layout {
   padding: 24px 28px 60px;
