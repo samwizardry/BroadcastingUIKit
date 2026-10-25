@@ -173,21 +173,21 @@
           </div>
           <a href="#settings" class="cyber-dropdown__item" data-modal-open="stream-settings-modal">
             <span class="item-left">
-              <span>⚙️</span>
+              <span class="item-tag">[CFG]</span>
               <span>Stream Ingest Settings</span>
             </span>
             <span class="item-shortcut">CTRL+S</span>
           </a>
           <a href="#stats" class="cyber-dropdown__item">
             <span class="item-left">
-              <span>📊</span>
+              <span class="item-tag" style="color: var(--accent-cyan); border-color: rgba(0, 245, 255, 0.3); background: var(--accent-cyan-dim);">[TEL]</span>
               <span>Channel Telemetry</span>
             </span>
           </a>
           <div class="cyber-dropdown__divider"></div>
           <a href="#logout" class="cyber-dropdown__item" style="color: var(--accent-alert);">
             <span class="item-left">
-              <span>🛑</span>
+              <span class="item-tag" style="color: var(--accent-alert); border-color: rgba(255, 51, 75, 0.3); background: var(--accent-alert-dim);">[OFF]</span>
               <span>Disconnect Session</span>
             </span>
           </a>
@@ -313,9 +313,7 @@
                     <h1 class="stream-meta-title">CYBERPUNK BROADCASTING SYSTEM ARCHITECTURE // MARATHON SPEC</h1>
                     <div class="streamer-name-row">
                       <span class="channel-author">SamWizardry</span>
-                      <svg class="verified-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                      </svg>
+                      <span class="cyber-tag cyber-tag--cyan" style="padding: 1px 6px; font-size: 9px; font-weight: 700;">VERIFIED</span>
                       <span>•</span>
                       <span>Cyberpunk Design Systems & Streaming Engines</span>
                     </div>
@@ -453,7 +451,7 @@
                       <h3 class="stream-title">CYBERPUNK SHADER & POST-FX DEVELOPMENT</h3>
                       <div class="stream-author-row">
                         <span class="author-name">MarathonRunner</span>
-                        <svg class="verified-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <span class="cyber-tag cyber-tag--cyan" style="padding: 1px 5px; font-size: 8px; font-weight: 700;">VERIFIED</span>
                       </div>
                       <div class="stream-category">Game Engine Architecture</div>
                       <div class="tag-list">
@@ -545,8 +543,8 @@
 
               <!-- Pinned Notice -->
               <div class="cyber-chat__pinned">
-                <span class="pinned-icon">📌</span>
-                <span class="pinned-text">Welcome to BroadcastingUIKit showcase! Audio & WebRTC telemetry active.</span>
+                <span class="pinned-tag">[PINNED]</span>
+                <span class="pinned-text">Broadcasting Live // WebRTC telemetry & tactile audio active.</span>
               </div>
 
               <!-- Live Message Stream -->
@@ -588,11 +586,11 @@
 
               <!-- Quick Reaction Bar -->
               <div class="cyber-chat__reactions">
-                <button class="btn-reaction" title="Fire">🔥</button>
-                <button class="btn-reaction" title="Acid Heart">💚</button>
-                <button class="btn-reaction" title="100">💯</button>
-                <button class="btn-reaction" title="Glitch">⚡</button>
-                <button class="btn-reaction" title="Rocket">🚀</button>
+                <button class="btn-reaction" title="Hype">[HYPE]</button>
+                <button class="btn-reaction" title="Good Game">[GG]</button>
+                <button class="btn-reaction" title="Win">[W]</button>
+                <button class="btn-reaction" title="Max Bitrate">[100%]</button>
+                <button class="btn-reaction" title="Glitch">[GLITCH]</button>
               </div>
 
               <!-- Chat Input Footer -->
@@ -827,38 +825,86 @@
             <span class="cyber-tag cyber-tag--alert">MESSAGING</span>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <!-- Info Alert -->
             <div class="cyber-alert cyber-alert--info">
-              <div class="cyber-alert__icon">ℹ️</div>
+              <span class="cyber-alert__badge">[SYS.INFO]</span>
               <div class="cyber-alert__content">
-                <span class="alert-title">// PROTOCOL NOTICE</span>
+                <div class="alert-header">
+                  <span class="alert-title">// PROTOCOL NOTICE</span>
+                  <span class="alert-code">INGEST // WEBRTC_200</span>
+                </div>
                 <span class="alert-desc">WebRTC ultra low-latency streaming pipeline is functioning under optimal threshold.</span>
               </div>
             </div>
 
+            <!-- Success Alert -->
             <div class="cyber-alert cyber-alert--success">
-              <div class="cyber-alert__icon">✓</div>
+              <span class="cyber-alert__badge">[VERIFIED]</span>
               <div class="cyber-alert__content">
-                <span class="alert-title">// INGEST VERIFIED</span>
+                <div class="alert-header">
+                  <span class="alert-title">// INGEST VERIFIED</span>
+                  <span class="alert-code">AUTH // CLUSTER_OK</span>
+                </div>
                 <span class="alert-desc">Ingest key successfully validated by Frankfurt Edge Cluster. Broadcast is Live.</span>
               </div>
             </div>
 
+            <!-- Warning Alert -->
             <div class="cyber-alert cyber-alert--warning">
-              <div class="cyber-alert__icon">⚠</div>
+              <span class="cyber-alert__badge">[WARN_08]</span>
               <div class="cyber-alert__content">
-                <span class="alert-title">// BUFFER WARNING</span>
+                <div class="alert-header">
+                  <span class="alert-title">// BUFFER WARNING</span>
+                  <span class="alert-code">QUEUE // 85%_FULL</span>
+                </div>
                 <span class="alert-desc">Client bandwidth fluctuation detected. Video bitrate throttled to 6,200 kbps.</span>
               </div>
             </div>
 
+            <!-- Danger Alert -->
             <div class="cyber-alert cyber-alert--danger">
-              <div class="cyber-alert__icon">🛑</div>
+              <span class="cyber-alert__badge">[CRIT_ERR]</span>
               <div class="cyber-alert__content">
-                <span class="alert-title">// CRITICAL DROP</span>
+                <div class="alert-header">
+                  <span class="alert-title">// CRITICAL DROP</span>
+                  <span class="alert-code">FAIL // SLOT_#04</span>
+                </div>
                 <span class="alert-desc">Network dropped 18 frames in slot #4. Immediate relay failover recommended.</span>
               </div>
             </div>
+          </div>
+
+          <!-- Code Snippet Box for Alerts -->
+          <div class="code-preview-box" style="margin-top: 10px;">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (TELEMETRY ALERTS)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-alerts">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-alerts">
+&lt;!-- HTML5 Cyber Alert (No Emojis) --&gt;
+&lt;div class="cyber-alert cyber-alert--info"&gt;
+  &lt;span class="cyber-alert__badge"&gt;[SYS.INFO]&lt;/span&gt;
+  &lt;div class="cyber-alert__content"&gt;
+    &lt;div class="alert-header"&gt;
+      &lt;span class="alert-title"&gt;// PROTOCOL NOTICE&lt;/span&gt;
+      &lt;span class="alert-code"&gt;INGEST // WEBRTC_200&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;span class="alert-desc"&gt;WebRTC ultra low-latency streaming pipeline is functioning under optimal threshold.&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;div class="cyber-alert cyber-alert--@Variant.ToString().ToLower()"&gt;
+  &lt;span class="cyber-alert__badge"&gt;[@BadgeCode]&lt;/span&gt;
+  &lt;div class="cyber-alert__content"&gt;
+    &lt;div class="alert-header"&gt;
+      &lt;span class="alert-title"&gt;// @Title&lt;/span&gt;
+      &lt;span class="alert-code"&gt;@TelemetryCode&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;span class="alert-desc"&gt;@Message&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
           </div>
         </div>
 

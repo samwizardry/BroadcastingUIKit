@@ -210,9 +210,13 @@ export function showToast(message, type = 'info') {
     pointer-events: auto;
     animation: cyber-toast-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   `;
+  const badgeText = type === 'success' ? '[VERIFIED]' : type === 'warning' ? '[WARN]' : type === 'danger' ? '[CRIT]' : '[SYS.INFO]';
   toast.innerHTML = `
+    <span class="cyber-alert__badge">${badgeText}</span>
     <div class="cyber-alert__content">
-      <span class="alert-title">// TELEMETRY ALERT</span>
+      <div class="alert-header">
+        <span class="alert-title">// TELEMETRY ALERT</span>
+      </div>
       <span class="alert-desc">${message}</span>
     </div>
   `;

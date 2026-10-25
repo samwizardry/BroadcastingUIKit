@@ -67,8 +67,16 @@
     font-size: 11px;
     font-family: var(--font-mono);
 
-    .pinned-icon {
+    .pinned-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
       color: var(--accent-acid);
+      background: var(--accent-acid-dim);
+      border: 1px solid rgba(216, 255, 0, 0.35);
+      padding: 2px 6px;
+      clip-path: var(--cut-corner-xs);
     }
 
     .pinned-text {
@@ -196,14 +204,21 @@
     .btn-reaction {
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-dim);
-      font-size: 13px;
-      padding: 2px 7px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
       clip-path: var(--cut-corner-xs);
       transition: var(--transition-fast);
+      cursor: pointer;
 
       &:hover {
+        color: var(--accent-acid);
         border-color: var(--accent-acid);
-        transform: scale(1.15);
+        background: var(--accent-acid-dim);
+        box-shadow: 0 0 8px rgba(216, 255, 0, 0.25);
       }
     }
   }

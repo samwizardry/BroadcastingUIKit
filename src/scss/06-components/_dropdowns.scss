@@ -70,7 +70,18 @@
     .item-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+    }
+
+    .item-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-acid);
+      background: var(--accent-acid-dim);
+      border: 1px solid rgba(216, 255, 0, 0.25);
+      padding: 1px 5px;
+      clip-path: var(--cut-corner-xs);
     }
 
     .item-shortcut {

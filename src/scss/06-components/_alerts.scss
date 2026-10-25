@@ -1,12 +1,14 @@
 // =============================================================================
 // LAYER 06: COMPONENTS // ALERTS & NOTIFICATIONS
-// BroadcastingUIKit - Industrial Cyber HUD Alerts
+// BroadcastingUIKit - Industrial Marathon HUD Alerts (No Cheesy Emojis)
 // =============================================================================
+
+@use '../02-tools/mixins' as *;
 
 .cyber-alert {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
   padding: 14px 18px;
   background: var(--bg-surface);
   border: 1px solid var(--border-dim);
@@ -14,17 +16,55 @@
   clip-path: var(--cut-corner-sm);
   position: relative;
   overflow: hidden;
+  transition: var(--transition-fast);
 
-  &__icon {
+  // Technical Telemetry Badge on Left (Replaces Cheesy Emojis)
+  &__badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    clip-path: var(--cut-corner-xs);
+    white-space: nowrap;
+    user-select: none;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     margin-top: 1px;
+  }
+
+  // Sharp Industrial Vector Glyph (If an SVG icon is used)
+  &__glyph {
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      display: block;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
   }
 
   &__content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
+    min-width: 0;
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
     .alert-title {
       font-family: var(--font-hud);
@@ -33,36 +73,90 @@
       text-transform: uppercase;
       font-weight: 700;
       color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .alert-code {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
     }
 
     .alert-desc {
+      font-family: var(--font-body);
       font-size: 12px;
       color: var(--text-secondary);
-      line-height: 1.4;
+      line-height: 1.5;
     }
   }
 
   // ---------------------------------------------------------------------------
-  // Alert Variants
+  // Alert Variants & Color Themes
   // ---------------------------------------------------------------------------
+  
+  // Info (Glitch Cyan)
   &--info {
     border-left-color: var(--accent-cyan);
-    .cyber-alert__icon { color: var(--accent-cyan); }
+
+    .cyber-alert__badge {
+      background: var(--accent-cyan-dim);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 245, 255, 0.4);
+    }
+
+    .cyber-alert__glyph {
+      color: var(--accent-cyan);
+    }
   }
 
+  // Success / Verified (Acid Chartreuse)
   &--success {
     border-left-color: var(--accent-acid);
-    .cyber-alert__icon { color: var(--accent-acid); }
+
+    .cyber-alert__badge {
+      background: var(--accent-acid);
+      color: var(--text-inverse);
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(216, 255, 0, 0.25);
+    }
+
+    .cyber-alert__glyph {
+      color: var(--accent-acid);
+    }
   }
 
+  // Warning (Hazard Amber)
   &--warning {
     border-left-color: var(--accent-warning);
-    .cyber-alert__icon { color: var(--accent-warning); }
+
+    .cyber-alert__badge {
+      background: var(--accent-warning-dim);
+      color: var(--accent-warning);
+      border: 1px solid rgba(255, 132, 0, 0.4);
+    }
+
+    .cyber-alert__glyph {
+      color: var(--accent-warning);
+    }
   }
 
+  // Danger / Critical Drop (Alert Crimson)
   &--danger {
     border-left-color: var(--accent-alert);
-    background: rgba(255, 51, 75, 0.04);
-    .cyber-alert__icon { color: var(--accent-alert); }
+    background: linear-gradient(90deg, rgba(255, 51, 75, 0.06) 0%, var(--bg-surface) 60%);
+
+    .cyber-alert__badge {
+      background: var(--accent-alert);
+      color: #FFFFFF;
+      font-weight: 800;
+      box-shadow: 0 0 12px rgba(255, 51, 75, 0.35);
+    }
+
+    .cyber-alert__glyph {
+      color: var(--accent-alert);
+    }
   }
 }
