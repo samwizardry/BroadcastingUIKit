@@ -3,7 +3,6 @@
 // Platform Navigation, Channel Switching, and Studio Controls
 // =============================================================================
 
-import { soundFx } from './audio-fx.js';
 import { initInteractiveComponents, showToast } from './components.js';
 
 // Channels Dataset for Dynamic Channel Switching
@@ -36,8 +35,8 @@ const CHANNELS_DATA = {
     id: 'signal',
     name: 'Signal_09',
     avatar: 'AI',
-    title: 'REALTIME AUDIO DSP & SYNTHESIS WORKBENCH // WEBAUDIO C++',
-    category: 'Audio Engineering',
+    title: 'DISTRIBUTED WEBRTC MESH & LOW-LATENCY INGEST TESTING',
+    category: 'Network Architecture',
     viewers: '8,890',
     codec: 'AV1 / OPUS',
     resolution: '4K HDR // 60FPS',
@@ -60,7 +59,7 @@ const CHANNELS_DATA = {
     id: 'vortex',
     name: 'VortexNet',
     avatar: 'VX',
-    title: 'DISTRIBUTED WEBRTC MESH & LOW-LATENCY INGEST TESTING',
+    title: 'DISTRIBUTED EDGE INGESTION & PROTOCOL OPTIMIZATION',
     category: 'Network Engineering',
     viewers: '3,410',
     codec: 'AV1 / OPUS',
@@ -73,25 +72,6 @@ const CHANNELS_DATA = {
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize component behaviors
   initInteractiveComponents();
-
-  // Top Nav Audio FX Toggle Button
-  const audioToggleBtn = document.getElementById('audio-fx-toggle');
-  if (audioToggleBtn) {
-    const updateAudioButton = () => {
-      const isEnabled = soundFx.enabled;
-      audioToggleBtn.textContent = isEnabled ? 'AUDIO: ON' : 'AUDIO: MUTED';
-      audioToggleBtn.classList.toggle('btn-cyber-primary', isEnabled);
-      audioToggleBtn.classList.toggle('btn-cyber-ghost', !isEnabled);
-    };
-
-    updateAudioButton();
-
-    audioToggleBtn.addEventListener('click', () => {
-      const state = soundFx.toggle();
-      updateAudioButton();
-      showToast(`TACTILE AUDIO ${state ? 'ENABLED' : 'MUTED'}`, 'info');
-    });
-  }
 
   // View Switching Controller
   const navTabs = document.querySelectorAll('[data-showcase-view]');
@@ -121,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tab.addEventListener('click', () => {
       const targetView = tab.getAttribute('data-showcase-view');
       activateView(targetView);
-      soundFx.click();
     });
   });
 
@@ -158,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Switch view to Watch Mode
     activateView('watch');
     showToast(`TUNED TO [${channel.name.toUpperCase()}] // ${channel.resolution}`, 'info');
-    soundFx.alert();
   }
 
   // Sidebar Channel Item Click
@@ -183,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (backToBrowseBtn) {
     backToBrowseBtn.addEventListener('click', () => {
       activateView('browse');
-      soundFx.click();
     });
   }
 
@@ -195,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
       sidebarEl.classList.toggle('cyber-sidebar--collapsed');
       const isCollapsed = sidebarEl.classList.contains('cyber-sidebar--collapsed');
       sidebarCollapseBtn.textContent = isCollapsed ? '▶' : '◀';
-      soundFx.click();
     });
   }
 
@@ -207,14 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (chatCollapseBtn && watchLayout) {
     chatCollapseBtn.addEventListener('click', () => {
       watchLayout.classList.add('watch-layout--chat-collapsed');
-      soundFx.click();
     });
   }
 
   if (chatExpandBtn && watchLayout) {
     chatExpandBtn.addEventListener('click', () => {
       watchLayout.classList.remove('watch-layout--chat-collapsed');
-      soundFx.click();
     });
   }
 
@@ -223,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('is-active'));
       pill.classList.add('is-active');
-      soundFx.click();
       showToast(`FILTER APPLIED: ${pill.textContent.trim()}`, 'info');
     });
   });
@@ -237,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const togglePlayback = () => {
       isPlaying = !isPlaying;
-      soundFx.click();
 
       if (isPlaying) {
         centerPlayAction.style.display = 'none';

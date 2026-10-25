@@ -158,10 +158,6 @@
 
     <!-- Header Actions -->
     <div style="display: flex; align-items: center; gap: 10px;">
-      <button id="audio-fx-toggle" class="btn-cyber btn-cyber-primary btn-cyber-sm" title="Toggle Tactile Web Audio FX">
-        AUDIO: ON
-      </button>
-
       <!-- Auth Action Triggers -->
       <button id="btn-header-login" class="btn-cyber btn-cyber-ghost btn-cyber-sm" data-modal-open="login-modal" title="Sign In to Broadcaster System">
         LOG IN
@@ -661,14 +657,6 @@
                       </svg>
                     </button>
 
-                    <!-- Mini VU Meter embedded in controls -->
-                    <div class="vu-meter-mini" title="Audio Levels">
-                      <div class="mini-bar"></div>
-                      <div class="mini-bar"></div>
-                      <div class="mini-bar"></div>
-                      <div class="mini-bar"></div>
-                    </div>
-
                     <span class="time-readout">01:42:18 // LIVE</span>
                   </div>
 
@@ -747,73 +735,45 @@
               </div>
             </div>
 
-            <!-- Real-Time Telemetry Row: VU Meter & Stream Health -->
-            <div class="cyber-grid cyber-grid--2col">
-              
-              <!-- Real-Time Audio Telemetry VU Meter -->
-              <div class="vu-meter-panel">
-                <div class="vu-meter-header">
-                  <span>// AUDIO TELEMETRY [STEREO MASTER]</span>
-                  <span class="vu-meter-status">48.0 KHZ // 320 KBPS</span>
+            <!-- Real-Time Stream & Network Telemetry Board -->
+            <div class="stream-health-widget" style="margin-top: 16px;">
+              <div class="stream-health-widget__header">
+                <span class="health-title">// NETWORK & BITRATE TELEMETRY</span>
+                <span class="cyber-tag cyber-tag--acid">STATUS: OPTIMAL</span>
+              </div>
+              <div class="bitrate-graph-container">
+                <div class="graph-grid-lines"></div>
+                <svg class="bitrate-svg-sparkline" viewBox="0 0 300 60" preserveAspectRatio="none">
+                  <polygon points="0,60 0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20 300,60" />
+                  <polyline points="0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20" />
+                </svg>
+              </div>
+              <div class="health-metrics-grid" style="grid-template-columns: repeat(6, 1fr);">
+                <div class="metric-cell">
+                  <span class="metric-name">FPS</span>
+                  <span class="metric-val metric-val--acid">60.0</span>
                 </div>
-                <div class="vu-meter-stereo">
-                  <div class="vu-channel">
-                    <span class="channel-id">L</span>
-                    <div class="vu-bar-track">
-                      <div class="vu-bar-fill" id="vu-fill-left" style="width: 68%;"></div>
-                      <div class="vu-peak-indicator" id="vu-peak-left" style="left: 72%;"></div>
-                    </div>
-                    <span class="vu-db-readout" id="vu-db-left">-8.4 dB</span>
-                  </div>
-                  <div class="vu-channel">
-                    <span class="channel-id">R</span>
-                    <div class="vu-bar-track">
-                      <div class="vu-bar-fill" id="vu-fill-right" style="width: 64%;"></div>
-                      <div class="vu-peak-indicator" id="vu-peak-right" style="left: 69%;"></div>
-                    </div>
-                    <span class="vu-db-readout" id="vu-db-right">-9.8 dB</span>
-                  </div>
+                <div class="metric-cell">
+                  <span class="metric-name">BITRATE</span>
+                  <span class="metric-val metric-val--cyan">8,450 kbps</span>
                 </div>
-                <div class="vu-scale-legend">
-                  <span>-40</span>
-                  <span>-20</span>
-                  <span>-12</span>
-                  <span>-6</span>
-                  <span>-3</span>
-                  <span>0</span>
-                  <span>+3 dB</span>
+                <div class="metric-cell">
+                  <span class="metric-name">DROP RATE</span>
+                  <span class="metric-val">0.00%</span>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-name">RTT LATENCY</span>
+                  <span class="metric-val metric-val--acid">0.84 SEC</span>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-name">CODEC</span>
+                  <span class="metric-val">AV1 / OPUS</span>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-name">SECURITY</span>
+                  <span class="metric-val metric-val--cyan">TLS 1.3 / E2E</span>
                 </div>
               </div>
-
-              <!-- Stream Health & Bitrate Widget -->
-              <div class="stream-health-widget">
-                <div class="stream-health-widget__header">
-                  <span class="health-title">// NETWORK & BITRATE TELEMETRY</span>
-                  <span class="cyber-tag cyber-tag--acid">STATUS: OPTIMAL</span>
-                </div>
-                <div class="bitrate-graph-container">
-                  <div class="graph-grid-lines"></div>
-                  <svg class="bitrate-svg-sparkline" viewBox="0 0 300 60" preserveAspectRatio="none">
-                    <polygon points="0,60 0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20 300,60" />
-                    <polyline points="0,38 30,35 60,32 90,36 120,28 150,30 180,24 210,26 240,22 270,25 300,20" />
-                  </svg>
-                </div>
-                <div class="health-metrics-grid">
-                  <div class="metric-cell">
-                    <span class="metric-name">FPS</span>
-                    <span class="metric-val metric-val--acid">60.0</span>
-                  </div>
-                  <div class="metric-cell">
-                    <span class="metric-name">BITRATE</span>
-                    <span class="metric-val metric-val--cyan">8,450 kbps</span>
-                  </div>
-                  <div class="metric-cell">
-                    <span class="metric-name">DROP RATE</span>
-                    <span class="metric-val">0.00%</span>
-                  </div>
-                </div>
-              </div>
-
             </div>
 
           </div>
@@ -869,7 +829,7 @@
                     <span class="msg-badge msg-badge--mod">MOD</span>
                     <span class="msg-username" style="color: var(--accent-cyan);">CYBER_GUARD</span>
                   </div>
-                  <div class="msg-content">Remember to test tactile audio with the AUDIO: ON toggle in the top bar!</div>
+                  <div class="msg-content">WebRTC broadcast stream latency is 0.84 seconds. Rock solid!</div>
                 </div>
 
                 <div class="chat-msg">

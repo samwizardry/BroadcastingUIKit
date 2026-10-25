@@ -2,28 +2,7 @@
 // BROADCASTING UI KIT // INTERACTIVE COMPONENT CONTROLLERS
 // =============================================================================
 
-import { soundFx } from './audio-fx.js';
-
 export function initInteractiveComponents() {
-  // Attach tactile audio feedback to all buttons, switches, and tabs
-  document.addEventListener('click', (e) => {
-    const clickable = e.target.closest('button, .cyber-switch, .cyber-tabs__item, a, .stream-card, .btn-player-control');
-    if (clickable) {
-      if (clickable.classList.contains('cyber-switch') || clickable.querySelector('input[type="checkbox"]')) {
-        soundFx.switch();
-      } else {
-        soundFx.click();
-      }
-    }
-  });
-
-  document.addEventListener('mouseover', (e) => {
-    const hoverable = e.target.closest('.btn-cyber, .btn-icon-hud, .stream-card, .cyber-tabs__item');
-    if (hoverable && !hoverable.dataset.hovered) {
-      soundFx.hover();
-    }
-  });
-
   // ---------------------------------------------------------------------------
   // 1. Dropdown Menus
   // ---------------------------------------------------------------------------
@@ -59,34 +38,46 @@ export function initInteractiveComponents() {
   });
 
   // ---------------------------------------------------------------------------
-  // 2. Modals
+  // 2. Modals (with Seamless Switching Support)
   // ---------------------------------------------------------------------------
-  document.querySelectorAll('[data-modal-open]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modalId = btn.getAttribute('data-modal-open');
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.classList.add('is-open');
-        soundFx.alert();
-      }
-    });
-  });
+  document.addEventListener('click', (e) => {
+    // Open / Switch modal
+    const openBtn = e.target.closest('[data-modal-open]');
+    if (openBtn) {
+      e.preventDefault();
+      const modalId = openBtn.getAttribute('data-modal-open');
+      const targetModal = document.getElementById(modalId);
+      if (targetModal) {
+        // Close any other open modal backdrop immediately
+        document.querySelectorAll('.cyber-modal-backdrop.is-open').forEach(m => {
+          if (m !== targetModal) m.classList.remove('is-open');
+        });
+        targetModal.classList.add('is-open');
 
-  document.querySelectorAll('[data-modal-close]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modal = btn.closest('.cyber-modal-backdrop');
+        // Auto-focus first input
+        setTimeout(() => {
+          const firstInput = targetModal.querySelector('input:not([type="hidden"]):not([disabled])');
+          if (firstInput) firstInput.focus();
+        }, 80);
+      }
+      return;
+    }
+
+    // Close modal
+    const closeBtn = e.target.closest('[data-modal-close]');
+    if (closeBtn) {
+      e.preventDefault();
+      const modal = closeBtn.closest('.cyber-modal-backdrop');
       if (modal) {
         modal.classList.remove('is-open');
       }
-    });
-  });
+      return;
+    }
 
-  document.querySelectorAll('.cyber-modal-backdrop').forEach(backdrop => {
-    backdrop.addEventListener('click', (e) => {
-      if (e.target === backdrop) {
-        backdrop.classList.remove('is-open');
-      }
-    });
+    // Backdrop click
+    if (e.target.classList.contains('cyber-modal-backdrop')) {
+      e.target.classList.remove('is-open');
+    }
   });
 
   // ---------------------------------------------------------------------------
@@ -171,17 +162,12 @@ export function initInteractiveComponents() {
   });
 
   // ---------------------------------------------------------------------------
-  // 7. Real-Time VU Meter Simulation
-  // ---------------------------------------------------------------------------
-  startVuMeterSimulation();
-
-  // ---------------------------------------------------------------------------
-  // 8. Simulated Live Chat Message Generator
+  // 7. Simulated Live Chat Message Generator
   // ---------------------------------------------------------------------------
   startChatSimulation();
 
   // ---------------------------------------------------------------------------
-  // 9. Auth Forms & Password Visibility Toggles
+  // 8. Auth Forms & Password Visibility Toggles
   // ---------------------------------------------------------------------------
   initAuthForms();
 }
@@ -343,7 +329,6 @@ export function showToast(message, type = 'info') {
   `;
 
   toastContainer.appendChild(toast);
-  soundFx.alert();
 
   setTimeout(() => {
     toast.style.opacity = '0';
@@ -351,47 +336,6 @@ export function showToast(message, type = 'info') {
     toast.style.transition = 'opacity 0.2s, transform 0.2s';
     setTimeout(() => toast.remove(), 250);
   }, 3200);
-}
-
-// -----------------------------------------------------------------------------
-// VU Meter Real-Time Telemetry Simulation
-// -----------------------------------------------------------------------------
-function startVuMeterSimulation() {
-  const leftFill = document.getElementById('vu-fill-left');
-  const rightFill = document.getElementById('vu-fill-right');
-  const leftPeak = document.getElementById('vu-peak-left');
-  const rightPeak = document.getElementById('vu-peak-right');
-  const leftDb = document.getElementById('vu-db-left');
-  const rightDb = document.getElementById('vu-db-right');
-
-  if (!leftFill || !rightFill) return;
-
-  let peakL = 75;
-  let peakR = 70;
-
-  setInterval(() => {
-    // Generate organic audio fluctuation
-    const baseL = 50 + Math.random() * 38;
-    const baseR = 48 + Math.random() * 37;
-
-    leftFill.style.width = `${baseL}%`;
-    rightFill.style.width = `${baseR}%`;
-
-    if (baseL > peakL) peakL = baseL;
-    else peakL = Math.max(baseL, peakL - 1.5);
-
-    if (baseR > peakR) peakR = baseR;
-    else peakR = Math.max(baseR, peakR - 1.5);
-
-    if (leftPeak) leftPeak.style.left = `${peakL}%`;
-    if (rightPeak) rightPeak.style.left = `${peakR}%`;
-
-    const calcDbL = (baseL / 100 * 46 - 40).toFixed(1);
-    const calcDbR = (baseR / 100 * 46 - 40).toFixed(1);
-
-    if (leftDb) leftDb.textContent = `${calcDbL > 0 ? '+' : ''}${calcDbL} dB`;
-    if (rightDb) rightDb.textContent = `${calcDbR > 0 ? '+' : ''}${calcDbR} dB`;
-  }, 90);
 }
 
 // -----------------------------------------------------------------------------
@@ -411,11 +355,11 @@ function startChatSimulation() {
   ];
 
   const mockPhrases = [
-    'Audio bit rate is buttery smooth!',
+    'Video bitrate is rock solid at 8,450 kbps!',
     'The 1080p 60fps WebRTC stream latency is literally sub-second.',
     'That chamfer cut HUD border looks insane 🔥',
     'Broadcasting platform looks like straight out of Marathon',
-    'Check audio levels, left channel is hitting -3dB',
+    'Packet loss is 0.00% across the edge cluster.',
     'Insane aesthetics. Best broadcast UI kit.'
   ];
 
@@ -479,7 +423,6 @@ function startChatSimulation() {
       chatMessages.appendChild(msgEl);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       chatInput.value = '';
-      soundFx.click();
     };
 
     sendBtn.addEventListener('click', handleSend);
