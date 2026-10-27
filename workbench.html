@@ -311,148 +311,983 @@
           </div>
         </div>
 
-        <!-- 03 // Inputs & Stream Keys -->
+        <!-- 03 // Form Inputs, Sizes & Validation States -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>03 // FORM INPUTS & INGEST STREAM KEY</span>
+            <span>03 // FORM INPUTS, SIZES & VALIDATION STATES</span>
             <span class="cyber-tag cyber-tag--acid">MOLECULES // INPUTS</span>
           </div>
-          
-          <div class="cyber-grid cyber-grid--2col">
-            <div class="cyber-field">
-              <label class="cyber-field__label">
-                <span>STREAM TITLE</span>
-                <span class="label-code">[FIELD.01]</span>
-              </label>
-              <input type="text" class="cyber-input" value="Marathon Graphic Realism Streaming Architecture">
-            </div>
 
-            <div class="cyber-field">
-              <label class="cyber-field__label">
-                <span>RTMP SERVER INGEST URL</span>
-                <span class="label-code">[RTMP.NODE]</span>
-              </label>
-              <input type="text" class="cyber-input" value="rtmp://live.samwizardry.broadcasting/live" readonly>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Tactical input fields engineered with 45° chamfered cuts, high-vis focus outlines, comprehensive size scales, inline affixes, and real-time validation telemetry indicators.
+          </p>
+
+          <!-- Input Sizes -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              INPUT SIZE SCALE (SMALL // DEFAULT // LARGE):
+            </div>
+            <div class="cyber-grid cyber-grid--3col">
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>COMPACT HUD INPUT</span>
+                  <span class="label-code">[SM // 28PX]</span>
+                </label>
+                <input type="text" class="cyber-input cyber-input--sm" value="PORT_1935" placeholder="Port / Telemetry ID">
+              </div>
+
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>STANDARD BROADCAST INPUT</span>
+                  <span class="label-code">[MD // 38PX]</span>
+                </label>
+                <input type="text" class="cyber-input" value="Bungie Marathon Graphic Realism" placeholder="Standard field">
+              </div>
+
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>LARGE PROMINENT INPUT</span>
+                  <span class="label-code">[LG // 46PX]</span>
+                </label>
+                <input type="text" class="cyber-input cyber-input--lg" value="MAIN_STREAM_FEED" placeholder="Primary title">
+              </div>
             </div>
           </div>
 
+          <!-- Validation & State Spectrum -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              VALIDATION TELEMETRY STATES (SUCCESS // WARNING // ERROR // DISABLED // READONLY):
+            </div>
+            <div class="cyber-grid cyber-grid--3col">
+              <!-- Success / Verified -->
+              <div class="cyber-field cyber-field--success">
+                <label class="cyber-field__label">
+                  <span>INGEST CLUSTER ADDRESS</span>
+                  <span class="label-code">[VAL_OK]</span>
+                </label>
+                <input type="text" class="cyber-input" value="fra-01.broadcasting.samwizardry.net">
+                <div class="cyber-field__message cyber-field__message--success">
+                  <span class="msg-tag">[VERIFIED]</span>
+                  <span>TLS 1.3 certificate valid // 14ms latency</span>
+                </div>
+              </div>
+
+              <!-- Warning / Buffer -->
+              <div class="cyber-field cyber-field--warning">
+                <label class="cyber-field__label">
+                  <span>CLIENT BUFFER THRESHOLD</span>
+                  <span class="label-code">[WARN_BUFFER]</span>
+                </label>
+                <input type="text" class="cyber-input" value="9,200 KBPS">
+                <div class="cyber-field__message cyber-field__message--warning">
+                  <span class="msg-tag">[WARN_08]</span>
+                  <span>Bitrate exceeds standard tier threshold</span>
+                </div>
+              </div>
+
+              <!-- Error / Invalid -->
+              <div class="cyber-field cyber-field--error">
+                <label class="cyber-field__label">
+                  <span>BROADCASTER INGEST KEY</span>
+                  <span class="label-code">[ERR_INVALID]</span>
+                </label>
+                <input type="text" class="cyber-input" value="live_expired_key_#889">
+                <div class="cyber-field__message cyber-field__message--error">
+                  <span class="msg-tag">[CRIT_ERR]</span>
+                  <span>Secret key is invalid or expired</span>
+                </div>
+              </div>
+
+              <!-- Disabled / Locked State with Hazard Pattern -->
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>OFFLINE RELAY NODE</span>
+                  <span class="label-code">[DISABLED]</span>
+                </label>
+                <input type="text" class="cyber-input" value="node_relay_us_west_standby" disabled>
+                <span class="cyber-field__hint">Hardware relay currently locked by cluster admin</span>
+              </div>
+
+              <!-- Readonly Ingest Endpoint -->
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>EDGE TELEMETRY SOCKET</span>
+                  <span class="label-code">[READONLY]</span>
+                </label>
+                <input type="text" class="cyber-input" value="wss://edge.live.broadcasting/telemetry" readonly>
+                <span class="cyber-field__hint">Locked system telemetry stream socket</span>
+              </div>
+
+              <!-- Password Input with Toggle -->
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>SECURITY PASSPHRASE</span>
+                  <span class="label-code">[SECRET]</span>
+                </label>
+                <div class="cyber-input-group cyber-input-group--has-suffix">
+                  <input type="password" id="demo-passphrase-input" class="cyber-input" value="Cyberpunk2026_SecuredKey!">
+                  <button type="button" class="btn-cyber btn-cyber-secondary btn-cyber-sm input-suffix-action" data-password-toggle="demo-passphrase-input">SHOW</button>
+                </div>
+                <span class="cyber-field__hint">Toggle password visibility mask</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Affixes & Groups -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              INPUT AFFIXES & PREFIX/SUFFIX ADDONS:
+            </div>
+            <div class="cyber-grid cyber-grid--2col">
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>CHANNEL CUSTOM URL</span>
+                  <span class="label-code">[URL.SLUG]</span>
+                </label>
+                <div class="cyber-input-group cyber-input-group--affix">
+                  <span class="cyber-input-affix cyber-input-affix--prefix">https://live.io/</span>
+                  <input type="text" class="cyber-input" value="samwizardry">
+                </div>
+              </div>
+
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>TARGET ENCODER BITRATE</span>
+                  <span class="label-code">[BITRATE.VAL]</span>
+                </label>
+                <div class="cyber-input-group cyber-input-group--affix">
+                  <input type="number" class="cyber-input" value="8500" min="1000" max="25000" step="500">
+                  <span class="cyber-input-affix cyber-input-affix--suffix">KBPS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Protected Stream Key Box -->
           <div class="cyber-field">
             <label class="cyber-field__label">
-              <span>PROTECTED STREAM KEY (SECRET)</span>
+              <span>PROTECTED STREAM KEY (WITH ONE-CLICK COPY & REVEAL)</span>
               <span class="label-code">[KEY.INGEST]</span>
             </label>
             <div class="cyber-stream-key" data-stream-key-wrapper>
               <input type="password" class="key-value" value="live_sec_89201948293481029384729103" readonly>
               <div class="key-actions">
-                <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-key-toggle>SHOW</button>
-                <button class="btn-cyber btn-cyber-primary btn-cyber-sm" data-key-copy>COPY KEY</button>
+                <button type="button" class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-key-toggle>SHOW</button>
+                <button type="button" class="btn-cyber btn-cyber-primary btn-cyber-sm" data-key-copy>COPY KEY</button>
               </div>
             </div>
           </div>
 
+          <!-- Textarea with Live Character Counter -->
+          <div class="cyber-field">
+            <label class="cyber-field__label">
+              <span>BROADCAST DESCRIPTION & PATCH NOTES</span>
+              <span class="label-char-count" id="desc-counter">[92/180]</span>
+            </label>
+            <textarea class="cyber-textarea" id="demo-broadcast-desc" data-char-counter="desc-counter" data-char-max="180" placeholder="Enter stream briefing or telemetry notes...">Marathon Graphic Realism live architecture stream with WebRTC low-latency ingest enabled.</textarea>
+            <span class="cyber-field__hint">Supports inline markdown formatting and tactical telemetry tags</span>
+          </div>
+
+          <!-- Code Snippet Box for Inputs -->
           <div class="code-preview-box">
             <div class="code-preview-header">
-              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION</span>
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (INPUTS & VALIDATION STATES)</span>
               <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-inputs">COPY CODE</button>
             </div>
             <pre class="code-snippet" id="snippet-inputs">
-&lt;!-- Stream Key Ingest Box --&gt;
-&lt;div class="cyber-stream-key"&gt;
-  &lt;input type="password" class="key-value" value="live_sec_xxx" readonly&gt;
-  &lt;button class="btn-cyber btn-cyber-secondary btn-cyber-sm"&gt;SHOW&lt;/button&gt;
-  &lt;button class="btn-cyber btn-cyber-primary btn-cyber-sm"&gt;COPY KEY&lt;/button&gt;
-&lt;/div&gt;</pre>
+&lt;!-- HTML5 Cyber Input with Affix &amp; Validation Message --&gt;
+&lt;div class="cyber-field cyber-field--success"&gt;
+  &lt;label class="cyber-field__label"&gt;
+    &lt;span&gt;INGEST CLUSTER&lt;/span&gt;
+    &lt;span class="label-code"&gt;[VAL_OK]&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;div class="cyber-input-group cyber-input-group--affix"&gt;
+    &lt;span class="cyber-input-affix cyber-input-affix--prefix"&gt;https://&lt;/span&gt;
+    &lt;input type="text" class="cyber-input" value="node-01.broadcasting.net"&gt;
+  &lt;/div&gt;
+  &lt;div class="cyber-field__message cyber-field__message--success"&gt;
+    &lt;span class="msg-tag"&gt;[VERIFIED]&lt;/span&gt;
+    &lt;span&gt;Ingest node verified // 14ms latency&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) Equivalent --&gt;
+&lt;CyberField Label="INGEST CLUSTER" TelemetryCode="VAL_OK" ValidationState="@clusterValidation"&gt;
+  &lt;CyberInputGroup Prefix="https://"&gt;
+    &lt;CyberInput @bind-Value="ClusterAddress" Size="InputSize.Default" /&gt;
+  &lt;/CyberInputGroup&gt;
+  &lt;CyberFieldMessage Type="MessageType.Success" Tag="[VERIFIED]" Text="Ingest node verified" /&gt;
+&lt;/CyberField&gt;</pre>
           </div>
         </div>
 
-        <!-- 04 // Hardware Switches & Sliders -->
+        <!-- 04 // Selection Controls: Checkboxes, Radios & Tiles -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>04 // HARDWARE SWITCHES & TACTICAL SLIDERS</span>
-            <span class="cyber-tag cyber-tag--cyan">CONTROLS</span>
+            <span>04 // SELECTION CONTROLS: CHECKBOXES, RADIOS & TILES</span>
+            <span class="cyber-tag cyber-tag--cyan">ATOMS // SELECTION</span>
           </div>
 
-          <!-- Standalone Switches -->
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Chamfered interactive checkboxes, diamond radio buttons, rich feature option cards, and high-density protocol selector tiles.
+          </p>
+
+          <!-- Checkbox Spectrum -->
           <div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 1px;">
-              СВИТЧЕРЫ (TOGGLES):
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              CHAMFERED CHECKBOXES (STATES & ACCENTS):
             </div>
-            <div style="display: flex; gap: 18px; align-items: center;">
-              <label class="cyber-switch" title="Active State">
+            <div class="row" style="gap: 22px; flex-wrap: wrap;">
+              <label class="cyber-checkbox">
                 <input type="checkbox" checked>
-                <span class="slider"></span>
+                <span class="cyber-checkbox__box"></span>
+                <span>[ACID] CHECKED</span>
               </label>
-              <label class="cyber-switch" title="Inactive State">
+
+              <label class="cyber-checkbox">
                 <input type="checkbox">
-                <span class="slider"></span>
+                <span class="cyber-checkbox__box"></span>
+                <span>UNCHECKED IDLE</span>
+              </label>
+
+              <label class="cyber-checkbox cyber-checkbox--cyan">
+                <input type="checkbox" checked>
+                <span class="cyber-checkbox__box"></span>
+                <span>[CYAN] TELEMETRY</span>
+              </label>
+
+              <label class="cyber-checkbox cyber-checkbox--alert">
+                <input type="checkbox" checked>
+                <span class="cyber-checkbox__box"></span>
+                <span>[ALERT] CRITICAL</span>
+              </label>
+
+              <label class="cyber-checkbox cyber-checkbox--disabled">
+                <input type="checkbox" disabled>
+                <span class="cyber-checkbox__box"></span>
+                <span>DISABLED LOCKED</span>
               </label>
             </div>
           </div>
 
-          <!-- Labeled Stream Options -->
-          <div class="row" style="gap: 28px; margin-top: 6px;">
-            <label class="cyber-switch">
-              <input type="checkbox" checked>
-              <span class="slider"></span>
-              <span class="switch-label">DVR RECORDING</span>
-            </label>
+          <!-- Rich Feature Checkbox Cards -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              RICH FEATURE CHECKBOX CARDS (.CYBER-CHECKBOX-CARD):
+            </div>
+            <div class="cyber-grid cyber-grid--2col">
+              <label class="cyber-checkbox-card">
+                <input type="checkbox" checked>
+                <div class="cyber-checkbox-card__inner">
+                  <span class="cyber-checkbox__box"></span>
+                  <div class="card-content">
+                    <div class="card-title">
+                      <span>AUTOMATED DVR & HIGHLIGHT RECORDING</span>
+                      <span class="cyber-tag cyber-tag--acid">[AUTO]</span>
+                    </div>
+                    <div class="card-desc">Automatically archive stream VODs and create instant replay buffer for broadcast spectators.</div>
+                  </div>
+                </div>
+              </label>
 
-            <label class="cyber-switch">
-              <input type="checkbox" checked>
-              <span class="slider"></span>
-              <span class="switch-label">LOW-LATENCY WEBRTC</span>
-            </label>
-
-            <label class="cyber-switch">
-              <input type="checkbox">
-              <span class="slider"></span>
-              <span class="switch-label">SUBSCRIBER-ONLY CHAT</span>
-            </label>
+              <label class="cyber-checkbox-card">
+                <input type="checkbox" checked>
+                <div class="cyber-checkbox-card__inner">
+                  <span class="cyber-checkbox__box"></span>
+                  <div class="card-content">
+                    <div class="card-title">
+                      <span>SUB-SECOND WEBRTC GLASS-TO-GLASS LATENCY</span>
+                      <span class="cyber-tag cyber-tag--cyan">[0.84s]</span>
+                    </div>
+                    <div class="card-desc">Bypass standard HLS latency buffers for zero-delay interactive chat & telemetry feedback.</div>
+                  </div>
+                </div>
+              </label>
+            </div>
           </div>
 
-          <div class="cyber-grid cyber-grid--2col" style="margin-top: 10px;">
-            <div class="cyber-slider-group">
-              <span class="slider-label">AUDIO GAIN</span>
-              <input type="range" class="cyber-slider" min="0" max="100" value="85" data-unit="%">
-              <span class="slider-value">85%</span>
+          <!-- Tactical Diamond Radio Buttons -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              DIAMOND RADIO BUTTONS (VIDEO CODEC SELECTION):
             </div>
+            <div class="cyber-radio-group cyber-radio-group--inline">
+              <label class="cyber-radio">
+                <input type="radio" name="demo-codec" value="av1" checked>
+                <span class="cyber-radio__diamond"></span>
+                <span>AV1 HARDWARE (NVENC)</span>
+              </label>
 
-            <div class="cyber-slider-group">
-              <span class="slider-label">BITRATE TARGET</span>
-              <input type="range" class="cyber-slider" min="2000" max="12000" step="500" value="8500" data-unit=" kbps">
-              <span class="slider-value">8500 kbps</span>
+              <label class="cyber-radio">
+                <input type="radio" name="demo-codec" value="hevc">
+                <span class="cyber-radio__diamond"></span>
+                <span>HEVC / H.265</span>
+              </label>
+
+              <label class="cyber-radio">
+                <input type="radio" name="demo-codec" value="h264">
+                <span class="cyber-radio__diamond"></span>
+                <span>H.264 LEGACY COMPAT</span>
+              </label>
+
+              <label class="cyber-radio">
+                <input type="radio" name="demo-codec" value="vp9" disabled>
+                <span class="cyber-radio__diamond"></span>
+                <span>VP9 [OFFLINE]</span>
+              </label>
             </div>
           </div>
 
-          <!-- Code Snippet Box for Switches -->
-          <div class="code-preview-box" style="margin-top: 10px;">
+          <!-- Selectable Protocol Radio Tiles -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              SELECTABLE INGESTION PROTOCOL TILES (.CYBER-RADIO-TILE):
+            </div>
+            <div class="cyber-radio-tiles-grid">
+              <label class="cyber-radio-tile">
+                <input type="radio" name="demo-protocol" value="whip" checked>
+                <div class="cyber-radio-tile__content">
+                  <div class="tile-header">
+                    <span class="tile-tag">[PROTO.01]</span>
+                    <span class="cyber-radio__diamond"></span>
+                  </div>
+                  <div class="tile-title">WHIP / WEBRTC</div>
+                  <div class="tile-desc">Sub-second low latency ingest with bidirectional datachannels.</div>
+                  <div class="tile-specs">
+                    <span>LATENCY: &lt;0.8s</span>
+                    <span>AV1/OPUS</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cyber-radio-tile">
+                <input type="radio" name="demo-protocol" value="srt">
+                <div class="cyber-radio-tile__content">
+                  <div class="tile-header">
+                    <span class="tile-tag">[PROTO.02]</span>
+                    <span class="cyber-radio__diamond"></span>
+                  </div>
+                  <div class="tile-title">SRT TRANSPORT</div>
+                  <div class="tile-desc">Secure Reliable Transport with ARQ packet recovery for unstable links.</div>
+                  <div class="tile-specs">
+                    <span>LATENCY: 1.2s</span>
+                    <span>AES-256</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cyber-radio-tile">
+                <input type="radio" name="demo-protocol" value="rtmp">
+                <div class="cyber-radio-tile__content">
+                  <div class="tile-header">
+                    <span class="tile-tag">[PROTO.03]</span>
+                    <span class="cyber-radio__diamond"></span>
+                  </div>
+                  <div class="tile-title">RTMP INGESTION</div>
+                  <div class="tile-desc">Standard TCP streaming fallback compatible with all legacy broadcast encoders.</div>
+                  <div class="tile-specs">
+                    <span>LATENCY: 3.5s</span>
+                    <span>TCP/PORT 1935</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Custom Cyber Select Dropdown -->
+          <div class="cyber-field">
+            <label class="cyber-field__label">
+              <span>PRIMARY INGESTION EDGE CLUSTER (GEO ROUTING)</span>
+              <span class="label-code">[GEO.DNS]</span>
+            </label>
+            <div class="cyber-select-wrapper">
+              <select class="cyber-select">
+                <option value="fra-01">Frankfurt Edge (EU-Central-01) — 14ms // Optimal Route</option>
+                <option value="sto-01">Stockholm Edge (EU-North-01) — 22ms</option>
+                <option value="iad-01">Virginia Edge (US-East-01) — 84ms</option>
+                <option value="nrt-01">Tokyo Edge (AP-Northeast-01) — 142ms</option>
+                <option value="gru-01">Sao Paulo Edge (SA-East-01) — 198ms</option>
+              </select>
+            </div>
+            <span class="cyber-field__hint">Anycast routing automatically selects lowest round-trip latency</span>
+          </div>
+
+          <!-- Code Snippet Box for Selection Controls -->
+          <div class="code-preview-box">
             <div class="code-preview-header">
-              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (SLANTED CHAMFER TOGGLE)</span>
-              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-switches">COPY CODE</button>
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (CHECKBOXES &amp; RADIO TILES)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-selection">COPY CODE</button>
             </div>
-            <pre class="code-snippet" id="snippet-switches">
-&lt;!-- HTML5 Cyber Switch --&gt;
-&lt;label class="cyber-switch"&gt;
+            <pre class="code-snippet" id="snippet-selection">
+&lt;!-- Tactical Checkbox --&gt;
+&lt;label class="cyber-checkbox"&gt;
   &lt;input type="checkbox" checked&gt;
-  &lt;span class="slider"&gt;&lt;/span&gt;
-  &lt;span class="switch-label"&gt;LOW-LATENCY WEBRTC&lt;/span&gt;
+  &lt;span class="cyber-checkbox__box"&gt;&lt;/span&gt;
+  &lt;span&gt;AUTOMATED DVR RECORDING&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Protocol Radio Tile --&gt;
+&lt;label class="cyber-radio-tile"&gt;
+  &lt;input type="radio" name="protocol" value="whip" checked&gt;
+  &lt;div class="cyber-radio-tile__content"&gt;
+    &lt;div class="tile-header"&gt;
+      &lt;span class="tile-tag"&gt;[PROTO.01]&lt;/span&gt;
+      &lt;span class="cyber-radio__diamond"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="tile-title"&gt;WHIP / WEBRTC&lt;/div&gt;
+    &lt;div class="tile-desc"&gt;Sub-second low latency ingest.&lt;/div&gt;
+  &lt;/div&gt;
 &lt;/label&gt;
 
 &lt;!-- Blazor (.razor) --&gt;
-&lt;label class="cyber-switch"&gt;
-  &lt;input type="checkbox" @bind="IsChecked" @bind:after="OnToggled"&gt;
-  &lt;span class="slider"&gt;&lt;/span&gt;
-  @if (!string.IsNullOrEmpty(Label)) {
-    &lt;span class="switch-label"&gt;@Label&lt;/span&gt;
-  }
-&lt;/label&gt;</pre>
+&lt;CyberCheckbox @bind-Value="EnableDvr" Label="AUTOMATED DVR RECORDING" /&gt;
+&lt;CyberRadioGroup @bind-Value="SelectedProtocol"&gt;
+  &lt;CyberRadioTile Value="@Protocol.Whip" Title="WHIP / WEBRTC" Tag="[PROTO.01]" /&gt;
+&lt;/CyberRadioGroup&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 05 // Hardware Controls: Switches, Steppers & Sliders -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>05 // HARDWARE CONTROLS: SWITCHES, STEPPERS & SLIDERS</span>
+            <span class="cyber-tag cyber-tag--acid">CONTROLS // HARDWARE</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Physical HUD controls including Bungie Marathon slanted chamfer toggles, digital numeric steppers, tactical range sliders, color swatches, and interactive tag chips.
+          </p>
+
+          <!-- Marathon Slanted Switches -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              MARATHON SLANTED HARDWARE TOGGLES (.CYBER-SWITCH):
+            </div>
+            <div class="row" style="gap: 28px; flex-wrap: wrap;">
+              <label class="cyber-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+                <span class="switch-label">HARDWARE NVENC ENCODING</span>
+              </label>
+
+              <label class="cyber-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+                <span class="switch-label">AUTOMATIC RELAY FAILOVER</span>
+              </label>
+
+              <label class="cyber-switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+                <span class="switch-label">SUBSCRIBER SLOW-CHAT ONLY</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Digital HUD Steppers -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              DIGITAL NUMERIC HUD STEPPERS (.CYBER-STEPPER):
+            </div>
+            <div class="row" style="gap: 20px; flex-wrap: wrap;">
+              <div class="cyber-field" style="width: auto;">
+                <label class="cyber-field__label">
+                  <span>TARGET FRAMERATE</span>
+                  <span class="label-code">[FPS]</span>
+                </label>
+                <div class="cyber-stepper">
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--minus" data-stepper-down title="Decrease FPS">-</button>
+                  <input type="number" class="cyber-stepper__input" value="60" min="24" max="240" step="1" readonly>
+                  <span class="cyber-stepper__unit">FPS</span>
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--plus" data-stepper-up title="Increase FPS">+</button>
+                </div>
+              </div>
+
+              <div class="cyber-field" style="width: auto;">
+                <label class="cyber-field__label">
+                  <span>AUDIO SYNC DELAY</span>
+                  <span class="label-code">[DSP.SYNC]</span>
+                </label>
+                <div class="cyber-stepper">
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--minus" data-stepper-down title="Decrease Delay">-</button>
+                  <input type="number" class="cyber-stepper__input" value="120" min="0" max="2000" step="10" readonly>
+                  <span class="cyber-stepper__unit">MS</span>
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--plus" data-stepper-up title="Increase Delay">+</button>
+                </div>
+              </div>
+
+              <div class="cyber-field" style="width: auto;">
+                <label class="cyber-field__label">
+                  <span>INGEST PORT</span>
+                  <span class="label-code">[PORT]</span>
+                </label>
+                <div class="cyber-stepper">
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--minus" data-stepper-down title="Decrease Port">-</button>
+                  <input type="number" class="cyber-stepper__input" value="1935" min="1024" max="65535" step="1" readonly>
+                  <span class="cyber-stepper__unit">PORT</span>
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--plus" data-stepper-up title="Increase Port">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Range Sliders -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              TACTICAL RANGE SLIDERS (.CYBER-SLIDER-GROUP):
+            </div>
+            <div class="cyber-grid cyber-grid--2col">
+              <div class="cyber-slider-group">
+                <span class="slider-label">AUDIO MASTER GAIN</span>
+                <input type="range" class="cyber-slider" min="0" max="100" value="85" data-unit="%">
+                <span class="slider-value">85%</span>
+              </div>
+
+              <div class="cyber-slider-group">
+                <span class="slider-label">BITRATE TARGET</span>
+                <input type="range" class="cyber-slider" min="2000" max="14000" step="500" value="8500" data-unit=" kbps">
+                <span class="slider-value">8500 kbps</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tactical Color Swatch Palette Picker -->
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 1px;">
+              OVERLAY THEME ACCENT COLOR PICKER (.CYBER-COLOR-SWATCHES):
+            </div>
+            <div class="cyber-color-swatches">
+              <button type="button" class="color-swatch-item is-active" data-color-name="ACID CHARTREUSE" data-color-hex="#D8FF00" title="Acid Chartreuse (#D8FF00)">
+                <span class="swatch-fill" style="background: #D8FF00;"></span>
+              </button>
+              <button type="button" class="color-swatch-item" data-color-name="GLITCH CYAN" data-color-hex="#00F5FF" title="Glitch Cyan (#00F5FF)">
+                <span class="swatch-fill" style="background: #00F5FF;"></span>
+              </button>
+              <button type="button" class="color-swatch-item" data-color-name="ALERT CRIMSON" data-color-hex="#FF334B" title="Alert Crimson (#FF334B)">
+                <span class="swatch-fill" style="background: #FF334B;"></span>
+              </button>
+              <button type="button" class="color-swatch-item" data-color-name="HAZARD AMBER" data-color-hex="#FF8400" title="Hazard Amber (#FF8400)">
+                <span class="swatch-fill" style="background: #FF8400;"></span>
+              </button>
+              <button type="button" class="color-swatch-item" data-color-name="NEON PURPLE" data-color-hex="#9D4EDD" title="Neon Purple (#9D4EDD)">
+                <span class="swatch-fill" style="background: #9D4EDD;"></span>
+              </button>
+              <button type="button" class="color-swatch-item" data-color-name="GHOST WHITE" data-color-hex="#F0F4FC" title="Ghost White (#F0F4FC)">
+                <span class="swatch-fill" style="background: #F0F4FC;"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Tag / Chips Input -->
+          <div class="cyber-field">
+            <label class="cyber-field__label">
+              <span>BROADCAST TAGS & CATEGORY CHIPS (INTERACTIVE MANAGER)</span>
+              <span class="label-code">[TAGS.ADD]</span>
+            </label>
+            <div class="cyber-tag-input">
+              <span class="tag-item">
+                <span>#CYBERPUNK</span>
+                <button type="button" class="tag-remove" title="Remove tag">✕</button>
+              </span>
+              <span class="tag-item">
+                <span>#MARATHON</span>
+                <button type="button" class="tag-remove" title="Remove tag">✕</button>
+              </span>
+              <span class="tag-item">
+                <span>#DSP_AUDIO</span>
+                <button type="button" class="tag-remove" title="Remove tag">✕</button>
+              </span>
+              <input type="text" class="cyber-tag-input__field" placeholder="Type tag & press Enter or comma...">
+            </div>
+            <span class="cyber-field__hint">Press Enter or comma to insert tag. Backspace removes the last tag.</span>
+          </div>
+
+          <!-- Code Snippet Box for Hardware Controls -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (STEPPER &amp; SLIDERS)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-hardware-controls">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-hardware-controls">
+&lt;!-- Digital HUD Stepper --&gt;
+&lt;div class="cyber-stepper"&gt;
+  &lt;button class="cyber-stepper__btn cyber-stepper__btn--minus" data-stepper-down&gt;-&lt;/button&gt;
+  &lt;input type="number" class="cyber-stepper__input" value="60" min="24" max="240"&gt;
+  &lt;span class="cyber-stepper__unit"&gt;FPS&lt;/span&gt;
+  &lt;button class="cyber-stepper__btn cyber-stepper__btn--plus" data-stepper-up&gt;+&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Tactical Range Slider --&gt;
+&lt;div class="cyber-slider-group"&gt;
+  &lt;span class="slider-label"&gt;BITRATE&lt;/span&gt;
+  &lt;input type="range" class="cyber-slider" min="2000" max="14000" step="500" value="8500" data-unit=" kbps"&gt;
+  &lt;span class="slider-value"&gt;8500 kbps&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;CyberStepper @bind-Value="Framerate" Min="24" Max="240" Unit="FPS" /&gt;
+&lt;CyberSlider @bind-Value="TargetBitrate" Min="2000" Max="14000" Step="500" Unit="kbps" /&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 06 // Tactical File Ingestion & Asset Dropzone -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>06 // TACTICAL FILE INGESTION & ASSET DROPZONE</span>
+            <span class="cyber-tag cyber-tag--cyan">ORGANISMS // DROPZONE</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Tactical asset ingest dropzone equipped with corner HUD brackets, scanlines texture, drag-and-drop feedback, file validation, and uploaded item previews.
+          </p>
+
+          <div>
+            <div class="cyber-dropzone" data-dropzone>
+              <input type="file" class="cyber-dropzone__input" id="dropzone-asset-file" accept=".cube,.png,.jpg,.webm,.mp4">
+              <div class="cyber-dropzone__content">
+                <div class="dropzone-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                </div>
+                <div class="dropzone-title">DRAG &amp; DROP BROADCAST ASSET // OR <span style="color: var(--accent-acid);">BROWSE FILES</span></div>
+                <div class="dropzone-meta">SUPPORTS 3D COLOR LUT (.CUBE), GRAPHIC OVERLAYS (PNG/WEBM), VOD CLIPS (MP4) // MAX 2GB</div>
+                <div class="dropzone-badge">[DROP.INGEST // SECURE PROTOCOL]</div>
+              </div>
+            </div>
+
+            <!-- Uploaded File Preview Example -->
+            <div class="cyber-dropzone__file-item" style="margin-top: 12px;">
+              <div class="file-meta">
+                <span class="file-tag">[INGEST.OK]</span>
+                <span class="file-name">marathon_graphic_realism_lut_hdr.cube</span>
+                <span class="file-size">14.2 MB</span>
+              </div>
+              <button type="button" class="btn-file-remove" title="Remove File from Buffer">✕</button>
+            </div>
+          </div>
+
+          <!-- Code Snippet Box for Dropzone -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (TACTICAL DROPZONE)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-dropzone">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-dropzone">
+&lt;!-- HTML5 Cyber Dropzone --&gt;
+&lt;div class="cyber-dropzone" data-dropzone&gt;
+  &lt;input type="file" class="cyber-dropzone__input" accept=".cube,.png,.mp4"&gt;
+  &lt;div class="cyber-dropzone__content"&gt;
+    &lt;div class="dropzone-title"&gt;DRAG &amp; DROP ASSET // &lt;span class="text-acid"&gt;BROWSE&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="dropzone-badge"&gt;[DROP.INGEST // SECURE]&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;CyberDropzone OnFileSelected="HandleAssetUpload" AllowedExtensions="@(".cube,.png,.mp4")" MaxFileSizeMb="2048" /&gt;</pre>
+          </div>
+        </div>
+
+        <!-- 07 // Production Broadcast Forms -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>07 // PRODUCTION BROADCAST FORMS & WORKFLOWS</span>
+            <span class="cyber-tag cyber-tag--acid">ORGANISMS // FORMS</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            Comprehensive, production-ready form implementations for streaming setup and channel moderation, combining all atomic controls into cohesive operational workflows.
+          </p>
+
+          <!-- Form 1: Stream Broadcast Ingest Setup -->
+          <form class="cyber-form" id="form-stream-setup" autocomplete="off">
+            <div class="cyber-form__header">
+              <div class="form-title">
+                <span class="brand-crosshair" style="width: 20px; height: 20px; font-size: 13px;">+</span>
+                <span>// BROADCAST INGEST &amp; STREAM SETUP</span>
+              </div>
+              <span class="form-code">[FORM.INGEST_CONFIG // ID: 8904]</span>
+            </div>
+
+            <!-- Fieldset 1: Stream Identity -->
+            <div class="cyber-form__section">
+              <div class="section-heading">01 // BROADCAST IDENTITY &amp; DISCOVERY</div>
+              
+              <div class="cyber-grid cyber-grid--2col">
+                <div class="cyber-field">
+                  <label class="cyber-field__label">
+                    <span>STREAM TITLE</span>
+                    <span class="label-char-count" id="setup-title-count">[44/120]</span>
+                  </label>
+                  <input type="text" id="setup-stream-title" class="cyber-input" value="Bungie Marathon Graphic Realism Studio Stream" data-char-counter="setup-title-count" data-char-max="120" required>
+                </div>
+
+                <div class="cyber-field">
+                  <label class="cyber-field__label">
+                    <span>STREAM CATEGORY</span>
+                    <span class="label-code">[CAT.ID]</span>
+                  </label>
+                  <div class="cyber-select-wrapper">
+                    <select class="cyber-select">
+                      <option>Cyberpunk Design Systems</option>
+                      <option>Game Engine Architecture</option>
+                      <option>Audio DSP Engineering</option>
+                      <option>Distributed WebRTC Mesh</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fieldset 2: Ingest Pipeline & Telemetry -->
+            <div class="cyber-form__section">
+              <div class="section-heading">02 // INGEST PROTOCOL &amp; HARDWARE ENCODING</div>
+
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>STREAM INGESTION PROTOCOL</span>
+                  <span class="label-code">[TRANSPORT]</span>
+                </label>
+                <div class="cyber-radio-tiles-grid">
+                  <label class="cyber-radio-tile">
+                    <input type="radio" name="setup-proto" value="whip" checked>
+                    <div class="cyber-radio-tile__content">
+                      <div class="tile-header">
+                        <span class="tile-tag">[REC]</span>
+                        <span class="cyber-radio__diamond"></span>
+                      </div>
+                      <div class="tile-title">WHIP / WEBRTC</div>
+                      <div class="tile-desc">Sub-second low latency broadcast.</div>
+                    </div>
+                  </label>
+
+                  <label class="cyber-radio-tile">
+                    <input type="radio" name="setup-proto" value="srt">
+                    <div class="cyber-radio-tile__content">
+                      <div class="tile-header">
+                        <span class="tile-tag">[SRT]</span>
+                        <span class="cyber-radio__diamond"></span>
+                      </div>
+                      <div class="tile-title">SRT TRANSPORT</div>
+                      <div class="tile-desc">Packet-loss recovery on noisy links.</div>
+                    </div>
+                  </label>
+
+                  <label class="cyber-radio-tile">
+                    <input type="radio" name="setup-proto" value="rtmp">
+                    <div class="cyber-radio-tile__content">
+                      <div class="tile-header">
+                        <span class="tile-tag">[RTMP]</span>
+                        <span class="cyber-radio__diamond"></span>
+                      </div>
+                      <div class="tile-title">RTMP LEGACY</div>
+                      <div class="tile-desc">Standard TCP compatibility mode.</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="cyber-grid cyber-grid--2col">
+                <div class="cyber-slider-group">
+                  <span class="slider-label">TARGET BITRATE</span>
+                  <input type="range" class="cyber-slider" min="3000" max="14000" step="500" value="8500" data-unit=" kbps">
+                  <span class="slider-value">8500 kbps</span>
+                </div>
+
+                <div class="cyber-stepper" style="align-self: flex-start;">
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--minus" data-stepper-down>-</button>
+                  <input type="number" class="cyber-stepper__input" value="60" min="30" max="120" step="30" readonly>
+                  <span class="cyber-stepper__unit">FPS TARGET</span>
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--plus" data-stepper-up>+</button>
+                </div>
+              </div>
+
+              <!-- Stream Key -->
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>PRIMARY INGESTION SECRET KEY</span>
+                  <span class="label-code">[SECRET.KEY]</span>
+                </label>
+                <div class="cyber-stream-key" data-stream-key-wrapper>
+                  <input type="password" class="key-value" value="live_sec_frankfurt_991823719028" readonly>
+                  <div class="key-actions">
+                    <button type="button" class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-key-toggle>SHOW</button>
+                    <button type="button" class="btn-cyber btn-cyber-primary btn-cyber-sm" data-key-copy>COPY KEY</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fieldset 3: Operational Flags -->
+            <div class="cyber-form__section">
+              <div class="section-heading">03 // OPERATIONAL FLAGS &amp; ARCHIVING</div>
+              
+              <div class="cyber-grid cyber-grid--2col">
+                <label class="cyber-checkbox-card">
+                  <input type="checkbox" checked>
+                  <div class="cyber-checkbox-card__inner">
+                    <span class="cyber-checkbox__box"></span>
+                    <div class="card-content">
+                      <div class="card-title">HARDWARE ACCELERATION</div>
+                      <div class="card-desc">Enable NVENC hardware pipeline for low CPU utilization.</div>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="cyber-checkbox-card">
+                  <input type="checkbox" checked>
+                  <div class="cyber-checkbox-card__inner">
+                    <span class="cyber-checkbox__box"></span>
+                    <div class="card-content">
+                      <div class="card-title">AUTOMATIC DVR ARCHIVE</div>
+                      <div class="card-desc">Save full 1080p60 session recording to edge storage.</div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="cyber-form__actions">
+              <button type="reset" class="btn-cyber btn-cyber-ghost">RESET DEFAULTS</button>
+              <button type="submit" class="btn-cyber btn-cyber-primary">
+                <span class="btn-tag">[COMMIT]</span> SAVE &amp; APPLY CONFIG
+              </button>
+            </div>
+          </form>
+
+          <!-- Form 2: Channel Automod & Moderation Protocol -->
+          <form class="cyber-form" id="form-automod-rules" autocomplete="off" style="margin-top: 24px;">
+            <div class="cyber-form__header">
+              <div class="form-title">
+                <span class="brand-crosshair" style="width: 20px; height: 20px; font-size: 13px;">+</span>
+                <span>// AUTOMOD CHAT RULES &amp; PROTECTION PROTOCOL</span>
+              </div>
+              <span class="form-code">[FORM.AUTOMOD_RULES // CLUSTER: ACTIVE]</span>
+            </div>
+
+            <div class="cyber-form__section">
+              <div class="section-heading">01 // FILTER SENSITIVITY &amp; SLOW-MODE</div>
+
+              <div class="cyber-radio-group cyber-radio-group--inline">
+                <label class="cyber-radio">
+                  <input type="radio" name="automod-sens" value="relaxed">
+                  <span class="cyber-radio__diamond"></span>
+                  <span>RELAXED [TIER 1]</span>
+                </label>
+
+                <label class="cyber-radio">
+                  <input type="radio" name="automod-sens" value="standard" checked>
+                  <span class="cyber-radio__diamond"></span>
+                  <span>STANDARD [TIER 2 // BALANCED]</span>
+                </label>
+
+                <label class="cyber-radio cyber-radio--alert">
+                  <input type="radio" name="automod-sens" value="strict">
+                  <span class="cyber-radio__diamond"></span>
+                  <span>MAXIMUM LOCKDOWN [TIER 3]</span>
+                </label>
+              </div>
+
+              <div class="cyber-field" style="max-width: 280px;">
+                <label class="cyber-field__label">
+                  <span>CHAT MESSAGE DELAY (SLOW MODE)</span>
+                  <span class="label-code">[DELAY]</span>
+                </label>
+                <div class="cyber-stepper">
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--minus" data-stepper-down>-</button>
+                  <input type="number" class="cyber-stepper__input" value="5" min="0" max="120" step="1" readonly>
+                  <span class="cyber-stepper__unit">SEC</span>
+                  <button type="button" class="cyber-stepper__btn cyber-stepper__btn--plus" data-stepper-up>+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="cyber-form__section">
+              <div class="section-heading">02 // BLOCKED KEYWORDS &amp; PROTECTION TOGGLES</div>
+
+              <div class="cyber-field">
+                <label class="cyber-field__label">
+                  <span>BLOCKED KEYWORDS LIST (COMMA-SEPARATED)</span>
+                  <span class="label-char-count" id="automod-words-count">[34/200]</span>
+                </label>
+                <textarea class="cyber-textarea" id="automod-words" data-char-counter="automod-words-count" data-char-max="200" placeholder="Enter keywords to auto-suppress...">scam, phishing, giveaway_bot, hack</textarea>
+              </div>
+
+              <div class="row" style="gap: 24px; flex-wrap: wrap;">
+                <label class="cyber-checkbox">
+                  <input type="checkbox" checked>
+                  <span class="cyber-checkbox__box"></span>
+                  <span>BLOCK EXTERNAL HYPERLINKS</span>
+                </label>
+
+                <label class="cyber-checkbox">
+                  <input type="checkbox" checked>
+                  <span class="cyber-checkbox__box"></span>
+                  <span>REQUIRE VERIFIED CALLSIGN</span>
+                </label>
+
+                <label class="cyber-checkbox cyber-checkbox--alert">
+                  <input type="checkbox">
+                  <span class="cyber-checkbox__box"></span>
+                  <span>PURGE CHAT HISTORY ON DISCONNECT</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="cyber-form__actions">
+              <button type="submit" class="btn-cyber btn-cyber-primary">
+                <span class="btn-tag">[APPLY]</span> COMMIT AUTOMOD PROTOCOL
+              </button>
+            </div>
+          </form>
+
+          <!-- Code Snippet Box for Production Forms -->
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (PRODUCTION FORMS)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-production-forms">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-production-forms">
+&lt;!-- HTML5 Production Form Layout --&gt;
+&lt;form class="cyber-form" id="form-stream-setup"&gt;
+  &lt;div class="cyber-form__header"&gt;
+    &lt;div class="form-title"&gt;// STREAM SETUP&lt;/div&gt;
+    &lt;span class="form-code"&gt;[FORM.INGEST_CONFIG]&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="cyber-form__section"&gt;
+    &lt;div class="section-heading"&gt;01 // IDENTITY&lt;/div&gt;
+    &lt;!-- Cyber Fields, Inputs &amp; Selects --&gt;
+  &lt;/div&gt;
+  &lt;div class="cyber-form__actions"&gt;
+    &lt;button type="reset" class="btn-cyber btn-cyber-ghost"&gt;RESET&lt;/button&gt;
+    &lt;button type="submit" class="btn-cyber btn-cyber-primary"&gt;SAVE CONFIG&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+
+&lt;!-- Blazor (.razor) --&gt;
+&lt;CyberForm OnValidSubmit="HandleSaveIngestConfig"&gt;
+  &lt;CyberFormHeader Title="// STREAM SETUP" Code="[FORM.INGEST_CONFIG]" /&gt;
+  &lt;CyberFormSection Heading="01 // IDENTITY"&gt;
+    &lt;CyberField Label="STREAM TITLE"&gt;
+      &lt;CyberInput @bind-Value="Model.Title" Required="true" /&gt;
+    &lt;/CyberField&gt;
+  &lt;/CyberFormSection&gt;
+  &lt;CyberFormActions&gt;
+    &lt;CyberButton Variant="Ghost" Type="reset"&gt;RESET&lt;/CyberButton&gt;
+    &lt;CyberButton Variant="Primary" Type="submit"&gt;SAVE CONFIG&lt;/CyberButton&gt;
+  &lt;/CyberFormActions&gt;
+&lt;/CyberForm&gt;</pre>
           </div>
         </div>
 
         <!-- 05 // Avatars & Status Rings -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>05 // STREAMER AVATARS & STATUS RINGS</span>
+            <span>08 // STREAMER AVATARS & STATUS RINGS</span>
             <span class="cyber-tag cyber-tag--acid">AVATARS</span>
           </div>
 
@@ -468,7 +1303,7 @@
         <!-- 06 // Alerts & Notification Banners (NO EMOJIS) -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>06 // CYBER HUD ALERTS & SYSTEM WARNINGS</span>
+            <span>09 // CYBER HUD ALERTS & SYSTEM WARNINGS</span>
             <span class="cyber-tag cyber-tag--alert">MESSAGING</span>
           </div>
 
@@ -558,7 +1393,7 @@
         <!-- 07 // Auth & Registration Modals -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>07 // AUTHENTICATION & REGISTRATION MODALS</span>
+            <span>10 // AUTHENTICATION & REGISTRATION MODALS</span>
             <span class="cyber-tag cyber-tag--acid">ORGANISMS // AUTH MODALS</span>
           </div>
 
@@ -616,7 +1451,7 @@
         <!-- 08 // Tactical Dropdown Menus -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>08 // TACTICAL DROPDOWN MENUS</span>
+            <span>11 // TACTICAL DROPDOWN MENUS</span>
             <span class="cyber-tag cyber-tag--acid">MOLECULES // DROPDOWNS</span>
           </div>
 
@@ -789,7 +1624,7 @@
         <!-- 09 // Stream Search Component -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>09 // STREAM & BROADCASTER SEARCH</span>
+            <span>12 // STREAM & BROADCASTER SEARCH</span>
             <span class="cyber-tag cyber-tag--cyan">COMPLEX // SEARCH</span>
           </div>
 
@@ -958,7 +1793,7 @@
         <!-- 10 // Segmented Tabs & Switchers -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>10 // SEGMENTED TABS & SWITCHERS</span>
+            <span>13 // SEGMENTED TABS & SWITCHERS</span>
             <span class="cyber-tag cyber-tag--acid">MOLECULES // TABS</span>
           </div>
 
@@ -1035,7 +1870,7 @@
         <!-- 11 // Stream Discovery Cards -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>11 // STREAM CARDS & BROADCAST PREVIEWS</span>
+            <span>14 // STREAM CARDS & BROADCAST PREVIEWS</span>
             <span class="cyber-tag cyber-tag--acid">ORGANISMS // CARDS</span>
           </div>
 
@@ -1105,7 +1940,7 @@
         <!-- 12 // Chat Messages & Reaction Chips -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>12 // CHAT MESSAGES & REACTION CHIPS</span>
+            <span>15 // CHAT MESSAGES & REACTION CHIPS</span>
             <span class="cyber-tag cyber-tag--cyan">ATOMS // CHAT</span>
           </div>
 
@@ -1183,7 +2018,7 @@
         <!-- 13 // Broadcast Telemetry & Health Board -->
         <div class="showcase-workbench-card">
           <div class="showcase-workbench-title">
-            <span>13 // BROADCAST TELEMETRY & HEALTH BOARD</span>
+            <span>16 // BROADCAST TELEMETRY & HEALTH BOARD</span>
             <span class="cyber-tag cyber-tag--acid">MOLECULES // TELEMETRY</span>
           </div>
 

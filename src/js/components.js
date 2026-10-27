@@ -175,6 +175,11 @@ export function initInteractiveComponents() {
   // 9. Cyber Search Controllers
   // ---------------------------------------------------------------------------
   initSearchComponents();
+
+  // ---------------------------------------------------------------------------
+  // 10. Form Controls, Steppers, Dropzones & Tags
+  // ---------------------------------------------------------------------------
+  initFormControls();
 }
 
 // -----------------------------------------------------------------------------
@@ -548,4 +553,218 @@ function initSearchComponents() {
     }
   });
 }
+
+// -----------------------------------------------------------------------------
+// Form Controls Controller (Steppers, Dropzones, Tag Inputs, Color Pickers)
+// -----------------------------------------------------------------------------
+function initFormControls() {
+  // 1. Digital Steppers
+  document.querySelectorAll('.cyber-stepper').forEach(stepper => {
+    const input = stepper.querySelector('.cyber-stepper__input');
+    const minusBtn = stepper.querySelector('[data-stepper-down]');
+    const plusBtn = stepper.querySelector('[data-stepper-up]');
+    if (!input) return;
+
+    const min = input.hasAttribute('min') ? parseFloat(input.min) : -Infinity;
+    const max = input.hasAttribute('max') ? parseFloat(input.max) : Infinity;
+    const step = input.hasAttribute('step') ? parseFloat(input.step) : 1;
+
+    if (minusBtn) {
+      minusBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let val = parseFloat(input.value) || 0;
+        val = Math.max(min, val - step);
+        input.value = val;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+
+    if (plusBtn) {
+      plusBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let val = parseFloat(input.value) || 0;
+        val = Math.min(max, val + step);
+        input.value = val;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+  });
+
+  // 2. Interactive Tag Inputs
+  document.querySelectorAll('.cyber-tag-input').forEach(container => {
+    const field = container.querySelector('.cyber-tag-input__field');
+    if (!field) return;
+
+    const addTag = (text) => {
+      const clean = text.trim().replace(/^#/, '');
+      if (!clean) return;
+
+      const tagEl = document.createElement('span');
+      tagEl.className = 'tag-item';
+      tagEl.innerHTML = `<span>#${clean}</span><button type="button" class="tag-remove" title="Remove tag">✕</button>`;
+      container.insertBefore(tagEl, field);
+      field.value = '';
+
+      tagEl.querySelector('.tag-remove').addEventListener('click', () => {
+        tagEl.remove();
+      });
+    };
+
+    field.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        addTag(field.value);
+      } else if (e.key === 'Backspace' && field.value === '') {
+        const lastTag = container.querySelectorAll('.tag-item');
+        if (lastTag.length > 0) {
+          lastTag[lastTag.length - 1].remove();
+        }
+      }
+    });
+
+    container.querySelectorAll('.tag-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.tag-item')?.remove();
+      });
+    });
+  });
+
+  // 3. File Dropzone Upload Simulation
+  document.querySelectorAll('[data-dropzone]').forEach(zone => {
+    const fileInput = zone.querySelector('input[type="file"]');
+    const container = zone.parentElement;
+
+    const handleFiles = (files) => {
+      if (!files || files.length === 0) return;
+      const file = files[0];
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      
+      // Remove any existing preview
+      container.querySelectorAll('.cyber-dropzone__file-item').forEach(el => el.remove());
+
+      const preview = document.createElement('div');
+      preview.className = 'cyber-dropzone__file-item';
+      preview.innerHTML = `
+        <div class="file-meta">
+          <span class="file-tag">[INGEST.OK]</span>
+          <span class="file-name">${file.name}</span>
+          <span class="file-size">${sizeMb > 0 ? sizeMb + ' MB' : (file.size / 1024).toFixed(1) + ' KB'}</span>
+        </div>
+        <button type="button" class="btn-file-remove" title="Remove File">✕</button>
+      `;
+
+      preview.querySelector('.btn-file-remove').addEventListener('click', () => {
+        preview.remove();
+        if (fileInput) fileInput.value = '';
+        showToast('FILE REMOVED FROM INGEST BUFFER', 'info');
+      });
+
+      zone.after(preview);
+      showToast(`ASSET INGESTED: ${file.name.toUpperCase()}`, 'success');
+    };
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      zone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        zone.classList.add('is-dragover');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      zone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        zone.classList.remove('is-dragover');
+      });
+    });
+
+    zone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      if (dt && dt.files) {
+        handleFiles(dt.files);
+      }
+    });
+
+    if (fileInput) {
+      fileInput.addEventListener('change', () => {
+        handleFiles(fileInput.files);
+      });
+    }
+  });
+
+  // 4. Color Swatches Selection
+  document.querySelectorAll('.cyber-color-swatches').forEach(swatches => {
+    swatches.querySelectorAll('.color-swatch-item').forEach(swatch => {
+      swatch.addEventListener('click', (e) => {
+        e.preventDefault();
+        swatches.querySelectorAll('.color-swatch-item').forEach(s => s.classList.remove('is-active'));
+        swatch.classList.add('is-active');
+        const colorName = swatch.getAttribute('data-color-name') || 'CUSTOM';
+        const colorVal = swatch.getAttribute('data-color-hex') || '';
+        showToast(`OVERLAY THEME ACCENT: [${colorName} // ${colorVal}]`, 'info');
+      });
+    });
+  });
+
+  // 5. Character Counters on Textareas & Inputs
+  document.querySelectorAll('[data-char-counter]').forEach(input => {
+    const max = parseInt(input.getAttribute('data-char-max') || '120', 10);
+    const counterId = input.getAttribute('data-char-counter');
+    const counterEl = document.getElementById(counterId);
+
+    const updateCount = () => {
+      const len = input.value.length;
+      if (counterEl) {
+        counterEl.textContent = `[${len}/${max}]`;
+        if (len > max) {
+          counterEl.style.color = 'var(--accent-alert)';
+        } else {
+          counterEl.style.color = 'var(--text-muted)';
+        }
+      }
+    };
+
+    input.addEventListener('input', updateCount);
+    updateCount();
+  });
+
+  // 6. Interactive Production Broadcast Forms
+  const streamSetupForm = document.getElementById('form-stream-setup');
+  if (streamSetupForm) {
+    streamSetupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const titleInput = streamSetupForm.querySelector('#setup-stream-title');
+      const title = titleInput ? titleInput.value.trim() : 'Live Stream';
+      showToast(`BROADCAST INGEST SAVED // TITLE: ${title.toUpperCase()}`, 'success');
+    });
+
+    streamSetupForm.addEventListener('reset', () => {
+      setTimeout(() => {
+        showToast('STREAM INGEST CONFIGURATION RESET TO DEFAULTS', 'warning');
+      }, 50);
+    });
+  }
+
+  const automodForm = document.getElementById('form-automod-rules');
+  if (automodForm) {
+    automodForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('AUTOMOD FILTER PROTOCOL RULES COMMITTED TO CLUSTER', 'success');
+    });
+  }
+
+  const broadcasterProfileForm = document.getElementById('form-broadcaster-profile');
+  if (broadcasterProfileForm) {
+    broadcasterProfileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const callsignInput = document.getElementById('profile-callsign');
+      const callsign = callsignInput ? callsignInput.value.trim() : 'OPERATOR';
+      showToast(`OPERATOR PROFILE [${callsign.toUpperCase()}] COMMITTED`, 'success');
+    });
+  }
+}
+
 

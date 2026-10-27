@@ -1,0 +1,715 @@
+// =============================================================================
+// LAYER 06: COMPONENTS // FORMS & CONTROLS
+// BroadcastingUIKit - Tactical Cyberpunk Checkboxes, Radios, Dropzones & Form Containers
+// Marathon "Graphic Realism" & Loud Utility
+// =============================================================================
+
+@use '../02-tools/mixins' as *;
+
+// -----------------------------------------------------------------------------
+// 1. Cyber Checkbox (.cyber-checkbox)
+// -----------------------------------------------------------------------------
+.cyber-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-hud);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__box {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-xs);
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-acid);
+      clip-path: var(--cut-corner-xs);
+      opacity: 0;
+      transform: scale(0.4);
+      transition: var(--transition-fast);
+      box-shadow: 0 0 8px rgba(216, 255, 0, 0.7);
+    }
+  }
+
+  // Hover state
+  &:hover {
+    color: var(--text-primary);
+
+    .cyber-checkbox__box {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.25);
+    }
+  }
+
+  // Checked state
+  input[type="checkbox"]:checked + .cyber-checkbox__box {
+    border-color: var(--accent-acid);
+    background: rgba(216, 255, 0, 0.12);
+
+    &::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Indeterminate state
+  input[type="checkbox"]:indeterminate + .cyber-checkbox__box {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 245, 255, 0.1);
+
+    &::after {
+      opacity: 1;
+      transform: scaleX(1.4) scaleY(0.4);
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 245, 255, 0.7);
+    }
+  }
+
+  // Focus visible ring
+  input[type="checkbox"]:focus-visible + .cyber-checkbox__box {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+
+  // Disabled state
+  input[type="checkbox"]:disabled ~ * {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Color variants
+  &--cyan {
+    input[type="checkbox"]:checked + .cyber-checkbox__box {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 245, 255, 0.12);
+
+      &::after {
+        background: var(--accent-cyan);
+        box-shadow: 0 0 8px rgba(0, 245, 255, 0.7);
+      }
+    }
+  }
+
+  &--alert {
+    input[type="checkbox"]:checked + .cyber-checkbox__box {
+      border-color: var(--accent-alert);
+      background: rgba(255, 51, 75, 0.12);
+
+      &::after {
+        background: var(--accent-alert);
+        box-shadow: 0 0 8px rgba(255, 51, 75, 0.7);
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 2. Cyber Checkbox Card (.cyber-checkbox-card)
+// -----------------------------------------------------------------------------
+.cyber-checkbox-card {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-dim);
+    clip-path: var(--cut-corner-sm);
+    transition: var(--transition-fast);
+
+    .card-content {
+      flex: 1;
+
+      .card-title {
+        font-family: var(--font-hud);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .card-desc {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        line-height: 1.45;
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  &:hover &__inner {
+    border-color: var(--border-bright);
+    background: var(--bg-surface-elevated);
+  }
+
+  input[type="checkbox"]:checked + &__inner {
+    border-color: var(--accent-acid);
+    background: rgba(216, 255, 0, 0.04);
+    box-shadow: 0 0 16px rgba(216, 255, 0, 0.12);
+
+    .cyber-checkbox__box {
+      border-color: var(--accent-acid);
+      background: rgba(216, 255, 0, 0.16);
+
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  input[type="checkbox"]:focus-visible + &__inner {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 3. Cyber Radio Button (.cyber-radio) & Radio Groups
+// -----------------------------------------------------------------------------
+.cyber-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+.cyber-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-hud);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__diamond {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-bright);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-acid);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      opacity: 0;
+      transform: scale(0.3);
+      transition: var(--transition-fast);
+      box-shadow: 0 0 10px rgba(216, 255, 0, 0.8);
+    }
+  }
+
+  &:hover {
+    color: var(--text-primary);
+
+    .cyber-radio__diamond {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.25);
+    }
+  }
+
+  input[type="radio"]:checked + .cyber-radio__diamond {
+    border-color: var(--accent-acid);
+    background: rgba(216, 255, 0, 0.14);
+
+    &::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  input[type="radio"]:focus-visible + .cyber-radio__diamond {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+
+  input[type="radio"]:disabled ~ * {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &--cyan {
+    input[type="radio"]:checked + .cyber-radio__diamond {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 245, 255, 0.14);
+
+      &::after {
+        background: var(--accent-cyan);
+        box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 4. Cyber Radio Tiles (.cyber-radio-tile)
+// -----------------------------------------------------------------------------
+.cyber-radio-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.cyber-radio-tile {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-dim);
+    clip-path: var(--cut-corner-sm);
+    transition: var(--transition-fast);
+    height: 100%;
+
+    .tile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .tile-tag {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+      }
+    }
+
+    .tile-title {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .tile-desc {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-top: auto;
+    }
+
+    .tile-specs {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+  }
+
+  &:hover &__content {
+    border-color: var(--border-bright);
+    background: var(--bg-surface-elevated);
+  }
+
+  input[type="radio"]:checked + &__content {
+    border-color: var(--accent-acid);
+    background: rgba(216, 255, 0, 0.04);
+    box-shadow: 0 0 16px rgba(216, 255, 0, 0.15);
+
+    .tile-title {
+      color: var(--accent-acid);
+    }
+
+    .cyber-radio__diamond {
+      border-color: var(--accent-acid);
+      background: rgba(216, 255, 0, 0.16);
+
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  input[type="radio"]:focus-visible + &__content {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 5. Tactical File Upload Dropzone (.cyber-dropzone)
+// -----------------------------------------------------------------------------
+.cyber-dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-bright);
+  clip-path: var(--cut-corner-md);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  width: 100%;
+  overflow: hidden;
+
+  // Scanlines overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    @include scanlines(6px, 0.25);
+  }
+
+  // Corner HUD brackets
+  &::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid var(--accent-acid);
+    border-right: 2px solid var(--accent-acid);
+    pointer-events: none;
+  }
+
+  &__input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+
+    .dropzone-icon {
+      color: var(--accent-acid);
+      margin-bottom: 4px;
+      transition: var(--transition-fast);
+    }
+
+    .dropzone-title {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .dropzone-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .dropzone-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      background: rgba(0, 245, 255, 0.1);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      padding: 2px 8px;
+      margin-top: 6px;
+      letter-spacing: 1px;
+    }
+  }
+
+  &:hover, &.is-dragover {
+    border-color: var(--accent-acid);
+    background: rgba(216, 255, 0, 0.03);
+    box-shadow: 0 0 20px rgba(216, 255, 0, 0.12);
+
+    .dropzone-icon {
+      transform: translateY(-3px) scale(1.1);
+      color: var(--accent-cyan);
+    }
+  }
+
+  // Uploaded File Preview Item
+  &__file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-xs);
+    margin-top: 12px;
+
+    .file-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .file-tag {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--accent-acid);
+        background: var(--accent-acid-dim);
+        border: 1px solid rgba(216, 255, 0, 0.3);
+        padding: 2px 6px;
+      }
+
+      .file-name {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-primary);
+      }
+
+      .file-size {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+    }
+
+    .btn-file-remove {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 4px;
+      transition: var(--transition-fast);
+
+      &:hover {
+        color: var(--accent-alert);
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 6. Tactical Color Swatches (.cyber-color-swatches)
+// -----------------------------------------------------------------------------
+.cyber-color-swatches {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  .color-swatch-item {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-bright);
+    clip-path: var(--cut-corner-xs);
+    cursor: pointer;
+    background: transparent;
+    padding: 2px;
+    transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .swatch-fill {
+      width: 100%;
+      height: 100%;
+      clip-path: var(--cut-corner-xs);
+      transition: var(--transition-fast);
+    }
+
+    &:hover {
+      transform: scale(1.12);
+      border-color: #fff;
+    }
+
+    &.is-active {
+      border-color: #fff;
+      box-shadow: 0 0 12px currentColor;
+
+      &::after {
+        content: '✓';
+        position: absolute;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-inverse);
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 7. Complete Production Form Containers (.cyber-form)
+// -----------------------------------------------------------------------------
+.cyber-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  clip-path: var(--cut-corner-md);
+  padding: 24px;
+  position: relative;
+
+  // Header banner
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-dim);
+
+    .form-title {
+      font-family: var(--font-hud);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-acid);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+  }
+
+  // Fieldset section with title
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .section-heading {
+      font-family: var(--font-hud);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border-dim);
+      }
+    }
+  }
+
+  // Action footer
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-dim);
+    margin-top: 8px;
+  }
+}
