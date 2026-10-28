@@ -4,6 +4,12 @@
 // =============================================================================
 
 .btn-cyber {
+  // Loading spinner variables (default)
+  --btn-spinner-head: var(--accent-acid);
+  --btn-spinner-track: rgba(255, 255, 255, 0.2);
+  --btn-spinner-size: 16px;
+  --btn-spinner-width: 2px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -48,6 +54,8 @@
     background: var(--accent-acid);
     color: var(--text-inverse);
     border-color: var(--accent-acid);
+    --btn-spinner-head: var(--text-inverse);
+    --btn-spinner-track: rgba(8, 9, 11, 0.22);
 
     &:hover {
       background: var(--accent-acid-hover);
@@ -65,6 +73,8 @@
     background: var(--bg-surface-elevated);
     color: var(--text-primary);
     border-color: var(--border-bright);
+    --btn-spinner-head: var(--accent-cyan);
+    --btn-spinner-track: rgba(0, 245, 255, 0.2);
 
     &:hover {
       background: var(--bg-surface-hover);
@@ -84,6 +94,8 @@
     background: var(--accent-alert);
     color: #FFFFFF;
     border-color: var(--accent-alert);
+    --btn-spinner-head: #FFFFFF;
+    --btn-spinner-track: rgba(255, 255, 255, 0.25);
 
     &:hover {
       filter: brightness(1.15);
@@ -97,6 +109,8 @@
     background: var(--accent-warning);
     color: var(--text-inverse);
     border-color: var(--accent-warning);
+    --btn-spinner-head: var(--text-inverse);
+    --btn-spinner-track: rgba(8, 9, 11, 0.22);
 
     &:hover {
       filter: brightness(1.15);
@@ -110,6 +124,8 @@
     background: transparent;
     color: var(--text-secondary);
     border-color: var(--border-dim);
+    --btn-spinner-head: var(--accent-acid);
+    --btn-spinner-track: rgba(255, 255, 255, 0.18);
 
     &:hover {
       color: var(--accent-acid);
@@ -126,6 +142,7 @@
     font-size: 11px;
     letter-spacing: 1.2px;
     clip-path: var(--cut-corner-xs);
+    --btn-spinner-size: 14px;
   }
 
   &-lg, &--lg {
@@ -133,27 +150,40 @@
     font-size: 14px;
     letter-spacing: 2px;
     clip-path: var(--cut-corner-md);
+    --btn-spinner-size: 20px;
+    --btn-spinner-width: 2.5px;
   }
 
   // ---------------------------------------------------------------------------
   // Loading State
   // ---------------------------------------------------------------------------
-  &--loading {
+  &--loading,
+  &.is-loading {
     color: transparent !important;
+    text-shadow: none !important;
     pointer-events: none;
+    cursor: wait;
+
+    > * {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
 
     &::after {
       content: '';
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: var(--btn-spinner-size, 16px);
+      height: var(--btn-spinner-size, 16px);
       top: 50%;
       left: 50%;
-      margin: -8px 0 0 -8px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-top-color: currentColor;
+      margin: calc(var(--btn-spinner-size, 16px) * -0.5) 0 0 calc(var(--btn-spinner-size, 16px) * -0.5);
+      border: var(--btn-spinner-width, 2px) solid var(--btn-spinner-track, rgba(255, 255, 255, 0.2));
+      border-top-color: var(--btn-spinner-head, var(--accent-acid));
       border-radius: 50%;
       animation: cyber-spin 0.6s linear infinite;
+      box-sizing: border-box;
+      pointer-events: none;
+      transition: none;
     }
   }
 }
@@ -216,6 +246,35 @@
     padding: 1px 5px;
     border-radius: 2px;
     border: 1px solid var(--bg-deep);
+  }
+
+  &--loading,
+  &.is-loading {
+    color: transparent !important;
+    pointer-events: none;
+    cursor: wait;
+
+    > * {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin: -8px 0 0 -8px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--accent-acid);
+      border-radius: 50%;
+      animation: cyber-spin 0.6s linear infinite;
+      box-sizing: border-box;
+      pointer-events: none;
+      transition: none;
+    }
   }
 }
 

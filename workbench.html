@@ -255,6 +255,21 @@
             </button>
           </div>
 
+          <!-- Loading States Row -->
+          <div class="row" style="margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border-dim); align-items: center;">
+            <button class="btn-cyber btn-cyber-primary btn-cyber--loading">Loading Acid</button>
+            <button class="btn-cyber btn-cyber-secondary btn-cyber--loading">Loading Carbon</button>
+            <button class="btn-cyber btn-cyber-danger btn-cyber--loading">Loading Alert</button>
+            <button class="btn-cyber btn-cyber-warning btn-cyber--loading">Loading Amber</button>
+            <button class="btn-cyber btn-cyber-ghost btn-cyber--loading">Loading Ghost</button>
+            <button class="btn-cyber btn-cyber-primary btn-cyber-sm btn-cyber--loading">Small</button>
+            <button class="btn-icon-hud btn-icon-hud--loading" title="Loading Icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              </svg>
+            </button>
+          </div>
+
           <!-- Code Snippet Box -->
           <div class="code-preview-box">
             <div class="code-preview-header">
@@ -266,9 +281,10 @@
 &lt;button class="btn-cyber btn-cyber-primary"&gt;Primary Action&lt;/button&gt;
 &lt;button class="btn-cyber btn-cyber-secondary"&gt;Secondary Action&lt;/button&gt;
 &lt;button class="btn-cyber btn-cyber-danger"&gt;Terminate Broadcast&lt;/button&gt;
+&lt;button class="btn-cyber btn-cyber-primary btn-cyber--loading"&gt;Processing...&lt;/button&gt;
 
 &lt;!-- Blazor (.razor) --&gt;
-&lt;button class="btn-cyber btn-cyber-@Variant.ToString().ToLower() @(IsSmall ? "btn-cyber-sm" : "")" @onclick="OnClick"&gt;
+&lt;button class="btn-cyber btn-cyber-@Variant.ToString().ToLower() @(IsSmall ? "btn-cyber-sm" : "") @(IsLoading ? "btn-cyber--loading" : "")" @onclick="OnClick"&gt;
     @ChildContent
 &lt;/button&gt;</pre>
           </div>
