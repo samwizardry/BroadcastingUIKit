@@ -1417,9 +1417,12 @@
             High-contrast security dialogs featuring chamfered polygon geometry, inline form validation, password visibility toggles, and seamless modal switching between Login and Registration.
           </p>
 
-          <div class="row">
+          <div class="row" style="flex-wrap: wrap; gap: 12px;">
             <button class="btn-cyber btn-cyber-primary" data-modal-open="login-modal">
               <span class="btn-tag">[SYS.01]</span> LAUNCH LOGIN MODAL
+            </button>
+            <button class="btn-cyber btn-cyber-danger" data-modal-open="login-modal" data-simulate-error="true">
+              <span class="btn-tag">[ERR.401]</span> SIMULATE AUTH ERROR STATE
             </button>
             <button class="btn-cyber btn-cyber-secondary" data-modal-open="register-modal">
               <span class="btn-tag">[SYS.02]</span> LAUNCH REGISTER MODAL
@@ -1435,7 +1438,27 @@
             <pre class="code-snippet" id="snippet-auth-modals">
 &lt;!-- Trigger Buttons --&gt;
 &lt;button class="btn-cyber btn-cyber-ghost" data-modal-open="login-modal"&gt;LOG IN&lt;/button&gt;
+&lt;button class="btn-cyber btn-cyber-danger" data-modal-open="login-modal" data-simulate-error="true"&gt;SIMULATE AUTH ERROR&lt;/button&gt;
 &lt;button class="btn-cyber btn-cyber-primary" data-modal-open="register-modal"&gt;REGISTER&lt;/button&gt;
+
+&lt;!-- Auth Error Telemetry Banner (Replaces standard [SYS.AUTH_01]) --&gt;
+&lt;div class="cyber-telemetry-banner cyber-telemetry-banner--danger" role="alert"&gt;
+  &lt;span class="banner-badge"&gt;[AUTH_FAIL // ERR.0401]&lt;/span&gt;
+  &lt;span&gt;ACCESS DENIED: INVALID OPERATOR SECRET KEY&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Field Error State on Secret Key --&gt;
+&lt;div class="cyber-field cyber-field--error"&gt;
+  &lt;label class="cyber-field__label" for="login-password"&gt;
+    &lt;span&gt;OPERATOR SECRET KEY&lt;/span&gt;
+    &lt;span class="label-code"&gt;[PASS.HASH]&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;div class="cyber-input-group"&gt;...&lt;/div&gt;
+  &lt;div class="cyber-field__message cyber-field__message--error"&gt;
+    &lt;span class="msg-tag"&gt;[REJECTED]&lt;/span&gt;
+    &lt;span&gt;INVALID OPERATOR SECRET KEY — VERIFY HASH&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;!-- Login Modal with Registration Switch Link --&gt;
 &lt;div class="cyber-modal-backdrop" id="login-modal"&gt;

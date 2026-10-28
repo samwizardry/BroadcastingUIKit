@@ -54,10 +54,23 @@ export function initInteractiveComponents() {
         });
         targetModal.classList.add('is-open');
 
+        const simulateError = openBtn.getAttribute('data-simulate-error') === 'true';
+        if (modalId === 'login-modal') {
+          if (simulateError) {
+            const loginPass = document.getElementById('login-password');
+            const loginUser = document.getElementById('login-username');
+            if (loginUser && !loginUser.value) loginUser.value = 'OPERATOR_09';
+            if (loginPass) loginPass.value = 'invalid_hash_99';
+            setLoginModalError(true, 'ACCESS DENIED: INVALID OPERATOR SECRET KEY');
+          } else {
+            setLoginModalError(false);
+          }
+        }
+
         // Auto-focus first input
         setTimeout(() => {
           const firstInput = targetModal.querySelector('input:not([type="hidden"]):not([disabled])');
-          if (firstInput) firstInput.focus();
+          if (firstInput && !simulateError) firstInput.focus();
         }, 80);
       }
       return;
@@ -212,10 +225,20 @@ function initAuthForms() {
       const password = passwordInput ? passwordInput.value.trim() : '';
 
       if (!username || !password) {
+        setLoginModalError(true, 'AUTHENTICATION FAILED: ALL FIELDS ARE REQUIRED');
         showToast('ERROR: ALL AUTHENTICATION FIELDS ARE REQUIRED', 'danger');
         return;
       }
 
+      // Simulation: Passwords under 6 chars or test keywords trigger error state
+      const isSimulatedWrongPassword = ['wrong', 'error', 'fail', 'test'].includes(password.toLowerCase()) || password.length < 6;
+      if (isSimulatedWrongPassword) {
+        setLoginModalError(true, 'ACCESS DENIED: INVALID OPERATOR SECRET KEY');
+        showToast('ERROR: ACCESS DENIED // INVALID SECRET KEY', 'danger');
+        return;
+      }
+
+      setLoginModalError(false);
       showToast(`ACCESS GRANTED // OPERATOR: ${username.toUpperCase()}`, 'success');
 
       // Update Profile dropdown header callsign
@@ -230,6 +253,13 @@ function initAuthForms() {
         setTimeout(() => modal.classList.remove('is-open'), 350);
       }
     });
+
+    const loginPass = document.getElementById('login-password');
+    if (loginPass) {
+      loginPass.addEventListener('input', () => {
+        setLoginModalError(false);
+      });
+    }
   }
 
   // Register Form Submission
@@ -768,3 +798,69 @@ function initFormControls() {
 }
 
 
+
+// -----------------------------------------------------------------------------
+// Auth Modal Error State Controller (Marathon Graphic Realism)
+// -----------------------------------------------------------------------------
+export function setLoginModalError(isError, customMsg = 'ACCESS DENIED: INVALID OPERATOR SECRET KEY') {
+  const modal = document.getElementById('login-modal');
+  if (!modal) return;
+
+  const banner = modal.querySelector('.cyber-telemetry-banner');
+  const passwordInput = document.getElementById('login-password');
+  const passwordField = passwordInput ? passwordInput.closest('.cyber-field') : null;
+  let errorMsg = passwordField ? passwordField.querySelector('.cyber-field__message--error') : null;
+
+  if (isError) {
+    if (banner) {
+      banner.className = 'cyber-telemetry-banner cyber-telemetry-banner--danger is-shaking';
+      banner.setAttribute('role', 'alert');
+      banner.innerHTML = `
+        <span class="banner-badge">[AUTH_FAIL // ERR.0401]</span>
+        <span>${customMsg}</span>
+      `;
+      setTimeout(() => banner.classList.remove('is-shaking'), 400);
+    }
+
+    if (passwordField) {
+      passwordField.classList.add('cyber-field--error');
+      if (!errorMsg) {
+        errorMsg = document.createElement('div');
+        errorMsg.className = 'cyber-field__message cyber-field__message--error';
+        errorMsg.id = 'login-password-error';
+        passwordField.appendChild(errorMsg);
+      }
+      errorMsg.innerHTML = `
+        <span class="msg-tag">[REJECTED]</span>
+        <span>INVALID OPERATOR SECRET KEY — VERIFY HASH</span>
+      `;
+      errorMsg.style.display = 'flex';
+    }
+
+    if (passwordInput) {
+      passwordInput.classList.add('cyber-input--error');
+      passwordInput.focus();
+    }
+  } else {
+    // Reset to default
+    if (banner) {
+      banner.className = 'cyber-telemetry-banner';
+      banner.removeAttribute('role');
+      banner.innerHTML = `
+        <span class="banner-badge">[SYS.AUTH_01]</span>
+        <span>AUTHORIZATION PROTOCOL: ENCRYPTED TLS 1.3 / CALLSIGN VERIFY</span>
+      `;
+    }
+
+    if (passwordField) {
+      passwordField.classList.remove('cyber-field--error');
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
+    }
+
+    if (passwordInput) {
+      passwordInput.classList.remove('cyber-input--error');
+    }
+  }
+}
