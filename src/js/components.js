@@ -400,7 +400,7 @@ function startChatSimulation() {
     'That chamfer cut HUD border looks insane 🔥',
     'Broadcasting platform looks like straight out of Marathon',
     'Packet loss is 0.00% across the edge cluster.',
-    'Insane aesthetics. Best broadcast UI kit.'
+    'Audio DSP and video telemetry are crystal clear on this node.'
   ];
 
   function pushMessage() {
