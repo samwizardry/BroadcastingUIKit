@@ -235,26 +235,353 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Stream Player Play/Pause Interactive Simulation
+  // Live Stream Video Player (HLS + Automatic Live-Edge Sync on Play, No Duration Bar)
+  const playerEl = document.getElementById('main-stream-player');
+  const video = document.getElementById('videoPlayer');
+  const statusOverlay = document.getElementById('statusOverlay');
   const centerPlayAction = document.getElementById('player-center-play');
+  const centerLabel = document.getElementById('player-center-label');
   const bottomPlayBtn = document.getElementById('player-bottom-play');
+  const playLabel = document.getElementById('player-play-label');
+  const liveSyncChip = document.getElementById('player-live-sync');
+  const liveChipText = document.getElementById('player-live-chip-text');
+  const syncReadout = document.getElementById('player-sync-readout');
+  const muteBtn = document.getElementById('player-mute-btn');
+  const volumeSlider = document.getElementById('player-volume-slider');
+  const volumeValue = document.getElementById('player-volume-value');
+  const fullscreenBtn = document.getElementById('player-fullscreen-btn');
 
-  if (centerPlayAction && bottomPlayBtn) {
+  if (playerEl && video && centerPlayAction && bottomPlayBtn) {
     let isPlaying = false;
+    let hlsInstance = null;
+    let pendingLiveEdgeSync = false;
+    let uiHideTimer = null;
+    let lastVolume = 80;
 
-    const togglePlayback = () => {
-      isPlaying = !isPlaying;
+    const rawStreamUrl = video.dataset.streamSrc || 'http://localhost:8888/live/sam/';
+    const streamUrl = rawStreamUrl.endsWith('.m3u8')
+      ? rawStreamUrl
+      : `${rawStreamUrl.replace(/\/+$/, '')}/index.m3u8`;
 
-      if (isPlaying) {
-        centerPlayAction.style.display = 'none';
-        showToast('STREAM PLAYBACK ACTIVE // 1080P 60FPS', 'success');
-      } else {
-        centerPlayAction.style.display = 'flex';
+    // Calculate and jump directly to the live stream edge (accounting for buffer & latency)
+    const syncToLiveEdge = () => {
+      try {
+        let targetTime = null;
+
+        if (video.buffered && video.buffered.length > 0) {
+          const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+          if (Number.isFinite(bufferedEnd) && bufferedEnd > 0) {
+            targetTime = Math.max(0, bufferedEnd - 0.25);
+          }
+        }
+
+        if (hlsInstance && Number.isFinite(hlsInstance.liveSyncPosition) && hlsInstance.liveSyncPosition > 0) {
+          targetTime = targetTime !== null
+            ? Math.max(targetTime, hlsInstance.liveSyncPosition)
+            : hlsInstance.liveSyncPosition;
+        }
+
+        if (targetTime === null && video.seekable && video.seekable.length > 0) {
+          const seekableEnd = video.seekable.end(video.seekable.length - 1);
+          if (Number.isFinite(seekableEnd) && seekableEnd > 0) {
+            targetTime = Math.max(0, seekableEnd - 0.25);
+          }
+        }
+
+        if (targetTime !== null && targetTime > 0) {
+          video.currentTime = targetTime;
+        }
+      } catch (_) {
+        // Ignore seek errors before media metadata is ready
+      }
+    };
+
+    const updatePlayerUI = (playing) => {
+      isPlaying = playing;
+      playerEl.classList.toggle('is-playing', isPlaying);
+
+      if (playLabel) {
+        playLabel.textContent = isPlaying ? 'PAUSE' : 'PLAY';
+      }
+
+      if (liveSyncChip && liveChipText) {
+        if (isPlaying) {
+          liveSyncChip.classList.remove('live-status-chip--behind');
+          liveChipText.textContent = 'LIVE';
+        } else {
+          liveSyncChip.classList.add('live-status-chip--behind');
+          liveChipText.textContent = 'PAUSED';
+        }
+      }
+
+      if (syncReadout) {
+        syncReadout.textContent = isPlaying ? 'SYNC // LIVE EDGE' : 'BUFFER // PAUSED';
+      }
+
+      if (!isPlaying && centerLabel) {
+        centerLabel.textContent = 'RESUME STREAM [LIVE EDGE]';
+      }
+    };
+
+    const playFromLiveEdge = (notify = true) => {
+      pendingLiveEdgeSync = true;
+
+      if (hlsInstance) {
+        // Restart segment loading at the live edge (-1) so stale buffer is skipped
+        hlsInstance.startLoad(-1);
+      }
+
+      syncToLiveEdge();
+      updatePlayerUI(true);
+
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+          // Keep UI interactive even if local ingest server on :8888 is not active
+        });
+      }
+
+      if (notify) {
+        showToast('STREAM PLAYBACK ACTIVE // SYNCED TO LIVE EDGE', 'success');
+      }
+    };
+
+    const pauseStream = (notify = true) => {
+      pendingLiveEdgeSync = false;
+      video.pause();
+
+      if (hlsInstance) {
+        // Stop buffering old segments while paused so next Play jumps straight to live edge
+        hlsInstance.stopLoad();
+      }
+
+      updatePlayerUI(false);
+
+      if (notify) {
         showToast('STREAM PLAYBACK PAUSED', 'info');
       }
     };
 
+    const togglePlayback = () => {
+      if (isPlaying) {
+        pauseStream(true);
+      } else {
+        playFromLiveEdge(true);
+      }
+    };
+
+    // Initialize HLS.js or native HLS pipeline
+    if (typeof window.Hls !== 'undefined' && window.Hls.isSupported()) {
+      hlsInstance = new window.Hls({
+        manifestLoadingMaxRetry: Infinity,
+        manifestLoadingRetryDelay: 1000,
+        liveSyncDurationCount: 1.5,
+        liveMaxLatencyDurationCount: 3,
+        maxBufferLength: 10,
+        maxMaxBufferLength: 20,
+        maxBufferSize: 150 * 1024 * 1024,
+        enableWorker: true,
+        lowLatencyMode: false
+      });
+
+      hlsInstance.loadSource(streamUrl);
+      hlsInstance.attachMedia(video);
+
+      hlsInstance.on(window.Hls.Events.MANIFEST_PARSED, () => {
+        if (statusOverlay) {
+          statusOverlay.textContent = 'LIVE BROADCAST';
+          statusOverlay.classList.remove('badge-live--waiting');
+          statusOverlay.classList.add('badge-live--online');
+        }
+        playerEl.classList.add('has-video-frames');
+        playFromLiveEdge(false);
+      });
+
+      hlsInstance.on(window.Hls.Events.LEVEL_UPDATED, () => {
+        if (pendingLiveEdgeSync && isPlaying) {
+          syncToLiveEdge();
+        }
+      });
+
+      hlsInstance.on(window.Hls.Events.FRAG_BUFFERED, () => {
+        if (pendingLiveEdgeSync && isPlaying) {
+          syncToLiveEdge();
+          pendingLiveEdgeSync = false;
+        }
+      });
+
+      hlsInstance.on(window.Hls.Events.ERROR, (event, data) => {
+        if (data && data.fatal) {
+          if (statusOverlay) {
+            statusOverlay.textContent = 'WAITING FOR INGEST...';
+            statusOverlay.classList.remove('badge-live--online');
+            statusOverlay.classList.add('badge-live--waiting');
+          }
+          setTimeout(() => {
+            if (hlsInstance) {
+              hlsInstance.loadSource(streamUrl);
+            }
+          }, 2000);
+        }
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = streamUrl;
+      video.addEventListener('loadedmetadata', () => {
+        if (statusOverlay) {
+          statusOverlay.textContent = 'LIVE BROADCAST';
+          statusOverlay.classList.remove('badge-live--waiting');
+          statusOverlay.classList.add('badge-live--online');
+        }
+        playerEl.classList.add('has-video-frames');
+        playFromLiveEdge(false);
+      });
+    }
+
+    video.addEventListener('loadeddata', () => {
+      playerEl.classList.add('has-video-frames');
+    });
+
     centerPlayAction.addEventListener('click', togglePlayback);
     bottomPlayBtn.addEventListener('click', togglePlayback);
+    video.addEventListener('click', togglePlayback);
+
+    // Volume Slider & Mute / Unmute Audio Controller
+    const volOnIcon = muteBtn ? muteBtn.querySelector('.icon-volume-on') : null;
+    const volMutedIcon = muteBtn ? muteBtn.querySelector('.icon-volume-muted') : null;
+
+    const syncVolumeUI = () => {
+      const effectiveVol = video.muted ? 0 : Math.round(video.volume * 100);
+      const isMuted = video.muted || effectiveVol === 0;
+
+      if (volOnIcon) volOnIcon.style.display = isMuted ? 'none' : 'block';
+      if (volMutedIcon) volMutedIcon.style.display = isMuted ? 'block' : 'none';
+
+      if (volumeSlider) {
+        volumeSlider.value = String(effectiveVol);
+        volumeSlider.style.setProperty('--volume-fill', `${effectiveVol}%`);
+      }
+
+      if (volumeValue) {
+        volumeValue.textContent = `${effectiveVol}%`;
+        volumeValue.style.color = isMuted ? 'var(--text-muted)' : 'var(--accent-acid)';
+      }
+    };
+
+    const toggleMute = () => {
+      if (video.muted || video.volume === 0) {
+        const restored = lastVolume > 0 ? lastVolume : 80;
+        video.volume = restored / 100;
+        video.muted = false;
+      } else {
+        lastVolume = Math.round(video.volume * 100) || 80;
+        video.muted = true;
+      }
+      syncVolumeUI();
+    };
+
+    syncVolumeUI();
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', toggleMute);
+    }
+
+    if (volumeSlider) {
+      volumeSlider.addEventListener('input', () => {
+        const val = parseInt(volumeSlider.value, 10) || 0;
+        video.volume = val / 100;
+        if (val === 0) {
+          video.muted = true;
+        } else {
+          video.muted = false;
+          lastVolume = val;
+        }
+        syncVolumeUI();
+      });
+    }
+
+    // Fullscreen Toggle & 3-Second Idle UI Auto-Hide
+    const isPlayerFullscreen = () => {
+      return Boolean(
+        document.fullscreenElement === playerEl ||
+        document.webkitFullscreenElement === playerEl
+      );
+    };
+
+    const toggleFullscreen = () => {
+      if (!isPlayerFullscreen()) {
+        playerEl.requestFullscreen?.().catch(() => {});
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    };
+
+    const resetFullscreenIdleTimer = () => {
+      playerEl.classList.remove('is-ui-hidden');
+      if (uiHideTimer) {
+        clearTimeout(uiHideTimer);
+        uiHideTimer = null;
+      }
+      if (isPlayerFullscreen()) {
+        uiHideTimer = setTimeout(() => {
+          if (isPlayerFullscreen()) {
+            playerEl.classList.add('is-ui-hidden');
+          }
+        }, 3000);
+      }
+    };
+
+    document.addEventListener('fullscreenchange', () => {
+      if (isPlayerFullscreen()) {
+        resetFullscreenIdleTimer();
+      } else {
+        if (uiHideTimer) {
+          clearTimeout(uiHideTimer);
+          uiHideTimer = null;
+        }
+        playerEl.classList.remove('is-ui-hidden');
+      }
+    });
+
+    ['mousemove', 'pointermove', 'mousedown', 'touchstart', 'keydown', 'click'].forEach(evtName => {
+      playerEl.addEventListener(evtName, resetFullscreenIdleTimer, { passive: true });
+    });
+
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', toggleFullscreen);
+    }
+
+    // Keyboard Hotkeys: Space (Play/Pause), M (Mute/Unmute), F (Fullscreen)
+    document.addEventListener('keydown', (e) => {
+      if (isPlayerFullscreen()) {
+        resetFullscreenIdleTimer();
+      }
+
+      if (e.repeat || e.ctrlKey || e.altKey || e.metaKey) return;
+
+      // Ignore hotkeys when typing in text inputs, textareas, selects, or when a modal is open
+      const activeEl = document.activeElement;
+      if (activeEl) {
+        const tag = activeEl.tagName;
+        const isTextInput =
+          tag === 'TEXTAREA' ||
+          tag === 'SELECT' ||
+          activeEl.isContentEditable ||
+          (tag === 'INPUT' && activeEl.type !== 'range' && activeEl.type !== 'button');
+        if (isTextInput) return;
+      }
+
+      if (document.querySelector('.cyber-modal-backdrop.is-open')) return;
+
+      if (e.code === 'Space' || e.key === ' ') {
+        e.preventDefault();
+        togglePlayback();
+      } else if (e.code === 'KeyM' || e.key.toLowerCase() === 'm') {
+        e.preventDefault();
+        toggleMute();
+      } else if (e.code === 'KeyF' || e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    });
   }
 });

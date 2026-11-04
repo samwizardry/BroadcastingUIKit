@@ -2131,6 +2131,72 @@
           </div>
         </div>
 
+        <!-- 17 // Live Stream Video Player (No Timeline // Live-Edge Sync) -->
+        <div class="showcase-workbench-card">
+          <div class="showcase-workbench-title">
+            <span>17 // LIVE STREAM VIDEO PLAYER [PLAY/PAUSE &amp; LIVE-EDGE SYNC]</span>
+            <span class="cyber-tag cyber-tag--acid">ORGANISMS // VIDEO PLAYER</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+            HTML5 <code>&lt;video&gt;</code> stream shell styled with Marathon Graphic Realism HUD overlays, no duration seekbar, Play/Pause toggle, and automatic jump to the live stream edge (<code>hls.liveSyncPosition</code>) upon resuming playback.
+          </p>
+
+          <div class="code-preview-box">
+            <div class="code-preview-header">
+              <span style="font-family: var(--font-hud); font-size: 11px; color: var(--text-secondary);">CODE SPECIFICATION (RAZOR / HTML5 + HLS.JS LIVE-EDGE SYNC)</span>
+              <button class="btn-cyber btn-cyber-secondary btn-cyber-sm" data-copy-code="snippet-live-player">COPY CODE</button>
+            </div>
+            <pre class="code-snippet" id="snippet-live-player">
+&lt;article class="cyber-player" id="main-stream-player"&gt;
+  &lt;div class="player-scanlines"&gt;&lt;/div&gt;
+  &lt;div class="player-overlay-crosshair"&gt;&lt;/div&gt;
+
+  &lt;div class="player-hud-top"&gt;
+    &lt;div class="hud-meta-left"&gt;
+      &lt;span class="badge-live" id="statusOverlay"&gt;CONNECTING...&lt;/span&gt;
+      &lt;span class="hud-pill"&gt;CH_STREAM_01 // LIVE&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="hud-meta-right"&gt;
+      &lt;span class="hud-pill" style="color: var(--accent-acid);"&gt;1080P // 60FPS&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="player-center-action" id="player-center-play"&gt;
+    &lt;div class="play-btn-large"&gt;
+      &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"&gt;
+        &lt;polygon points="5 3 19 12 5 21 5 3"&gt;&lt;/polygon&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;span class="play-label" id="player-center-label"&gt;START BROADCAST FEED [LIVE EDGE]&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;video id="videoPlayer" class="player-video" autoplay muted playsinline&gt;&lt;/video&gt;
+
+  &lt;div class="player-controls"&gt;
+    &lt;div class="controls-bar"&gt;
+      &lt;div class="controls-left"&gt;
+        &lt;button type="button" class="btn-player-control" id="player-bottom-play"&gt;
+          &lt;svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"&gt;
+            &lt;polygon points="5 3 19 12 5 21 5 3"&gt;&lt;/polygon&gt;
+          &lt;/svg&gt;
+          &lt;svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"&gt;
+            &lt;rect x="6" y="4" width="4" height="16"&gt;&lt;/rect&gt;
+            &lt;rect x="14" y="4" width="4" height="16"&gt;&lt;/rect&gt;
+          &lt;/svg&gt;
+          &lt;span class="control-label" id="player-play-label"&gt;PLAY&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button type="button" class="live-status-chip" id="player-live-sync"&gt;
+          &lt;span class="live-dot"&gt;&lt;/span&gt;
+          &lt;span id="player-live-chip-text"&gt;LIVE&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</pre>
+          </div>
+        </div>
+
       </div>
     </main>
 
